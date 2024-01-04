@@ -1,7 +1,7 @@
 function Myprofile() {
     return (
         <div>
-
+            Myprofile
         </div>
     )
 }
