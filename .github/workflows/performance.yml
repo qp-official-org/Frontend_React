@@ -18,8 +18,7 @@ jobs:
           yarn install
 
       - name: Build
-        run: |
-          yarn build
+        run: CI=false yarn build
 
       - name: Run Lighthouse CI
         env:
