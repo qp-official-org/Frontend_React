@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { useState } from "react";
 import { styles } from "src/components/qdetail/style";
@@ -21,12 +22,23 @@ function Qdetail() {
                     <div style={styles.a_q_container}>다음 질문으로 이동 칸</div>
                     {/*Link 컴포넌트로 바꿀 태그*/}
                 </div>
-                <div style={styles.q_a_main}>질문과 대답이 나오는 칸</div>
+                <div style={styles.q_a_main}>
+                    <div style={{ display: 'flex', flex: '1' }}>
+                        <div style={styles.q_content}>질문</div>
+                    </div>
+                    <hr style={{ width: '90%' }} />
+                    <button>
+                        답변하기
+                    </button>
+                    <div style={styles.answer}>답변1</div>
+                    <div style={styles.answer}>답변2</div>
+                    <div style={styles.answer}>답변3</div>
+                </div>
             </div>
             <div style={styles.profilecontainer}>
                 <div style={styles.profilecontainer2}>로그인</div>
             </div>
-        </div>
+        </div >
     );
 }
 export default Qdetail;

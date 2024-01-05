@@ -47,6 +47,8 @@ export const styles = {
         height: '90.2vh',
         boxShadow: '0 4px 4px 0 black',
         borderRadius: '20px',
+        display: 'flex',
+        flexDirection: 'column'
     },
     profilecontainer: {
         flex: "0.6",
@@ -54,5 +56,14 @@ export const styles = {
     profilecontainer2: {
         background: "#EB7125",
         borderRadius: '45px',
+    },
+    answer: {
+        flex: "1",
+    },
+    q_content: {
+        background: "#FFFFFF",
+        margin: '10px',
+        borderRadius: "15px",
+        flex: "1",
     }
 }
