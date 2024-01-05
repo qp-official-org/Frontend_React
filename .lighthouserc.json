@@ -25,11 +25,11 @@
                 }
             }
         },
-        "server": {}
-    },
-    "upload": {
-        "target": "filesystem",
-        "outputDir": "./lhci_reports",
-        "reportFilenamePattern": "%%PATHNAME%%-%%DATETIME%%-report.%%EXTENSION%%"
+        "server": {},
+        "upload": {
+            "target": "filesystem",
+            "outputDir": "./lhci_reports",
+            "reportFilenamePattern": "%%PATHNAME%%-%%DATETIME%%-report.%%EXTENSION%%"
+        }
     }
 }
