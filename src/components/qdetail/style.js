@@ -53,6 +53,7 @@ export const styles = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: "center"
+
     },
     profilecontainer: {
         flex: "0.6",
@@ -86,5 +87,6 @@ export const styles = {
         color: '#EB7125',
         fontWeight: 'bold',
         boxShadow: 'inset 0 2px 6px 0 #00000040, 0 2px 6px 0 black',
+
     }
 }

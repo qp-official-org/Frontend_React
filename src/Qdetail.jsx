@@ -44,6 +44,7 @@ function Qdetail() {
                         </button>}
                     </div>
                     {/* map함수로 답변 컴포넌트 호출 */}
+
                     <div style={styles.answer}>답변1</div>
                     <div style={styles.answer}>답변2</div>
                     <div style={styles.answer}>답변3</div>
