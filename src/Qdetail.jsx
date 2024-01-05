@@ -18,7 +18,7 @@ function Qdetail() {
                 <div style={styles.a_b_q_container}>
                     <div style={styles.b_q_container}>이전 질문으로 이동 칸</div>
                     {/*Link 컴포넌트로 바꿀 태그*/}
-                    <div style={styles.a_q_contianer}>다음 질문으로 이동 칸</div>
+                    <div style={styles.a_q_container}>다음 질문으로 이동 칸</div>
                     {/*Link 컴포넌트로 바꿀 태그*/}
                 </div>
                 <div style={styles.q_a_main}>질문과 대답이 나오는 칸</div>
