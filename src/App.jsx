@@ -1,7 +1,8 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Main from "./Main";
-import Myprofile from "./Myprofile";
-import Qdetail from "./Qdetail";
+import Main from "src/Main";
+import Myprofile from "src/Myprofile";
+import Qdetail from "src/Qdetail";
 
 function App() {
   return (

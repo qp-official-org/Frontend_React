@@ -8,7 +8,7 @@
                 "http://localhost:3000/profile",
                 "http://localhost:3000/detail"
             ],
-            "numberOfRuns": 5,
+            "numberOfRuns": 3,
             "settings": {
                 "preset": "desktop",
                 "chromeFlags": "--no-sandbox"
