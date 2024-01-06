@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { styles } from "src/components/qdetail/style";
 //import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 function Qdetail() {
     const [isLogined, setIsLogined] = useState(false);
@@ -44,6 +45,7 @@ function Qdetail() {
                         </button>}
                     </div>
                     {/* map함수로 답변 컴포넌트 호출 */}
+
                     <div style={styles.answer}>답변1</div>
                     <div style={styles.answer}>답변2</div>
                     <div style={styles.answer}>답변3</div>

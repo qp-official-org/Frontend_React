@@ -53,6 +53,10 @@ export const styles = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: "center"
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: "center"
+
     },
     profilecontainer: {
         flex: "0.6",
@@ -86,5 +90,35 @@ export const styles = {
         color: '#EB7125',
         fontWeight: 'bold',
         boxShadow: 'inset 0 2px 6px 0 #00000040, 0 2px 6px 0 black',
+    }
+}
+
+    },
+answer: {
+    flex: "1",
+        background: '#FFFFFF',
+            margin: '25px',
+                borderRadius: "15px",
+                    boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
+                        color: '#EB7125',
+    },
+q_content: {
+    background: "#FFFFFF",
+        margin: '25px',
+            borderRadius: "15px",
+                boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
+                    flex: "1",
+                        color: '#EB7125',
+    },
+a_button: {
+    width: "15.8%",
+        height: "150%",
+            alignItems: 'center',
+                borderRadius: "15px",
+                    border: 'none',
+                        color: '#EB7125',
+                            fontWeight: 'bold',
+                                boxShadow: 'inset 0 2px 6px 0 #00000040, 0 2px 6px 0 black',
+
     }
 }
