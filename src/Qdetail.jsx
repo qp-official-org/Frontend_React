@@ -36,7 +36,13 @@ function Qdetail() {
                 </div>
                 <div style={styles.q_a_main}>
                     <div style={{ display: 'flex', flex: '1' }}>
-                        <div style={styles.q_content}>질문</div>
+                        <div style={styles.q_content}>
+                            <div style={{ background: 'blue', flex: '1', display: 'flex' }}>
+                                <div style={{ flex: "1", background: 'red', borderRadius: "50%", width: "7vh", height: "7vh" }}>질문자 프로필</div>
+                                <div style={{ flex: '10' }}>제목/해시태그/시간/어린이/더보기</div>
+                            </div>
+                            <div style={{ background: 'skyblue', flex: '1' }}>질문내용</div>
+                        </div>
                     </div>
                     <hr style={{ width: '90%', height: '2px', background: 'white' }} />
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
