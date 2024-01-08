@@ -3,7 +3,6 @@ import React from "react";
 import { useState } from "react";
 import { styles } from "src/components/qdetail/style";
 //import { Link } from "react-router-dom";
-//import { Link } from "react-router-dom";
 
 function Qdetail() {
     const [isLogined, setIsLogined] = useState(false);
@@ -11,6 +10,7 @@ function Qdetail() {
     const [view, setView] = useState(false);
     const [alarm, setAlarm] = useState(false);
     const [isAnswer, setIsAnswer] = useState(false);
+    const [isChild, setIsChiled] = useState(true);
     const ddClick = () => {
         setView(!view)
     };
@@ -35,13 +35,28 @@ function Qdetail() {
                     {/*Link 컴포넌트로 바꿀 태그*/}
                 </div>
                 <div style={styles.q_a_main}>
-                    <div style={{ display: 'flex', flex: '1' }}>
+                    <div style={{ display: 'flex', flex: '1.5' }}>
                         <div style={styles.q_content}>
-                            <div style={{ background: 'blue', flex: '1', display: 'flex' }}>
-                                <div style={{ flex: "1", background: 'red', borderRadius: "50%", width: "7vh", height: "7vh" }}>질문자 프로필</div>
-                                <div style={{ flex: '10' }}>제목/해시태그/시간/어린이/더보기</div>
+                            <div style={{ flex: '1', display: 'flex' }}>
+                                <div style={{ flex: "1" }}><div style={{ background: 'red', borderRadius: "50%", width: "8vh", height: "8vh", margin: '2px' }}></div></div>
+                                <div style={{ flexDirection: 'column', display: 'flex', flex: '10' }}>
+                                    <div style={{ display: 'flex', flex: '1' }}>
+                                        <div style={{ flex: '7' }}>#해시태그</div>
+                                        <div style={{ flex: '1' }}>{isChild ? "어린이" : null}</div>
+                                        <ul onClick={() => { setView(!view) }} style={{ listStyle: 'none', marginRight: '15px', marginTop: '0px' }}>⋮
+                                            {view && (
+                                                <>
+                                                    <li>마이페이지</li>
+                                                    <li>로그아웃</li>
+                                                </>
+                                            )}
+                                        </ul>
+                                    </div>
+                                    <h3 style={{ flex: '2', marginTop: '-10px' }}>질문 제목</h3>
+                                    <div style={{ flex: '1' }}>1시간 전</div>
+                                </div>
                             </div>
-                            <div style={{ background: 'skyblue', flex: '1' }}>질문내용</div>
+                            <div style={{ flex: '1' }}>질문내용</div>
                         </div>
                     </div>
                     <hr style={{ width: '90%', height: '2px', background: 'white' }} />
