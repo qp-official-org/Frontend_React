@@ -40,14 +40,14 @@ function Qdetail() {
                             <div style={{ flex: '1', display: 'flex' }}>
                                 <div style={{ flex: "1" }}><div style={{ background: 'red', borderRadius: "50%", width: "8vh", height: "8vh", margin: '2px' }}></div></div>
                                 <div style={{ flexDirection: 'column', display: 'flex', flex: '10' }}>
-                                    <div style={{ display: 'flex', flex: '1' }}>
+                                    <div style={{ display: 'flex', flex: '1', position: 'relative' }}>
                                         <div style={{ flex: '7' }}>#해시태그</div>
                                         <div style={{ flex: '1' }}>{isChild ? "어린이" : null}</div>
-                                        <ul onClick={() => { setView(!view) }} style={{ listStyle: 'none', marginRight: '15px', marginTop: '0px' }}>⋮
+                                        <ul onClick={() => { setView(!view) }} style={{ listStyle: 'none', marginRight: '15px', marginTop: '0px', position: 'absolute', left: '92%', display: 'flex', flexDirection: 'row', }}>⋮
                                             {view && (
                                                 <>
-                                                    <li>마이페이지</li>
-                                                    <li>로그아웃</li>
+                                                    <li style={{ flexDirection: 'row' }}>수정하기</li>
+                                                    <li>신고하기</li>
                                                 </>
                                             )}
                                         </ul>
