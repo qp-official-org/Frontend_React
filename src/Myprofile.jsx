@@ -1,10 +1,6 @@
-import React from "react";
+import React from 'react';
 
 function Myprofile() {
-    return (
-        <div>
-            MyprofilePage
-        </div>
-    )
+  return <div>asdfsadfasdf</div>;
 }
 export default Myprofile;
