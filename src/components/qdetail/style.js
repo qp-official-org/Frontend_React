@@ -52,7 +52,8 @@ export const styles = {
         borderRadius: '20px',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: "center"
+        justifyContent: "center",
+        overflowY: 'auto',
 
     },
     profilecontainer: {
@@ -68,9 +69,8 @@ export const styles = {
         margin: '25px',
         borderRadius: "15px",
         boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
-        color: '#EB7125',
     },
-    q_content: {
+    q_box: {
         background: "#FFFFFF",
         margin: '25px',
         borderRadius: "15px",
@@ -90,5 +90,55 @@ export const styles = {
         fontWeight: 'bold',
         boxShadow: 'inset 0 2px 6px 0 #00000040, 0 2px 6px 0 black',
 
-    }
+    },
+    question_container: {
+        display: 'flex',
+        flex: '1.5',
+    },
+    question_main: {
+        flex: '1',
+        display: 'flex',
+    },
+    profile_box: {
+        flex: '1',
+    },
+    profile_img: {
+        background: 'red',
+        borderRadius: "50%",
+        width: "8vh",
+        height: "8vh",
+        margin: '2px'
+    },
+    question_main2: {
+        flexDirection: 'column',
+        display: 'flex',
+        flex: '10',
+    },
+    question_main3: {
+        display: 'flex',
+        flex: '1',
+        position: 'relative',
+    },
+    question_hashtag: {
+        flex: '7'
+    },
+    dropdownbtn: {
+        listStyle: 'none',
+        marginRight: '15px',
+        marginTop: '0px',
+        position: 'absolute',
+        left: '92%',
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    question_title: {
+        flex: '2',
+        marginTop: '0px',
+    },
+    hrline: {
+        width: '90%',
+        height: '2px',
+        background: 'white'
+    },
+
 }
