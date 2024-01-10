@@ -2,7 +2,7 @@
 import React from "react";
 import { useState } from "react";
 import { styles } from "src/components/qdetail/style";
-import Answer from "./components/Answer";
+import Answer from "./components/qdetail/Answer";
 import Newanswer from "./components/qdetail/Newanswer";
 //import { Link } from "react-router-dom";
 
@@ -62,10 +62,9 @@ function Qdetail() {
                         </div>
                     </div>
                     <hr style={styles.hrline} />
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        {btnClicked ? <Newanswer /> : <button onClick={answerClick} style={styles.a_button}>
-                            답변하기
-                        </button>}
+                    <div style={{ flex: '1 ', justifyContent: 'center' }}>
+                        {btnClicked ? <Newanswer /> :
+                            <button onClick={answerClick} style={styles.a_button}>답변하기</button>}
                     </div>
                     {/* map함수로 답변 컴포넌트 호출 */}
 

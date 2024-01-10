@@ -4,8 +4,12 @@ import { useState } from "react";
 
 function Newanswer() {
     const [view, setView] = useState(false);
+    const [answerText, setAnswerText] = useState("");
+    const onChangeText = (event) => {
+        setAnswerText(event.target.value);
+    }
     return (
-        <div style={styles.q_box}>
+        <div style={styles.newanswer_box}>
             <div style={styles.question_main}>
                 <div style={styles.profile_box}><div style={styles.profile_img}></div></div>
                 <div style={styles.question_main2}>
@@ -21,6 +25,9 @@ function Newanswer() {
                     </div>
                     <h3 style={styles.question_title}>답변자 정보</h3>
                 </div>
+            </div>
+            <div style={{ justifyContent: 'center' }}>
+                <input placeholder="답변을 입력해주세요." style={styles.inputBox}></input>
             </div>
         </div>
     )

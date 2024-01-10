@@ -47,7 +47,7 @@ export const styles = {
     q_a_main: {
         background: '#EB7125',
         width: '59.7vw',
-        height: '90.2vh',
+        height: '130%',
         boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
         borderRadius: '20px',
         display: 'flex',
@@ -81,8 +81,8 @@ export const styles = {
         flexDirection: 'column'
     },
     a_button: {
-        width: "15.8%",
-        height: "150%",
+        width: "50%%",
+        height: "50%",
         alignItems: 'center',
         borderRadius: "15px",
         border: 'none',
@@ -140,5 +140,21 @@ export const styles = {
         height: '2px',
         background: 'white'
     },
+    inputBox: {
+        background: '#D9D9D9',
+        borderRadius: '20px',
+        width: '95%',
+        height: '50px',
+        marginLeft: '1%',
+    },
+    newanswer_box: {
+        background: "#FFFFFF",
+        margin: '25px',
+        borderRadius: "15px",
+        boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
+        flex: "1",
+        flexDirection: 'column',
+        height: '80%'
+    }
 
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { styles } from "./qdetail/style";
+import { styles } from "./style";
 import { useState } from "react";
 
 function Answer() {
