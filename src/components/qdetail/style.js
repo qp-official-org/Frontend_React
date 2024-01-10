@@ -44,10 +44,21 @@ export const styles = {
         border: 'none',
         fontWeight: 'bold'
     },
-    q_a_main: {
+    q_a_main1: {
         background: '#EB7125',
-        width: '59.7vw',
+        width: '65vw',
         height: '130%',
+        boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
+        borderRadius: '20px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: "center",
+        overflowY: 'auto',
+    },
+    q_a_main2: {
+        background: '#EB7125',
+        width: '65vw',
+        height: '150%',
         boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
         borderRadius: '20px',
         display: 'flex',
@@ -78,22 +89,27 @@ export const styles = {
         flex: "1",
         color: '',
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
     },
     a_button: {
-        width: "50%%",
-        height: "50%",
+        width: "20%",
+        height: "100%",
+        display: 'flex', // 추가
         alignItems: 'center',
+        justifyContent: 'center',
         borderRadius: "15px",
         border: 'none',
         color: '#EB7125',
         fontWeight: 'bold',
         boxShadow: 'inset 0 2px 6px 0 #00000040, 0 2px 6px 0 black',
-
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
+
     question_container: {
         display: 'flex',
         flex: '1.5',
+        height: '100%'
     },
     question_main: {
         flex: '1',
@@ -103,7 +119,7 @@ export const styles = {
         flex: '1',
     },
     profile_img: {
-        background: 'red',
+        background: '#D9D9D9',
         borderRadius: "50%",
         width: "8vh",
         height: "8vh",
@@ -116,20 +132,18 @@ export const styles = {
     },
     question_main3: {
         display: 'flex',
-        flex: '1',
+        flex: '2',
         position: 'relative',
     },
     question_hashtag: {
-        flex: '7'
+        flex: '5'
     },
     dropdownbtn: {
         listStyle: 'none',
-        marginRight: '15px',
         marginTop: '0px',
+        marginLeft: '-5%',
         position: 'absolute',
         left: '92%',
-        display: 'flex',
-        flexDirection: 'row'
     },
     question_title: {
         flex: '2',
@@ -144,8 +158,11 @@ export const styles = {
         background: '#D9D9D9',
         borderRadius: '20px',
         width: '95%',
-        height: '50px',
+        height: '50%',
         marginLeft: '1%',
+        boxSizing: 'border-box',
+        wordWrap: 'break-word',
+        border: 'none'
     },
     newanswer_box: {
         background: "#FFFFFF",
@@ -154,7 +171,7 @@ export const styles = {
         boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
         flex: "1",
         flexDirection: 'column',
-        height: '80%'
+        height: '100%'
     }
 
 }

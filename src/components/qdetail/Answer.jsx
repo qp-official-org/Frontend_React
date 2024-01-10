@@ -12,9 +12,10 @@ function Answer() {
                     <div style={styles.question_main3}>
                         <ul onClick={() => { setView(!view) }} style={styles.dropdownbtn}>⋮
                             {view && (
-                                <>
-                                    <li style={{ flexDirection: 'row' }}>수정하기</li>
-                                    <li>신고하기</li>
+                                <><div style={{ background: 'white', border: '1px solid #000' }}>
+                                    <li style={{ order: '-1', height: '25px', width: "100px" }}>수정하기</li>
+                                    <li style={{ order: '-1', height: '25px', width: "100px" }}>신고하기</li>
+                                </div>
                                 </>
                             )}
                         </ul>
@@ -22,7 +23,7 @@ function Answer() {
                     <h3 style={styles.question_title}>답변자 정보</h3>
                 </div>
             </div>
-            <div>
+            <div style={{ margin: '15px' }}>
                 답변 내용
             </div>
         </div>

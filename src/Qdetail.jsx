@@ -4,6 +4,7 @@ import { useState } from "react";
 import { styles } from "src/components/qdetail/style";
 import Answer from "./components/qdetail/Answer";
 import Newanswer from "./components/qdetail/Newanswer";
+import Question from "./components/Question";
 //import { Link } from "react-router-dom";
 
 function Qdetail() {
@@ -36,36 +37,16 @@ function Qdetail() {
                     <div style={styles.a_q_container}>다음 질문으로 이동 칸 ▶</div>
                     {/*Link 컴포넌트로 바꿀 태그*/}
                 </div>
-                <div style={styles.q_a_main}>
-                    <div style={styles.question_container}>
-                        <div style={styles.q_box}>
-                            <div style={styles.question_main}>
-                                <div style={styles.profile_box}><div style={styles.profile_img}></div></div>
-                                <div style={styles.question_main2}>
-                                    <div style={styles.question_main3}>
-                                        <div style={styles.question_hashtag}>#해시태그</div>
-                                        <div style={{ flex: '1' }}>{isChild ? "어린이" : null}</div>
-                                        <ul onClick={() => { setView(!view) }} style={styles.dropdownbtn}>⋮
-                                            {view && (
-                                                <>
-                                                    <li style={{ flexDirection: 'row' }}>수정하기</li>
-                                                    <li>신고하기</li>
-                                                </>
-                                            )}
-                                        </ul>
-                                    </div>
-                                    <h3 style={styles.question_title}>질문 제목</h3>
-                                    <div style={{ flex: '1' }}>🕓1시간 전</div>
-                                </div>
-                            </div>
-                            <div style={{ flex: '1' }}>질문내용</div>
-                        </div>
+                <div style={btnClicked ? styles.q_a_main2 : styles.q_a_main1}>
+                    <div style={{ flex: '1' }}>
+                        <Question />
                     </div>
                     <hr style={styles.hrline} />
-                    <div style={{ flex: '1 ', justifyContent: 'center' }}>
+                    <div style={btnClicked ? { flex: '1', display: 'flex', justifyContent: 'center', alignItems: 'center' } : null}>
                         {btnClicked ? <Newanswer /> :
                             <button onClick={answerClick} style={styles.a_button}>답변하기</button>}
                     </div>
+
                     {/* map함수로 답변 컴포넌트 호출 */}
 
                     <div style={styles.answer}>

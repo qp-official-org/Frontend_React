@@ -7,7 +7,7 @@ function Newanswer() {
     const [answerText, setAnswerText] = useState("");
     const onChangeText = (event) => {
         setAnswerText(event.target.value);
-    }
+    }//나중에 서버에 올릴 값(변수 answerText)
     return (
         <div style={styles.newanswer_box}>
             <div style={styles.question_main}>
@@ -26,7 +26,7 @@ function Newanswer() {
                     <h3 style={styles.question_title}>답변자 정보</h3>
                 </div>
             </div>
-            <div style={{ justifyContent: 'center' }}>
+            <div style={{ justifyContent: 'center', height: '100%' }}>
                 <input placeholder="답변을 입력해주세요." style={styles.inputBox}></input>
             </div>
         </div>
