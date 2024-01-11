@@ -27,7 +27,8 @@ function Newanswer() {
                 </div>
             </div>
             <div style={{ justifyContent: 'center', height: '100%' }}>
-                <input placeholder="답변을 입력해주세요." style={styles.inputBox}></input>
+                <textarea placeholder="
+                답변을 입력해주세요." style={styles.inputBox} />
             </div>
         </div>
     )

@@ -160,9 +160,10 @@ export const styles = {
         width: '95%',
         height: '50%',
         marginLeft: '1%',
-        boxSizing: 'border-box',
-        wordWrap: 'break-word',
-        border: 'none'
+        border: 'none',
+        overflowY: 'auto', // 수직 스크롤이 필요한 경우에만 표시
+        overflowWrap: 'break-word', // 줄 바꿈 설정
+        whiteSpace: 'pre-wrap'
     },
     newanswer_box: {
         background: "#FFFFFF",

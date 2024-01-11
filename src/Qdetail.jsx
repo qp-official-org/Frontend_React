@@ -14,6 +14,7 @@ function Qdetail() {
     const [alarm, setAlarm] = useState(false);
     const [isAnswer, setIsAnswer] = useState(false);
     const [isChild, setIsChiled] = useState(true);
+    const [answerOfAnswer, setAnswerOfAnswer] = useState(false);
     const ddClick = () => {
         setView(!view)
     };
@@ -21,6 +22,10 @@ function Qdetail() {
         console.log("clicked")
         setBtnClicked(true)
     };
+    const openReAnswer = () => {
+        setAnswerOfAnswer(!answerOfAnswer)
+        console.log('clicked')
+    }
     return (
         <div style={styles.container}>
             <div style={styles.q_a_sub}>
@@ -49,13 +54,14 @@ function Qdetail() {
 
                     {/* map함수로 답변 컴포넌트 호출 */}
 
-                    <div style={styles.answer}>
+                    <div onClick={openReAnswer} style={styles.answer}>
+                        {/*answerOfAnswer ? <Reanswer /> : null*/}
                         <Answer />
                     </div>
-                    <div style={styles.answer}>
+                    <div onClick={openReAnswer} style={styles.answer}>
                         <Answer />
                     </div>
-                    <div style={styles.answer}>
+                    <div onClick={openReAnswer} style={styles.answer}>
                         <Answer />
                     </div>
                 </div>
