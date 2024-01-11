@@ -23,7 +23,7 @@ function Answer() {
                     <h3 style={styles.question_title}>답변자 정보</h3>
                 </div>
             </div>
-            <div style={{ margin: '15px' }}>
+            <div style={{ margin: '15px', minHeight: '10vh' }}>
                 답변 내용
             </div>
         </div>

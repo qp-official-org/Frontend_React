@@ -26,7 +26,7 @@ function Newanswer() {
                     <h3 style={styles.question_title}>답변자 정보</h3>
                 </div>
             </div>
-            <div style={{ justifyContent: 'center', height: '100%' }}>
+            <div style={{ justifyContent: 'center' }}>
                 <textarea placeholder="
                 답변을 입력해주세요." style={styles.inputBox} />
             </div>

@@ -5,6 +5,7 @@ import { styles } from "src/components/qdetail/style";
 import Answer from "./components/qdetail/Answer";
 import Newanswer from "./components/qdetail/Newanswer";
 import Question from "./components/Question";
+import Reanswer from "./components/Reanswer";
 //import { Link } from "react-router-dom";
 
 function Qdetail() {
@@ -23,7 +24,7 @@ function Qdetail() {
         setBtnClicked(true)
     };
     const openReAnswer = () => {
-        setAnswerOfAnswer(!answerOfAnswer)
+        setAnswerOfAnswer(true)
         console.log('clicked')
     }
     return (
@@ -47,7 +48,7 @@ function Qdetail() {
                         <Question />
                     </div>
                     <hr style={styles.hrline} />
-                    <div style={btnClicked ? { flex: '1', display: 'flex', justifyContent: 'center', alignItems: 'center' } : null}>
+                    <div style={btnClicked ? { flex: '1', display: 'flex', justifyContent: 'center', alignItems: 'center' } : { display: 'flex', height: '100%' }}>
                         {btnClicked ? <Newanswer /> :
                             <button onClick={answerClick} style={styles.a_button}>답변하기</button>}
                     </div>
@@ -55,8 +56,8 @@ function Qdetail() {
                     {/* map함수로 답변 컴포넌트 호출 */}
 
                     <div onClick={openReAnswer} style={styles.answer}>
-                        {/*answerOfAnswer ? <Reanswer /> : null*/}
                         <Answer />
+                        {answerOfAnswer ? <Reanswer /> : null}
                     </div>
                     <div onClick={openReAnswer} style={styles.answer}>
                         <Answer />

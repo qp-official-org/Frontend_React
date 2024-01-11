@@ -47,24 +47,22 @@ export const styles = {
     q_a_main1: {
         background: '#EB7125',
         width: '65vw',
-        height: '130%',
+        minHeight: '100%',
         boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
         borderRadius: '20px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: "center",
-        overflowY: 'auto',
     },
     q_a_main2: {
         background: '#EB7125',
         width: '65vw',
-        height: '150%',
+        minHeight: '100%',
         boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
         borderRadius: '20px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: "center",
-        overflowY: 'auto',
 
     },
     profilecontainer: {
@@ -90,11 +88,12 @@ export const styles = {
         color: '',
         display: 'flex',
         flexDirection: 'column',
+        height: '30vh'
     },
     a_button: {
         width: "20%",
-        height: "100%",
-        display: 'flex', // 추가
+        height: "150%",
+        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: "15px",
@@ -108,8 +107,7 @@ export const styles = {
 
     question_container: {
         display: 'flex',
-        flex: '1.5',
-        height: '100%'
+        minHeight: '100%'
     },
     question_main: {
         flex: '1',
@@ -117,6 +115,7 @@ export const styles = {
     },
     profile_box: {
         flex: '1',
+        margin: '10px'
     },
     profile_img: {
         background: '#D9D9D9',
@@ -158,8 +157,8 @@ export const styles = {
         background: '#D9D9D9',
         borderRadius: '20px',
         width: '95%',
-        height: '50%',
-        marginLeft: '1%',
+        height: '10vh',
+        margin: '2%',
         border: 'none',
         overflowY: 'auto', // 수직 스크롤이 필요한 경우에만 표시
         overflowWrap: 'break-word', // 줄 바꿈 설정
