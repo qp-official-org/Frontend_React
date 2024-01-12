@@ -1,69 +1,58 @@
 export const styles = {
-    container: {
-        display: 'flex'
+    full_container: {
+        display: 'flex',
     },
-    q_a_sub: {
+    search_ad_container: {
         flex: '1',
         display: 'inline',
+        margin: '1.5%'
     },
-    ad_q: {
+    question_detail_main_container: {
         flex: '3',
         display: 'inline',
-        margin: '2%'
+        marginTop: '3%'
     },
-    a_b_q_container: {
+    after_before_question_container: {
         display: "flex",
         justifyContent: "space-between",
     },
-    b_q_container: {
+    before_question_container: {
         marginTop: '5px',
         marginBottom: '10px',
         marginLeft: '5px'
     },
-    a_q_container: {
+    after_question_container: {
         marginTop: '5px',
         marginBottom: '10px',
-        marginLeft: '5px'
+        marginRight: '30px'
     },
-    q_container: {
+    search_container: {
         borderRadius: '15px',
         width: '20.4vw',
         height: '42.7vh',
-        margin: '7.5%',
         boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
         color: '#EB7125',
         border: 'none'
     },
-    ad: {
+    ad_container: {
         borderRadius: '15px',
         width: '20.4vw',
         height: '42.7vh',
-        margin: '7.5%',
+        marginTop: '7%',
         boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
         color: '#EB7125',
         border: 'none',
         fontWeight: 'bold'
     },
-    q_a_main1: {
+    main_orange_container: {
         background: '#EB7125',
-        width: '65vw',
+        width: '60vw',
         minHeight: '100%',
         boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
         borderRadius: '20px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: "center",
-    },
-    q_a_main2: {
-        background: '#EB7125',
-        width: '65vw',
-        minHeight: '100%',
-        boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
-        borderRadius: '20px',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: "center",
-
     },
     profilecontainer: {
         flex: "0.6",
@@ -90,13 +79,13 @@ export const styles = {
         flexDirection: 'column',
         height: '30vh'
     },
-    a_button: {
-        width: "20%",
-        height: "150%",
+    answer_button: {
+        width: "9.44vw",
+        height: "3.613vh",
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: "15px",
+        borderRadius: "20px",
         border: 'none',
         color: '#EB7125',
         fontWeight: 'bold',
