@@ -160,7 +160,8 @@ export const styles = {
         boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
         flex: "1",
         flexDirection: 'column',
-        height: '100%'
-    }
+        minHeight: '100%',
+
+    },
 
 }

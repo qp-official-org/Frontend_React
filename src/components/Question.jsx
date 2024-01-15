@@ -1,9 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { styles } from "./qdetail/style";
+import Dropdown from "./Dropdown";
 
 function Question() {
-    const [view, setView] = useState(false);
     const [isChild, setIsChiled] = useState(true);
 
     return (
@@ -15,14 +15,7 @@ function Question() {
                         <div style={styles.question_main3}>
                             <div style={styles.question_hashtag}>#해시태그</div>
                             <div style={{ flex: '1' }}>{isChild ? "어린이" : null}</div>
-                            <ul onClick={() => { setView(!view) }} style={styles.dropdownbtn}>⋮
-                                {view && (
-                                    <>
-                                        <li>수정하기</li>
-                                        <li>신고하기</li>
-                                    </>
-                                )}
-                            </ul>
+                            <Dropdown />
                         </div>
                         <h3 style={styles.question_title}>질문 제목</h3>
                         <div style={{ flex: '1' }}>🕓1시간 전</div>
