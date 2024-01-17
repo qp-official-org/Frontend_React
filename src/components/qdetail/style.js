@@ -74,16 +74,10 @@ export const styles = {
         borderRadius: "15px",
         boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
         flex: "1",
-<<<<<<< HEAD
         color: '',
         display: 'flex',
         flexDirection: 'column',
         height: '30vh'
-=======
-        color: '#EB7125',
-        display: 'flex',
-        flexDirection: 'column'
->>>>>>> b2bf9c2d2c73b3f5c7fa95141b3cce80753726ba
     },
     answer_button: {
         width: "9.44vw",
@@ -100,7 +94,6 @@ export const styles = {
         marginRight: 'auto',
     },
 
-<<<<<<< HEAD
     question_container: {
         display: 'flex',
         minHeight: '100%'
@@ -171,7 +164,4 @@ export const styles = {
 
     },
 
-=======
-    }
->>>>>>> b2bf9c2d2c73b3f5c7fa95141b3cce80753726ba
 }
