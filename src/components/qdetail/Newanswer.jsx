@@ -12,7 +12,7 @@ function Newanswer() {
         setAnswerText(event.target.value);
     }//서버에 추가할 답변 내용
     const handleSubmit = () => {
-        setSubmitBtnClicked(!submitBtnClicked)
+        setSubmitBtnClicked(true)
     }
 
     // 나중에 서버에 올릴 값(변수 answerText)
