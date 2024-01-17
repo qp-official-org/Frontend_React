@@ -6,7 +6,7 @@ import Answer from "./components/qdetail/Answer";
 import Newanswer from "./components/qdetail/Newanswer";
 import Question from "./components/Question";
 //import { Link } from "react-router-dom";
-//test
+
 
 function Qdetail() {
     const [isLogined, setIsLogined] = useState(false);
