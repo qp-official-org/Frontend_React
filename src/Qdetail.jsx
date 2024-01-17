@@ -13,6 +13,9 @@ function Qdetail() {
     const [isAnswer, setIsAnswer] = useState(false);
     const [isChild, setIsChiled] = useState(true);
     const [answerOfAnswer, setAnswerOfAnswer] = useState(false);
+    const [answerList, setAnswerList] = useState([1, 2, 3]);//서버에서 받는 답변 리스트
+
+    //등록하기 누름 => textarea에 있는 내용이 컴포넌트를 불러오는 컴포넌트로 전달 => map으로 돌려서 생성
     const ddClick = () => {
         setView(!view)
     };
@@ -52,18 +55,11 @@ function Qdetail() {
                         {btnClicked ? <Newanswer /> :
                             <button onClick={answerClick} style={styles.answer_button}>답변하기</button>}
                     </div>
-
-                    {/* map함수로 답변 컴포넌트 호출 */}
-
-                    <div /*onClick={openReAnswer}*/ style={styles.answer}>
-                        <Answer />
-                    </div>
-                    <div /*onClick={openReAnswer}*/ style={styles.answer}>
-                        <Answer />
-                    </div>
-                    <div /*onClick={openReAnswer}*/ style={styles.answer}>
-                        <Answer />
-                    </div>
+                    {answerList.map((answer, index) => (
+                        <div style={styles.answer}>
+                            <Answer key={index} content={answer.content} author={answer.author} />
+                        </div>
+                    ))}
                 </div>
             </div>
             <div style={styles.profilecontainer}>
