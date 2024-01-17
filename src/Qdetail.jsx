@@ -16,8 +16,14 @@ function Qdetail() {
     const [isChild, setIsChiled] = useState(true);
     const [answerOfAnswer, setAnswerOfAnswer] = useState(false);
     const [answerList, setAnswerList] = useState([1, 2, 3]);//서버에서 받는 답변 리스트
-
-    //등록하기 누름 => textarea에 있는 내용이 컴포넌트를 불러오는 컴포넌트로 전달 => map으로 돌려서 생성
+    /*
+        useEffect(()=>{
+            const fetchAnswers = async () =>{
+                const answers = await {주소();}
+                swetAnswerList(answers);
+            };
+        })
+    */
     const ddClick = () => {
         setView(!view)
     };
