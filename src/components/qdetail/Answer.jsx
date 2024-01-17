@@ -1,10 +1,11 @@
+// @ts-nocheck
 import React from "react";
 import { styles } from "./style";
 import { useState } from "react";
 import Reanswer from "../Reanswer";
 import Dropdown from "../Dropdown";
 
-function Answer() {
+function Answer({ text }) {
     const [view, setView] = useState(false);
     const [answerOfAnswer, setAnswerOfAnswer] = useState(false);
     const [isBtnClicked, setIsBtnClicked] = useState(false);
@@ -34,7 +35,7 @@ function Answer() {
                 </div>
             </div>
             <div style={{ margin: '15px', minHeight: '10vh', filter: isBlurred ? 'blur(5px)' : 'none' }}>
-                답변 내용
+                답변내용
             </div>
 
             {answerOfAnswer ? <Reanswer /> : null}

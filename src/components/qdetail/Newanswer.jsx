@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { styles } from "./style";
 import { useState } from "react";
@@ -9,7 +10,7 @@ function Newanswer() {
 
     const onChangeText = (event) => {
         setAnswerText(event.target.value);
-    }
+    }//서버에 추가할 답변 내용
     const handleSubmit = () => {
         setSubmitBtnClicked(!submitBtnClicked)
     }
