@@ -18,18 +18,30 @@ export const styles = {
         margin: '5px',  // 버튼 사이 간격을 조절할 수 있음
         borderRadius: '50px'
     },
-    button2: {
-        margin: '5px',  // 버튼 사이 간격을 조절할 수 있음
-        borderRadius: '50px',
+    nextButton: {
+        marginTop: '176px',
+        width: '324px',  // 버튼 사이 간격을 조절할 수 있음
+        height: '77px',
+        borderRadius: '40px',
         background: '#EB7125'
     },
-    box: {
+    loginButton: {
+        marginTop: '176px',
+        width: '324px',  // 버튼 사이 간격을 조절할 수 있음
+        height: '77px',
+        borderRadius: '40px',
+        background: '#EB7125'
+    },
+    whitebox: {
         background:'white',
-        width: '85%',
-        height: '75%',
-        borderRadius: '20px'
+        width: '86.25%',
+        height: '81.54%',
+        borderRadius: '20px',
     },
     bar: {
-        width: '80%'
+        marginTop: '151px',
+        width: '934px',
+        height: '90px',
+        borderRadius: '50px'
     }
 };
