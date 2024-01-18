@@ -29,11 +29,13 @@ function Newanswer() {
                 </div>
             </div>
             <div style={{ justifyContent: 'center' }}>
-                <textarea
-                    placeholder="답변을 입력해주세요."
-                    style={styles.inputBox}
-                    onChange={onChangeText}
-                />
+                <div style={{ ...styles.inputBox, background: "#D9D9D9" }}>
+                    <textarea
+                        placeholder="답변을 입력해주세요."
+                        style={styles.inputBox2}
+                        onChange={onChangeText}
+                    />
+                </div>
                 <div><button onClick={handleSubmit} style={styles.answer_button}>등록하기</button></div>
 
             </div>

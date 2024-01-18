@@ -5,10 +5,9 @@ export const styles = {
     search_ad_container: {
         flex: '1',
         display: 'inline',
-        margin: '1.5%'
     },
     question_detail_main_container: {
-        flex: '3',
+        width: '60vw',
         display: 'inline',
         marginTop: '3%'
     },
@@ -17,14 +16,10 @@ export const styles = {
         justifyContent: "space-between",
     },
     before_question_container: {
-        marginTop: '5px',
-        marginBottom: '10px',
-        marginLeft: '5px'
+        margin: '1.5%'
     },
     after_question_container: {
-        marginTop: '5px',
-        marginBottom: '10px',
-        marginRight: '30px'
+        margin: '1.5%'
     },
     search_container: {
         borderRadius: '15px',
@@ -46,7 +41,7 @@ export const styles = {
     },
     main_orange_container: {
         background: '#EB7125',
-        width: '60vw',
+        width: '100%',
         minHeight: '100%',
         boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
         borderRadius: '20px',
@@ -64,13 +59,13 @@ export const styles = {
     answer: {
         flex: "1",
         background: '#FFFFFF',
-        margin: '25px',
+        margin: '3%',
         borderRadius: "15px",
         boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
     },
     q_box: {
         background: "#FFFFFF",
-        margin: '25px',
+        margin: '3%',
         borderRadius: "15px",
         boxShadow: 'inset 0 4px 4px 0 #00000040, 0 4px 4px 0 black',
         flex: "1",
@@ -149,8 +144,18 @@ export const styles = {
         height: '10vh',
         margin: '2%',
         border: 'none',
-        overflowY: 'auto', // 수직 스크롤이 필요한 경우에만 표시
-        overflowWrap: 'break-word', // 줄 바꿈 설정
+        overflowY: 'auto',
+        overflowWrap: 'break-word',
+        whiteSpace: 'pre-wrap'
+    },
+    inputBox2: {
+        background: '#D9D9D9',
+        width: '95%',
+        height: '70%',
+        margin: '1%',
+        border: 'none',
+        overflowY: 'auto',
+        overflowWrap: 'break-word',
         whiteSpace: 'pre-wrap'
     },
     newanswer_box: {

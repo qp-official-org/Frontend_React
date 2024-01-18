@@ -29,11 +29,6 @@ function Qdetail() {
     return (
         <div style={styles.full_container}>
             <div style={styles.search_ad_container}>
-                <button style={styles.search_container}>
-                    <div>돋보기 사진이 들어갈 자리</div>
-                    <div>궁금한 것을 질문해보세요</div>
-                </button>
-                <button style={styles.ad_container}>광고/배너</button>
             </div>
             <div style={styles.question_detail_main_container}>
                 <div style={styles.after_before_question_container}>
