@@ -3,7 +3,7 @@ export const styles = {
         display: 'flex',
     },
     search_ad_container: {
-        flex: '1',
+        flex: '0.6',
         display: 'inline',
     },
     question_detail_main_container: {
@@ -166,7 +166,25 @@ export const styles = {
         flex: "1",
         flexDirection: 'column',
         minHeight: '100%',
-
+    },
+    header_block: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        margin: '2%',
+        marginBottom: '0px'
+    },
+    search_btn: {
+        width: '29.2vw',
+        height: '6.8vh',
+        borderRadius: '40px',
+        background: 'linear-gradient(to right, #EB7125,#CB4E00)',
+        display: 'flex'
+    },
+    header_input: {
+        backgroundColor: 'transparent',
+        border: 'none',
+        color: 'white',
+        width: '100%'
     },
 
 }
