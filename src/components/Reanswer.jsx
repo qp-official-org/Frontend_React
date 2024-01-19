@@ -6,7 +6,7 @@ import Newanswer from "./qdetail/Newanswer";
 import { styles } from "./qdetail/style";
 import Dropdown from "./Dropdown";
 
-function Reanswer() {
+function Reanswer({ content, author }) {
     const [isBlurred, setIsBlurred] = useState(false);
 
 
@@ -18,11 +18,11 @@ function Reanswer() {
                     <div style={styles.question_main3}>
                         <Dropdown />
                     </div>
-                    <h3 style={styles.question_title}>답변자 정보</h3>
+                    <h3 style={styles.question_title}>{author}</h3>
                 </div>
             </div>
             <div style={{ margin: '15px', minHeight: '10vh', filter: isBlurred ? 'blur(5px)' : 'none' }}>
-                답변내용
+                {content}
             </div>
         </div>
     )

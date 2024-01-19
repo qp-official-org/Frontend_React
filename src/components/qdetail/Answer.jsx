@@ -6,18 +6,26 @@ import Newanswer from "./Newanswer";
 import Dropdown from "../Dropdown";
 import Reanswer from "../Reanswer";
 
-function Answer({ text }) {//props로 답변 내용을 전달받음
+function Answer({ content, author }) {//props로 답변 내용을 전달받음
     const [view, setView] = useState(false);
     const [answerOfAnswer, setAnswerOfAnswer] = useState(false);
     const [isBtnClicked, setIsBtnClicked] = useState(false);
     const [isBlurred, setIsBlurred] = useState(true);
-    const [reanswerList, setReanswerList] = useState([1, 2]);
+    const [reanswerList, setReanswerList] = useState([
+        {
+            content: "이것은 첫 번째 답변입니다.",
+            author: "User1"
+        },
+        {
+            content: "두 번째 답변입니다.",
+            author: "User2"
+        },
+    ]);
 
     const handleCheckBtn = () => {
         setIsBtnClicked(true);
         setAnswerOfAnswer(true);
         setIsBlurred(false);
-        console.log('blur')
     };
 
     return (
@@ -33,11 +41,11 @@ function Answer({ text }) {//props로 답변 내용을 전달받음
                     <div style={styles.question_main3}>
                         <Dropdown />
                     </div>
-                    <h3 style={styles.question_title}>답변자 정보</h3>
+                    <h3 style={styles.question_title}>{author}</h3>
                 </div>
             </div>
             <div style={{ margin: '15px', minHeight: '10vh', filter: isBlurred ? 'blur(5px)' : 'none' }}>
-                답변내용{/*text prop으로 전달받음*/}
+                {content}
             </div>
 
             {answerOfAnswer && (
