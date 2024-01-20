@@ -173,18 +173,39 @@ export const styles = {
         margin: '2%',
         marginBottom: '0px'
     },
-    search_btn: {
+    search_btn_before: {
         width: '29.2vw',
         height: '6.8vh',
         borderRadius: '40px',
         background: 'linear-gradient(to right, #EB7125,#CB4E00)',
-        display: 'flex'
+        display: 'flex',
     },
     header_input: {
         backgroundColor: 'transparent',
         border: 'none',
         color: 'white',
-        width: '100%'
+        width: '100%',
+        right: '0',
     },
+    header_search_before: {
+        marginLeft: '-0.5%',
+        marginTop: '-0.5%',
+        width: '9vh',
+        height: '9vh',
+        borderRadius: '50%',
+        position: 'absolute',
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        boxShadow: '0px 4px 4px 2px rgba(0, 0, 0, 0.25), 0px 2px 8px 0px rgba(0, 0, 0, 0.25) inset'
+    },
+    search_btn_after: {
+        width: '48.3vw',
+        height: '6.8vh',
+        borderRadius: '40px',
+        background: 'linear-gradient(to right, #EB7125,#CB4E00)',
+        display: 'flex',
+    },
+    header_search_after: {
+
+    }
 
 }
