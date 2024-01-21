@@ -1,0 +1,36 @@
+// 메일 인증 컴포넌트
+//@ts-nocheck
+import React from "react";
+import { styles } from "src/components/logindetail/style";
+import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
+const MyBackButton = () => {
+    const navigate = useNavigate(); //변수 할당시켜서 사용
+    const onClickBtn = () => {
+      navigate(-1); // 바로 이전 페이지로 이동
+    };
+    return (
+      <button onClick={onClickBtn}></button>
+    );
+  };
+
+function Certify() {
+    return (
+        // 주황색 화면
+        <div style={styles.container}> 
+            {/* 흰 박스 */}
+            <div style={styles.whitebox}>
+                <div>
+                    <div style={styles.buttonBox}>
+                        <h1 style = {styles.contents}>인증번호 입력</h1>
+                        <input placeholder = '큐피 메일(qp.official.ac@gmail.com)로 받은 인증번호를 입력해주세요.' style = {styles.bar}></input>
+                        <button style = {styles.loginButton}>로그인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Certify;

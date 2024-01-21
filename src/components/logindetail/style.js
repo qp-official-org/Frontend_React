@@ -7,6 +7,23 @@ export const styles = {
         justifyContent: 'center',
         alignItems: 'center',
     },
+    previous:{
+        display: "flex",
+        position:"absolute",
+        top:"65px",
+        right:"131px",
+        width: "59px",
+        height: "57px",
+        flexDirection: "column",
+        justifyContent: "center",
+        color: "rgba(158, 158, 158, 0.63)",
+        textAlign: "center",
+        fontFamily: "NanumSquare",
+        fontSize: "70px",
+        fontStyle: "normal",
+        fontWeight: "400",
+        lineHeight: "normal"
+    },
     logo: {
         position: "relative",
         color: "#EB7125",
@@ -24,24 +41,24 @@ export const styles = {
         justifyContent: 'center'
     },
     text:{
-        position: "absolute",
+        position:"absolute",
+        top: "691px",
+        left:"39%",
         textAlign: 'center',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        top: "691px",
-        bottom: "118px",
-        left: "526px"
+        // flexDirection: 'column' // 세로축으로 정렬
     },
     text1: {
         color: "#000",
-        textAlign: "center",
         fontFamily: "Pretendard",
         fontSize: "22px",
         fontStyle: "normal",
         fontWeight: 500,
-        lineHeight: "normal",
+        lineHeight: "normal"
     },
+
     text2: {
         color: "#EB7125",
         fontFamily: "Pretendard",
@@ -50,6 +67,7 @@ export const styles = {
         fontWeight: 500,
         lineHeight: "normal"
     },
+
     buttonBox: {
         textAlign: 'center',
         display: 'flex',
@@ -57,10 +75,32 @@ export const styles = {
         alignItems: 'center',
         justifyContent: 'center'
     },
-    button: {
-        margin: '5px',  // 버튼 사이 간격을 조절할 수 있음
-        borderRadius: '50px'
+
+    button1: {
+        position:"absolute",
+        // margin: '81px',  // 버튼 사이 간격을 조절할 수 있음
+        borderRadius: '50px',
+        width: "552px",
+        height: "90px",
+        top:"269px"
     },
+    button2: {
+        position:"absolute",
+        // margin: '43px',  // 버튼 사이 간격을 조절할 수 있음
+        borderRadius: '50px',
+        width: "552px",
+        height: "90px",
+        top:"402px"
+    },
+    button3: {
+        position:"absolute",
+        // margin: '43px',  // 버튼 사이 간격을 조절할 수 있음
+        borderRadius: '50px',
+        width: "552px",
+        height: "90px",
+        top:"535px"
+    },
+
     nextButton: {
         marginTop: '176px',
         width: '324px',  // 버튼 사이 간격을 조절할 수 있음

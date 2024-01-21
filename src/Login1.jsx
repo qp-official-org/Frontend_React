@@ -1,8 +1,12 @@
+//로그인페이지1
 //@ts-nocheck
+
 import React from "react";
 import { styles } from "src/components/logindetail/style";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+
+// 이전페이지 기능, 카카오/구글/네이버 로그인 기능, 전문가 전용 로그인 인증번호 페이지 이동
 
 const MyBackButton = () => {
     const navigate = useNavigate(); //변수 할당시켜서 사용
@@ -20,7 +24,6 @@ function Login1() {
         <div style={styles.container}> 
             {/* 흰 박스 */}
             <div style={styles.whitebox}>
-                {/* 로그인1페이지 */}
                 <div>
                     <div>
                         <h1 style={styles.logo}>큐피 로고</h1>
@@ -40,27 +43,6 @@ function Login1() {
                         <Link to = "/Certify" style={styles.text2}>전문가 계정으로 로그인하기</Link>
                     </div>
                 </div>
-
-                {/* 로그인2페이지 (인증번호 입력페이지) */}
-                {/* <div style={styles.buttonBox}>
-                    <h1 style = {styles.contents}>인증번호 입력</h1>
-                    <input placeholder = '큐피 메일(qp.official.ac@gmail.com)로 받은 인증번호를 입력해주세요.' style = {styles.bar}></input>
-                    <button style = {styles.loginButton}>로그인</button>
-                </div> */}
-
-                {/* 로그인3페이지(닉네임 설정) */}
-                {/* <div style= {styles.buttonBox}>
-                    <h1>닉네임 설정</h1>
-                    <h5>6글자 이내, 띄어쓰기 x</h5>
-                    <input placeholder = '큐피에서 사용할 닉네임을 입력해주세요.' style = {styles.bar}></input>
-                    <button style = {styles.nextButton}>다음</button>
-                </div> */}
-                {/* 로그인4페이지(프로필 설정) */}
-                {/* <div style = {styles.buttonBox}>
-                    <h1>프로필 설정</h1>
-                    <input placeholder = '프로필 설정 자리' style = {styles.bar}></input>
-                    <button style = {styles.nextButton}>설정완료</button>
-                </div> */}
             </div>
         </div>
     );
