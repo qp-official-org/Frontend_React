@@ -16,7 +16,8 @@
     "paths": {
       "*": ["*"],
       "components/*": ["src/components/*"],
-      "utils/*": ["src/utils/*"]
+      "utils/*": ["src/utils/*"],
+      "lib/*": ["lib/*"],
     }
   },
   "include": ["src/**/*"],
