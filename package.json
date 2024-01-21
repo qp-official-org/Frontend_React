@@ -1,4 +1,5 @@
 {
+  "homepage": "https://qp-official-org.github.io/Frontend_React/",
   "name": "qp-react",
   "version": "0.1.0",
   "private": true,
@@ -9,6 +10,7 @@
     "antd": "^5.13.2",
     "axios": "^1.6.4",
     "cross-env": "^7.0.3",
+    "gh-pages": "^6.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",
@@ -19,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
