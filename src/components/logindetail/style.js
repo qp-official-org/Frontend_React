@@ -113,7 +113,13 @@ export const styles = {
         width: '324px',  // 버튼 사이 간격을 조절할 수 있음
         height: '77px',
         borderRadius: '40px',
-        background: '#EB7125'
+        background: '#EB7125',
+        color:"#FFF",
+        textAlign:"center",
+        fontSize:"40px",
+        fontStyle:"normal",
+        fontFamily:"Pretendard",
+        fontWeight:500
     },
     whitebox: {
         borderRadius: "20px",

@@ -32,8 +32,6 @@ function Login1() {
                         <h1 style = {styles.previous}>X</h1>
                     </div>
                     <div style={styles.buttonBox}>
-                        {/* 해당 div 완성되면 컴포넌트화 시키기  */} 
-                        {/* 클릭하면 컴포넌트 사이에서 이동가능하게 라우터.? */}
                         <button style={styles.button1}>네이버로그인</button>
                         <button style={styles.button2}>카카오로그인</button>
                         <button style={styles.button3}>구글 로그인</button> 
