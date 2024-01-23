@@ -2,7 +2,6 @@
 //@ts-nocheck
 import React from "react";
 import { styles } from "src/components/logindetail/style";
-import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 const MyBackButton = () => {
@@ -23,8 +22,13 @@ function Nickname() {
             <div style={styles.whitebox}>
                 <div style= {styles.buttonBox}>
                     <h1>닉네임 설정</h1>
+                    {/* <label for="nickname">닉네임 설정</label> */}
                     <h5>6글자 이내, 띄어쓰기 x</h5>
-                    <input placeholder = '큐피에서 사용할 닉네임을 입력해주세요.' style = {styles.bar}></input>
+                    <input placeholder = '큐피에서 사용할 닉네임을 입력해주세요.' style = {styles.bar} id="nickname" type="text"></input>
+                    <div class="help">
+                        <span class="success">사용할 수 있는 닉네임입니다.</span>
+                        <span class="fail">사용할 수 없는 닉네임입니다.</span>
+                    </div>
                     <button style = {styles.nextButton}>다음</button>
                 </div>
             </div>
