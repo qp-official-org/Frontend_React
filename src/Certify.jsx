@@ -19,7 +19,7 @@ const BackButton = () => {
 const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
 
 const emailCheck = (username) => {
-    if(username.match(emailRegEx)===null) { //형식에 맞지 않을 경우 아래 콘솔 출력
+    if(username.match(emailRegEx)==null) { //형식에 맞지 않을 경우 아래 콘솔 출력
       console.log('인증번호가 틀렸습니다.');
       return;
     }else{ // 형식에 맞을 경우 true
@@ -42,7 +42,7 @@ function Certify() {
                         <h1 style = {styles.contents}>인증번호 입력</h1>
                         {/* <input placeholder = '큐피 메일(qp.official.ac@gmail.com)로 받은 인증번호를 입력해주세요.' style = {styles.bar}></input> */}
                         <input _onChange={(e)=>{setUsername(e.target.value); emailCheck(e.target.value)}} placeholder="큐피 메일(qp.official.ac@gmail.com)로 받은 인증번호를 입력해주세요." name="signup_id" type="email" style = {styles.bar}></input>
-                        <button style = {styles.loginButton}>로그인</button>
+                        <button style = {styles.loginButton} onClick={emailCheck}>로그인</button>
                     </div>
                 </div>
             </div>
