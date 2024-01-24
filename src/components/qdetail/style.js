@@ -205,7 +205,14 @@ export const styles = {
         display: 'flex',
     },
     header_search_after: {
-
+        left: '68%',
+        marginTop: '-0.5%',
+        width: '9vh',
+        height: '9vh',
+        borderRadius: '50%',
+        position: 'absolute',
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        boxShadow: '0px 4px 4px 2px rgba(0, 0, 0, 0.25), 0px 2px 8px 0px rgba(0, 0, 0, 0.25) inset'
     }
 
 }
