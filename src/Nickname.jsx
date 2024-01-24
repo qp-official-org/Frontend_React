@@ -25,7 +25,7 @@ function Nickname() {
         setNickname(newNickname);
         //여기에서 닉네임 유효성 체크 후, isValidNickname 상태 업데이트
         const isValid = 
-            newNickname.length == 6 && /^[a-zA-Z0-9가-힣]*$/g.test(newNickname) && !/\s/g.test(newNickname);
+            newNickname.length <= 6 && /^[a-zA-Z0-9가-힣]*$/g.test(newNickname) && !/\s/g.test(newNickname);
 
         setIsValidNickname(isValid);
     };
@@ -33,7 +33,7 @@ function Nickname() {
     const handleNextButtonClick = () => {
         if(isValidNickname){
         //유효한 경우 다음 페이지로 이동하거나 다른 동작 수행
-            navigate('/next-page');
+            navigate('/Profile');
         }else{
             alert("사용할 수 없는 닉네임입니다.")
         }
@@ -51,9 +51,9 @@ function Nickname() {
                     id="nickname" type="text" value={nickname} onChange={handleNicknameChange}></input>
                         <div class="help">
                             {isValidNickname ? ( 
-                                <span class="success">사용할 수 있는 닉네임입니다.</span>
+                                <span class="success" style = {{color:'green'}}>사용할 수 있는 닉네임입니다.</span>
                                 ) : (
-                                <span class="fail">사용할 수 없는 닉네임입니다.</span>
+                                <span class="fail" style = {{color:'red'}}>사용할 수 없는 닉네임입니다.</span>
                                 )}
                         </div>
                     <button style = {styles.nextButton} onClick={handleNextButtonClick}>다음</button>
