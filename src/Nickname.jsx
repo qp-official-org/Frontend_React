@@ -29,7 +29,7 @@ function Nickname() {
         }
     }
 
-    const onClickBtn = () => {
+    const BackBtn = () => {
     navigate(-1); // 바로 이전 페이지로 이동
     };
 
@@ -40,7 +40,7 @@ function Nickname() {
             <div style={styles.whitebox}>
                 <div style= {styles.buttonBox}>
                     <h1>닉네임 설정</h1>
-                    <button onClick={onClickBtn} style={styles.previous}>←</button>
+                    <button onClick={BackBtn} style={styles.previous}>←</button>
                     <h5>6글자 이내, 띄어쓰기 x</h5>
                     <input placeholder = '큐피에서 사용할 닉네임을 입력해주세요.' style = {styles.bar} 
                     id="nickname" type="text" value={nickname} onChange={handleNicknameChange}></input>

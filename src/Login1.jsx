@@ -8,17 +8,11 @@ import { useNavigate } from "react-router-dom";
 
 // 이전페이지 기능, 카카오/구글/네이버 로그인 기능, 전문가 전용 로그인 인증번호 페이지 이동
 
-const MyBackButton = () => {
-    const navigate = useNavigate(); //변수 할당시켜서 사용
-    const onClickBtn = () => {
-      navigate(-1); // 바로 이전 페이지로 이동
-    };
-    return (
-      <button onClick={onClickBtn}></button>
-    );
-  };
-
 function Login1() {
+    const navigate = useNavigate();
+    const BackBtn = () => {
+        navigate('/Main'); // 바로 이전 페이지로 이동
+        };
     return (
         // 주황색 화면
         <div style={styles.container}> 
@@ -29,7 +23,7 @@ function Login1() {
                         <h1 style={styles.logo}>큐피 로고</h1>
                     </div>
                     <div>
-                        <h1 style = {styles.previous}>X</h1>
+                        <button onClick={BackBtn} style={styles.previous}>X</button>
                     </div>
                     <div style={styles.buttonBox}>
                         <button style={styles.button1}>네이버로그인</button>

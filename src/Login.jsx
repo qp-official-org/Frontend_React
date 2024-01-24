@@ -4,16 +4,6 @@ import { styles } from "src/components/logindetail/style";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
-const MyBackButton = () => {
-    const navigate = useNavigate(); //변수 할당시켜서 사용
-    const onClickBtn = () => {
-      navigate(-1); // 바로 이전 페이지로 이동
-    };
-    return (
-      <button onClick={onClickBtn}></button>
-    );
-  };
-
 function Login1() {
     return (
         // 주황색 화면
