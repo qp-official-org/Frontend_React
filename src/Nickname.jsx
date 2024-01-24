@@ -5,16 +5,6 @@ import { useState } from "react";
 import { styles } from "src/components/logindetail/style";
 import { useNavigate } from "react-router-dom";
 
-const MyBackButton = () => {
-    const navigate = useNavigate(); //변수 할당시켜서 사용
-    const onClickBtn = () => {
-      navigate(-1); // 바로 이전 페이지로 이동
-    };
-    return (
-      <button onClick={onClickBtn}></button>
-    );
-  };
-
 function Nickname() {
     const [nickname, setNickname] = useState("");
     const [isValidNickname, setIsValidNickname] = useState(false);
@@ -35,9 +25,14 @@ function Nickname() {
         //유효한 경우 다음 페이지로 이동하거나 다른 동작 수행
             navigate('/Profile');
         }else{
-            alert("사용할 수 없는 닉네임입니다.")
+            alert("사용할 수 없는 닉네임입니다.") //알림창 푸시
         }
     }
+
+    const onClickBtn = () => {
+    navigate(-1); // 바로 이전 페이지로 이동
+    };
+
     return (
         // 주황색 화면
         <div style={styles.container}> 
@@ -45,7 +40,7 @@ function Nickname() {
             <div style={styles.whitebox}>
                 <div style= {styles.buttonBox}>
                     <h1>닉네임 설정</h1>
-                    {/* <label for="nickname">닉네임 설정</label> */}
+                    <button onClick={onClickBtn} style={styles.previous}>←</button>
                     <h5>6글자 이내, 띄어쓰기 x</h5>
                     <input placeholder = '큐피에서 사용할 닉네임을 입력해주세요.' style = {styles.bar} 
                     id="nickname" type="text" value={nickname} onChange={handleNicknameChange}></input>

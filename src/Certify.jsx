@@ -6,20 +6,11 @@ import { styles } from "src/components/logindetail/style";
 import { useNavigate } from "react-router-dom";
 
 // 로그인버튼 기능, 이전페이지 기능
-const BackButton = () => {
-    const navigate = useNavigate(); //변수 할당시켜서 사용
-    const onClickBtn = () => {
-      navigate(-1); // 바로 이전 페이지로 이동
-    };
-    return (
-      <button onClick={onClickBtn}>X</button>
-    );
-  };
 
 const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
 
 const emailCheck = (username) => {
-    if(username.match(emailRegEx)==null) { //형식에 맞지 않을 경우 아래 콘솔 출력
+    if(username.match(emailRegEx)===null) { //형식에 맞지 않을 경우 아래 콘솔 출력
       console.log('인증번호가 틀렸습니다.');
       return;
     }else{ // 형식에 맞을 경우 true
@@ -29,6 +20,10 @@ const emailCheck = (username) => {
 
 function Certify() {
     const [username, setUsername] = React.useState("");
+    const navigate = useNavigate();
+    const onClickBtn = () => {
+        navigate('/Login1'); // 바로 이전 페이지로 이동
+        };
     return (
         // 주황색 화면
         <div style={styles.container}> 
@@ -36,7 +31,7 @@ function Certify() {
             <div style={styles.whitebox}>
                 <div>
                     <div>
-                        <h1 style = {styles.previous}>X</h1>
+                    <button onClick={onClickBtn} style={styles.previous}>X</button>
                     </div>
                     <div style={styles.buttonBox}>
                         <h1 style = {styles.contents}>인증번호 입력</h1>
