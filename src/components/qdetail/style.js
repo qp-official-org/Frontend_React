@@ -180,12 +180,15 @@ export const styles = {
         background: 'linear-gradient(to right, #EB7125,#CB4E00)',
         display: 'flex',
     },
-    header_input: {
+    header_input_before: {
         backgroundColor: 'transparent',
         border: 'none',
         color: 'white',
         width: '100%',
         right: '0',
+        marginLeft: '9.5vw',
+        textAlign: 'center',
+        marginTop: '2vh'
     },
     header_search_before: {
         marginLeft: '-0.5%',
@@ -195,7 +198,8 @@ export const styles = {
         borderRadius: '50%',
         position: 'absolute',
         backgroundColor: 'rgba(255,255,255,0.5)',
-        boxShadow: '0px 4px 4px 2px rgba(0, 0, 0, 0.25), 0px 2px 8px 0px rgba(0, 0, 0, 0.25) inset'
+        boxShadow: '0px 4px 4px 2px rgba(0, 0, 0, 0.25), 0px 2px 8px 0px rgba(0, 0, 0, 0.25) inset',
+        transition: 'all 0.5s ease'
     },
     search_btn_after: {
         width: '48.3vw',
@@ -205,14 +209,53 @@ export const styles = {
         display: 'flex',
     },
     header_search_after: {
-        left: '68%',
+        left: '71%',
         marginTop: '-0.5%',
         width: '9vh',
         height: '9vh',
         borderRadius: '50%',
         position: 'absolute',
         backgroundColor: 'rgba(255,255,255,0.5)',
-        boxShadow: '0px 4px 4px 2px rgba(0, 0, 0, 0.25), 0px 2px 8px 0px rgba(0, 0, 0, 0.25) inset'
+        boxShadow: '0px 4px 4px 2px rgba(0, 0, 0, 0.25), 0px 2px 8px 0px rgba(0, 0, 0, 0.25) inset',
+        transition: 'all 0.5s ease'
+    },
+    header_center_before: {
+        display: 'flex',
+        height: '6.8vh',
+        textAlign: 'center'
+    },
+    header_back_search: {
+        marginLeft: '3%',
+        color: 'white',
+        fontSize: '43px',
+        fontWeight: 'bold'
+    },
+    header_input: {
+        border: 'none',
+        background: 'none',
+        color: 'white',
+        marginLeft: '2%',
+        width: '40vw'
+    },
+    header_not_login: {
+        justifyContent: 'center',
+        textAlign: 'center',
+        borderRadius: '40px',
+        background: 'linear-gradient(to top, rgba(235, 113, 37, 1),rgba(203, 78, 0, 1))',
+        width: '10.76vw',
+        height: '6.83vh',
+        position: 'absolute',
+        left: '88%'
+    },
+    header_profile: {
+        width: '8.948vw',
+        height: '24.9vh',
+        background: 'linear-gradient(to top, rgba(235, 113, 37, 1),rgba(203, 78, 0, 1))',
+        borderRadius: '40px',
+        justifyContent: 'center',
+        position: 'absolute',
+        left: '88%'
     }
+
 
 }
