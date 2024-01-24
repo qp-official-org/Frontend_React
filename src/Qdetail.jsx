@@ -59,6 +59,7 @@ function Qdetail() {
                         <div style={{ flex: '1' }}>
                             <Question />
                         </div>
+                        <div style={{ textAlign: 'center', color: 'white', fontWeight: '600', fontSize: '16px' }}>{answerList.length}명의 전문가가 답변했어요</div>
                         <hr style={styles.hrline} />
                         <div style={btnClicked ? { flex: '1', display: 'flex', justifyContent: 'center', alignItems: 'center' } : { display: 'flex', height: '100%' }}>
                             {btnClicked ? <Newanswer /> :

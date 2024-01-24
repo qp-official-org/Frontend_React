@@ -228,7 +228,8 @@ export const styles = {
         marginLeft: '3%',
         color: 'white',
         fontSize: '43px',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        transition: 'all 0.5s ease'
     },
     header_input: {
         border: 'none',
@@ -250,7 +251,7 @@ export const styles = {
     header_profile: {
         width: '8.948vw',
         height: '24.9vh',
-        background: 'linear-gradient(to top, rgba(235, 113, 37, 1),rgba(203, 78, 0, 1))',
+        background: 'linear-gradient(to bottom, rgba(235, 113, 37, 1),rgba(203, 78, 0, 1))',
         borderRadius: '40px',
         justifyContent: 'center',
         position: 'absolute',
