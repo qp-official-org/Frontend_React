@@ -19,7 +19,7 @@ function App() {
           <Route path="/login1" element={<Login1 />} />
           <Route path="/certify" element={<Certify />} />
           <Route path="/nickname" element={<Nickname />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/setProfile" element={<Profile />} />
           <Route path="/main" element={<Main />} />
         </Routes>
       </BrowserRouter>

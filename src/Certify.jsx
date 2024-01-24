@@ -25,7 +25,7 @@ function Certify() {
     const handleNextButtonClick = () => {
         if(isValidNum){
         //유효한 경우 다음 페이지로 이동하거나 다른 동작 수행
-            navigate('/Profile');
+            navigate('/setProfile');
         }else{
             alert("인증번호를 다시 입력해주세요.") //알림창 푸시
         }

@@ -2,13 +2,12 @@
 //@ts-nocheck
 import React from "react";
 import { styles } from "src/components/logindetail/style";
-import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 function Profile() {
     const navigate = useNavigate();
     const BackBtn = () => {
-        navigate('/Login1'); // 바로 이전 페이지로 이동
+        navigate('/Nickname'); // 바로 이전 페이지로 이동
         };
     return (
         // 주황색 화면
