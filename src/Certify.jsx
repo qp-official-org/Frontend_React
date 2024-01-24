@@ -27,7 +27,7 @@ function Certify() {
         //유효한 경우 다음 페이지로 이동하거나 다른 동작 수행
             navigate('/Profile');
         }else{
-            alert("사용할 수 없는 닉네임입니다.") //알림창 푸시
+            alert("인증번호를 다시 입력해주세요.") //알림창 푸시
         }
     }
     const BackBtn = () => {
