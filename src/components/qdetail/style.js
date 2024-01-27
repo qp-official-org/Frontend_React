@@ -256,7 +256,54 @@ export const styles = {
         justifyContent: 'center',
         position: 'absolute',
         left: '88%'
+    },
+    header_logout: {
+        marginTop: '5%',
+        marginRight: '10%',
+        textAlign: 'right',
+        fontWeight: '600',
+        fontSize: '10px',
+        color: 'white',
+        textDecoration: 'underline'
+    },
+    header_profile_box: {
+        display: 'flex',
+        flexDirection: 'column',
+        textAlign: 'center',
+        justifyCoSntent: 'center',
+        alignItems: 'center'
+    },
+    header_profile_img: {
+        width: '9vh',
+        height: '9vh',
+        borderRadius: '50%',
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        border: '1px solid white'
+    },
+    header_profile_nickname: {
+        fontWeight: '900',
+        fontSize: '21px',
+        color: 'white',
+        margin: '4.5%'
+    },
+    header_profile_point: {
+        fontWeight: '900',
+        fontSize: '21px',
+        color: 'white',
+        margin: '4.5%'
+    },
+    header_profile_charge_btn: {
+        background: 'white',
+        width: '7.617vw',
+        height: "1.597vh",
+        borderRadius: '20px',
+        fontWeight: '700',
+        fontSize: '10px',
+        margin: '4.5%'
+    },
+    header_login_btn: {
+        color: 'white',
+        marginTop: '11%'
     }
-
 
 }
