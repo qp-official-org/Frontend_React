@@ -6,7 +6,7 @@ import Newanswer from "./qdetail/Newanswer";
 import { styles } from "./qdetail/style";
 import Dropdown from "./Dropdown";
 
-function Reanswer({ content, author }) {
+function Reanswer({ content, author, reply }) {
     const [isBlurred, setIsBlurred] = useState(false);
 
 

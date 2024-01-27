@@ -19,15 +19,29 @@ function Qdetail() {
     const [answerList, setAnswerList] = useState([
         {
             content: "이것은 첫 번째 답변입니다.",
-            author: "User1"
+            author: "User1",
+            reply: [{
+                content: '이것은 첫 번째 답변의 리플1입니다.',
+                author: "User4"
+            },
+            {
+                content: '이것은 첫 번째 답변의 리플2입니다.',
+                author: 'User7'
+            }],
         },
         {
             content: "두 번째 답변입니다.",
-            author: "User2"
+            author: "User2",
+            reply: [{
+            }]
         },
         {
             content: "세 번째 답변입니다.",
-            author: "User3"
+            author: "User3",
+            reply: [{
+                content: '이것은 세 번째 답변의 리플1입니다.',
+                author: "User6",
+            }]
         },
     ]);/*서버에서 받는 답변 리스트
     Answer안에 있는 Reanswer에 대한 내용도 Qdetail에서 받아야할지,
@@ -67,7 +81,7 @@ function Qdetail() {
                         </div>
                         {answerList.map((answer, index) => (
                             <div style={styles.answer}>
-                                <Answer key={index} content={answer.content} author={answer.author} />
+                                <Answer key={index} reply={answer.reply} content={answer.content} author={answer.author} />
                             </div>
                         ))}
                     </div>

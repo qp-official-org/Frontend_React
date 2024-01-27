@@ -6,21 +6,12 @@ import Newanswer from "./Newanswer";
 import Dropdown from "../Dropdown";
 import Reanswer from "../Reanswer";
 
-function Answer({ content, author }) {//props로 답변 내용을 전달받음
+function Answer({ content, author, reply }) {//props로 답변 내용을 전달받음
     const [view, setView] = useState(false);
     const [answerOfAnswer, setAnswerOfAnswer] = useState(false);
     const [isBtnClicked, setIsBtnClicked] = useState(false);
     const [isBlurred, setIsBlurred] = useState(true);
-    const [reanswerList, setReanswerList] = useState([
-        {
-            content: "이것은 첫 번째 답변입니다.",
-            author: "User1"
-        },
-        {
-            content: "두 번째 답변입니다.",
-            author: "User2"
-        },
-    ]);
+    const [reanswerList, setReanswerList] = useState(reply);
 
     const handleCheckBtn = () => {
         setIsBtnClicked(true);
@@ -50,10 +41,14 @@ function Answer({ content, author }) {//props로 답변 내용을 전달받음
 
             {answerOfAnswer && (
                 <div>
-                    {reanswerList.map((reanswer, index) => (
-                        <Reanswer key={index} content={reanswer.content} author={reanswer.author} />
-                    ))}
-                    <Newanswer />
+                    {answerOfAnswer && (
+                        <div>
+                            {reanswerList.map((reanswer, index) => reanswer.content && reanswer.content.length > 0 ? (
+                                <Reanswer key={index} reply={reanswerList} content={reanswer.content} author={reanswer.author} />
+                            ) : null)}
+                            <Newanswer />
+                        </div>
+                    )}
                 </div>
             )}
         </div >
