@@ -20,13 +20,28 @@ function Profile() {
         setMenu(isOpen => !isOpen);
     }
 
-    //설정완료 유효성 검사 !
-    // const handleNextButtonClick = () => {
-    //     if(isValidNickname){
-    //     //유효한 경우 다음 페이지로 이동하거나 다른 동작 수행
-    //     navigate('/MainPage');
-    // }
-    // }
+    const [nickname, setNickname] = useState("");
+    const [isValidNickname, setIsValidNickname] = useState(false);
+
+    const handleNicknameChange = (event) => {
+        const newNickname = event.target.value;
+        setNickname(newNickname);
+        //여기에서 닉네임 유효성 체크 후, isValidNickname 상태 업데이트
+        const isValid = 
+            newNickname.length <= 6 && /^[a-zA-Z0-9가-힣]*$/g.test(newNickname) && !/\s/g.test(newNickname);
+
+        setIsValidNickname(isValid);
+    };
+
+    const handleNextButtonClick = () => {
+        if(isValidNickname){
+        //유효한 경우 다음 페이지로 이동
+            navigate('/MainPage');
+        // }else{
+        //     alert("사용할 수 없는 닉네임입니다.") //알림창 푸시
+        // }
+         }
+    }
 
     return (
         // 주황색 화면
