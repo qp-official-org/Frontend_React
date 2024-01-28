@@ -1,6 +1,8 @@
 //로그인페이지1
 //@ts-nocheck
-
+import nlogo from "src/naver.svg";
+import klogo from "src/kakao.svg";
+import glogo from "src/google.svg";
 import React from "react";
 import { styles } from "src/components/logindetail/style";
 import { Link } from 'react-router-dom';
@@ -52,6 +54,9 @@ function Login1() {
                         <button style={styles.button1}>네이버로그인</button>
                         <button style={styles.button2}>카카오로그인</button>
                         <button style={styles.button3}>구글 로그인</button> 
+                        <img src={nlogo} style={{position: "absolute", top:"269px"}}></img>
+                        <img src={klogo} style={{position: "absolute", top:"402px"}}></img>
+                        <img src={glogo} style={{position: "absolute", top:"535px"}}></img>
                     </div>
                     <div style={styles.text}>
                         <span style={styles.text1}>전문가이신가요?</span>
