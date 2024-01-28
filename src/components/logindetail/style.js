@@ -8,6 +8,8 @@ export const styles = {
         alignItems: 'center',
     },
     previous:{
+        border:"none",
+        backgroundColor:"transparent",
         display: "flex",
         position:"absolute",
         top:"65px",
@@ -22,7 +24,8 @@ export const styles = {
         fontSize: "70px",
         fontStyle: "normal",
         fontWeight: "400",
-        lineHeight: "normal"
+        lineHeight: "normal",
+        cursor:"pointer"
     },
     logo: {
         position: "relative",
@@ -36,10 +39,22 @@ export const styles = {
         letterSpacing: "-5px",
         margin: "128px 0 647px 0",
         display: 'flex',
-        flexDirection: 'column',  // 세로축으로 정렬
+        flexDirection: 'column',  
         alignItems: 'center',
         justifyContent: 'center'
     },
+    toggle: {
+        position:"absolute",
+        listStyle:"none",
+        border: "1px solid #000",
+        background: "#FFF",
+        width: "195px",
+        height: "92px"
+    },
+    bimg:{
+        cursor:"pointer"
+    },
+
     text:{
         position:"absolute",
         top: "691px",
@@ -48,7 +63,7 @@ export const styles = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        // flexDirection: 'column' // 세로축으로 정렬
+        // flexDirection: 'column' 
     },
     text1: {
         color: "#000",
@@ -65,52 +80,59 @@ export const styles = {
         fontSize: "22px",
         fontStyle: "normal",
         fontWeight: 500,
-        lineHeight: "normal"
+        lineHeight: "normal",
+        cursor:"pointer",
+        textDecoration:"none"
     },
 
     buttonBox: {
         textAlign: 'center',
         display: 'flex',
-        flexDirection: 'column',  // 세로축으로 정렬
+        flexDirection: 'column',  
         alignItems: 'center',
         justifyContent: 'center'
     },
 
     button1: {
         position:"absolute",
-        // margin: '81px',  // 버튼 사이 간격을 조절할 수 있음
+        // margin: '81px',  
         borderRadius: '50px',
         width: "552px",
         height: "90px",
-        top:"269px"
+        top:"269px",
+        cursor:"pointer"
     },
     button2: {
         position:"absolute",
-        // margin: '43px',  // 버튼 사이 간격을 조절할 수 있음
+        // margin: '43px',  
         borderRadius: '50px',
         width: "552px",
         height: "90px",
-        top:"402px"
+        top:"402px",
+        cursor:"pointer"
     },
     button3: {
         position:"absolute",
-        // margin: '43px',  // 버튼 사이 간격을 조절할 수 있음
+        // margin: '43px',  
         borderRadius: '50px',
         width: "552px",
         height: "90px",
-        top:"535px"
+        top:"535px",
+        cursor:"pointer"
     },
 
     nextButton: {
-        marginTop: '176px',
-        width: '324px',  // 버튼 사이 간격을 조절할 수 있음
+        position:"absolute",
+        marginTop: '665px',
+        width: '324px',  
         height: '77px',
         borderRadius: '40px',
-        background: '#EB7125'
+        background: '#EB7125',
+        cursor:"pointer"
     },
     loginButton: {
         marginTop: '176px',
-        width: '324px',  // 버튼 사이 간격을 조절할 수 있음
+        width: '324px',  
         height: '77px',
         borderRadius: '40px',
         background: '#EB7125',
@@ -119,7 +141,8 @@ export const styles = {
         fontSize:"40px",
         fontStyle:"normal",
         fontFamily:"Pretendard",
-        fontWeight:500
+        fontWeight:500,
+        cursor:"pointer"
     },
     whitebox: {
         borderRadius: "20px",
