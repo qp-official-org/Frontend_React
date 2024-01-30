@@ -199,7 +199,8 @@ export const styles = {
         position: 'absolute',
         backgroundColor: 'rgba(255,255,255,0.5)',
         boxShadow: '0px 4px 4px 2px rgba(0, 0, 0, 0.25), 0px 2px 8px 0px rgba(0, 0, 0, 0.25) inset',
-        transition: 'all 0.5s ease'
+        transition: 'all 0.5s ease',
+        backdropFilter: 'blur(15px)'
     },
     search_btn_after: {
         width: '48.3vw',
