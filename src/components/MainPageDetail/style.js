@@ -1,4 +1,9 @@
 export const styles = {
+    // {
+    //     fontFamily: "Pretendard",
+    //     fontStyle: "normal",
+    // },
+
     container:{
         background:"white",
         width: '100vw',
@@ -37,12 +42,26 @@ export const styles = {
         borderRadius: "78px",
         background:"lightgray 50% / cover no-repeat"
     },
-    
-    answer:{
-        position:"absolute",
-        marginTop:"263px",
-    },
 
+    answer:{
+        
+    },
+    menu:{
+        position: "absolute",
+        marginTop:"10px",
+        marginRight: "48px",
+        width:"129px",
+        height:"255px",
+        borderRadius:"20px",
+        background: "linear-gradient(175deg, #EB7125 2.03%, #CB4E00 102.14%)"
+    },
+    alarm:{
+        position: "sticky",
+        top:"0",
+        width: "101.5px",
+        height: "101.5px",
+        fill: "linear-gradient(137deg, #EB7125 12.44%, #CB4E00 102.26%)"
+    },
     DummyBox:{
         position:"absolute",
         marginTop:"156px",

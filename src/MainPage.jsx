@@ -1,9 +1,9 @@
 // //메인화면 레이아웃
 //@ts-nocheck
 // import React, {useState, useEffect} from "react";
-// import { styles } from "src/components/MainPageDetail/style";
+// import { styles } from "components/MainPageDetail/style";
 // import { useNavigate } from "react-router-dom"; //헤더에 로그인 버튼 연동할 때 사용할 예정
-// import Qdummy from "src/Qdummy";
+// import Qdummy from "Qdummy";
 
 // //요소로는 프로필 사진, 어린이 여부, 업로드 시간, 제목, 댓글 전체 수, 전문가 답변 수, 해시태그
 // function MainPage() {
@@ -42,9 +42,9 @@
 // export default MainPage;
 
 // import React, {useState} from "react";
-// import { styles } from "src/components/MainPageDetail/style";
+// import { styles } from "components/MainPageDetail/style";
 // import { useNavigate } from "react-router-dom";
-// import Qdummy from "src/Qdummy";
+// import Qdummy from "Qdummy";
 // import InfiniteScroll from 'react-infinite-scroll-component';
 
 // function MainPage() {
@@ -89,13 +89,19 @@
 // }
 
 // export default MainPage;
-
+import profile1 from 'src/p1.svg';
+import profile2 from 'src/p2.svg';
+import profile3 from 'src/p3.svg';
+import profile4 from 'src/p4.svg';
+import profile5 from 'src/p5.svg';
+import profile6 from 'src/p6.svg';
 import React, { useState, useEffect } from "react";
-import { styles } from "src/components/MainPageDetail/style";
+import { styles } from "./components/MainPageDetail/style";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Qdummy from "src/Qdummy";
+import Qdummy from "./Qdummy";
 
 function MainPage() {
+    const [imgitems, setImgItems] = useState([profile1,profile2,profile3,profile4,profile5,profile6]); //기본 프로필 이미지 배열
     const [items, setItems] = useState(Array.from({ length: 12 })); // 초기에 불러올 아이템 수
     const [hasMore, setHasMore] = useState(true); // 더 불러올 아이템이 있는지
 
@@ -125,8 +131,8 @@ function MainPage() {
                 } style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridGap: "15px" }}
                 >
                 {hasMore? fetchMoreData: addQdummy}
-                {items.map((i, index) => (
-                    <Qdummy key={index} /> // 이 부분에서 Qdummy 컴포넌트를 사용하여 렌더링을 해줍니다.
+                {items.map((item, index) => (
+                    <Qdummy key={index}  profileImg={imgitems[index % imgitems.length]}/> // 이 부분에서 Qdummy 컴포넌트를 사용하여 렌더링을 해줍니다.
                 ))}
             </InfiniteScroll>
           </div>
