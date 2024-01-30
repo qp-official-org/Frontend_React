@@ -1,8 +1,5 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Main from "src/Main";
-import Myprofile from "src/Myprofile";
-import Qdetail from "src/Qdetail";
 import MainPage from "src/MainPage";
 import MainPage2 from "src/MainPage2";
 
@@ -11,11 +8,8 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/profile" element={<Myprofile />} />
-          <Route path="/detail" element={<Qdetail />} />
-          <Route path="/mainpage" element={<MainPage />} />
-          <Route path="/mainpage2" element={<MainPage2 />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/mainpage" element={<MainPage2 />} />
         </Routes>
       </BrowserRouter>
     </div>

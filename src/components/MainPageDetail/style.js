@@ -42,21 +42,37 @@ export const styles = {
         borderRadius: "78px",
         background:"lightgray 50% / cover no-repeat"
     },
-
+    contents:{
+        position:"absolute",
+        marginLeft:"15px"
+    },
     answer:{
-        
+        fontFamily:"Pretendard",
+        fontSize:"16px",
+        fontStyle:"normal",
+        fontWeight: 400,
+        marginTop:"60px"
+    },
+    sidebar:{
+        position:"flex",
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: "column",
+        marginTop:"31px",
+        marginLeft: "1263px",
+        marginRight: "48px"
     },
     menu:{
-        position: "absolute",
-        marginTop:"10px",
-        marginRight: "48px",
         width:"129px",
         height:"255px",
         borderRadius:"20px",
         background: "linear-gradient(175deg, #EB7125 2.03%, #CB4E00 102.14%)"
     },
     alarm:{
-        position: "sticky",
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: "column",
+        margin:"38px",
         top:"0",
         width: "101.5px",
         height: "101.5px",

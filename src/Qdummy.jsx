@@ -18,6 +18,8 @@ function Qdummy({ profileImg }) {
 
     const defaultQdummy = { 
         color:"black",
+        fontFamily: "Pretendard",
+        fontStyle: "normal",
         width:"276.421px",
         height: "355px",
         borderRadius: "20px",
@@ -30,7 +32,6 @@ function Qdummy({ profileImg }) {
         color: "#FFF",
         fontFamily: "Pretendard",
         fontStyle: "normal",
-        fontWeight: "700",
         lineHeight: "normal",
         width:"276.421px",
         height: "355px",
@@ -39,41 +40,62 @@ function Qdummy({ profileImg }) {
         background: "linear-gradient(151deg, #EB7125 0%, #CB4E00 106.87%)",
         boxShadow: "0px 2px 6px 0px rgba(0, 0, 0, 0.25), 0px 2px 6px 0px rgba(0, 0, 0, 0.25) inset"
     };
-    
+
     return (
         <div onMouseEnter={handleMouseEnter} onMouseLeave = {handleMouseLeave}>
             <div class="help">
                 {isHovered ? (
                     <div style={hoverQdummy}>
-                        <img src={ profileImg } style={styles.profile}></img>
-                        <h5>어린이</h5>
-                        <h5>업로드 시간</h5>
-                        <h1>제목</h1>
-                        <div style={styles.answer}>
-                            <img src={answericon}></img>
-                            <span>2</span>
-                            <img src={panswericon}></img>
-                            <span>3</span>
-                        </div>
-                        <div>
-                            <h5>해시태그 </h5>
+                        <div style={styles.contents}>
+                            <img src={ profileImg } style={styles.profile}></img>
+                            <div class="level" style={{fontSize:"16px", marginTop:"28px", marginLeft:"209px"}}>
+                                <h5>어린이</h5>
+                            </div>
+                            <div class="date" style={{fontSize:"13px", marginTop:"62px"}}>
+                                <h5>2023. 12. 20. 8:00am</h5>
+                            </div>
+                            <div class="title" style={{fontSize:"20px", fontWeight:700, marginTop:"10px"}}>
+                                <p>현재 아르테미스 계획은</p>
+                                <p>어떻게 되어 가고 있나요?</p>
+                            </div>
+                            <div class="reply" style={styles.answer}>
+                                <img src={answericon}></img>
+                                <span style={{marginLeft:"8px"}}>2</span>
+                                <img src={panswericon} style={{marginLeft:"8px"}}></img>
+                                <span style={{marginLeft:"8px"}}>3</span>
+                            </div>
+                            <div class="tag" style={{fontSize:"15px", marginTop:"20px"}}>
+                                <span>#해시태그</span>
+                                <span style={{marginLeft:"17px"}}>#해시태그</span>
+                                <span style={{marginLeft:"17px"}}>#해시태그</span>
+                            </div>
                         </div>
                     </div>
                 ):(
                     <div style={defaultQdummy}>
-                        <img src={ profileImg } style={styles.profile}></img>
-                        <h5 style={{color:"#EB7125"}}>어린이</h5>
-                        <h5>업로드 시간</h5>
-                        <h1>제목</h1>
-                        <div style={styles.answer}>
-                        {/* 호버가 아닐 때 기본 상태에서는 댓글을 안띄워두나? */}
-                            {/* <img src={answericon}></img>
-                            <span>2</span>
-                            <img src={panswericon}></img>
-                            <span>3</span> */} 
-                        </div>
-                        <div>
-                            <h5>해시태그 </h5>
+                        <div style={styles.contents}>
+                            <img src={ profileImg } style={styles.profile}></img>
+                            <div class="level" style={{fontSize:"16px", marginTop:"28px", marginLeft:"209px", color:"#EB7125"}}>
+                                <h5>어린이</h5>
+                            </div>
+                            <div class="date" style={{fontSize:"13px", marginTop:"62px"}}>
+                                <h5>2023. 12. 20. 8:00am</h5>
+                            </div>
+                            <div class="title" style={{fontSize:"20px", fontWeight:700, marginTop:"10px"}}>
+                                <p>현재 아르테미스 계획은</p>
+                                <p>어떻게 되어 가고 있나요?</p>
+                            </div>
+                            {/* <div class="reply" style={styles.answer}>
+                                <img src={answericon}></img>
+                                <span style={{marginLeft:"8px"}}>2</span>
+                                <img src={panswericon} style={{marginLeft:"8px"}}></img>
+                                <span style={{marginLeft:"8px"}}>3</span>
+                            </div> */}
+                            <div class="tag" style={{fontSize:"15px", marginTop:"109px"}}>
+                                <span>#해시태그</span>
+                                <span style={{marginLeft:"17px"}}>#해시태그</span>
+                                <span style={{marginLeft:"17px"}}>#해시태그</span>
+                            </div>
                         </div>
                     </div>
                 )}

@@ -37,30 +37,35 @@ function MainPage() {
         setIsHovered(false);
     };
 
-    const linkStyle = {
-        textDecoration: isHovered ? 'underline' : 'none',
-        cursor: 'pointer',
-        color: "#FFF",
-        fontFamily: "Pretendard",
-        fontSize: "10px",
-        fontStyle: "normal",
-        fontWeight: 600,
-        lineHeight: "normal"
-      };
+    //헤더에 포함되어있는 사이드 바 그대로 가져올 예정 
+    // const linkStyle = {
+    //     textDecoration: isHovered ? 'underline' : 'none',
+    //     cursor: 'pointer',
+    //     color: "#FFF",
+    //     fontFamily: "Pretendard",
+    //     fontSize: "10px",
+    //     fontStyle: "normal",
+    //     fontWeight: 600,
+    //     lineHeight: "normal",
+    //     position:"absolute",
+    //     marginTop:"41px",
+    //     marginRight:"57px"
+    //   };
 
     return (
         <div style={styles.container}> 
-            <div style={styles.DummyBox}>
-                {/* 작은 메뉴창  */}
-                <div style={styles.sidebar}>
-                    <div style={styles.menu}>
-                        <Link to = "/Login1" style={linkStyle} onMouseEnter={handleMouseEnter} onMouseLeave = {handleMouseLeave}>로그아웃</Link>
-                    </div>
+            {/* 작은 메뉴창  */}
+            <div style={styles.sidebar}>
+                    {/* <div style={styles.menu}> */}
+                        {/* <Link to = "/Login1" style={linkStyle} onMouseEnter={handleMouseEnter} onMouseLeave = {handleMouseLeave}>로그아웃</Link> */}
+                    {/* </div> */}
                     {/* 알림창 */}
                     <div style={styles.alarm}>
-                        <img src={alarmimg}></img>
+                        <img src={alarmimg} style={{cursor:"pointer"}} onMouseEnter={handleMouseEnter} onMouseLeave = {handleMouseLeave}></img>
                     </div>
-                </div>
+            </div>
+
+            <div style={styles.DummyBox}>
                 <InfiniteScroll
                     dataLength={items.length}
                     next={fetchMoreData}
