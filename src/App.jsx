@@ -4,6 +4,7 @@ import Main from "src/Main";
 import Myprofile from "src/Myprofile";
 import Qdetail from "src/Qdetail";
 import MainPage from "src/MainPage";
+import MainPage2 from "src/MainPage2";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/profile" element={<Myprofile />} />
           <Route path="/detail" element={<Qdetail />} />
           <Route path="/mainpage" element={<MainPage />} />
+          <Route path="/mainpage2" element={<MainPage2 />} />
         </Routes>
       </BrowserRouter>
     </div>
