@@ -44,14 +44,14 @@ function Certify() {
                     <button onClick={BackBtn} style={styles.previous}>X</button>
                     </div>
                     <div style={styles.buttonBox}>
-                        <h1 style = {styles.contents}>인증번호 입력</h1>
+                        <h1 style = {styles.pageTitle}>인증번호 입력</h1>
                         <input placeholder="큐피 메일(qp.official.ac@gmail.com)로 받은 인증번호를 입력해주세요." style = {styles.bar} 
                         id="CertifyNum" type="text" value={CertifyNum} onChange={handleNumChange}></input>
                             <div class="help">
                                 {isValidNum ? (
-                                <span class="success" style = {{color:'green'}}>인증되었습니다.</span> //이 부분은 임의로 작성해둔 것 (메일로 전송받은 인증번호를 어떻게 확인할지에 대해 논의 필요<)
+                                    <span class="success" style = {{color: "green", fontFamily: "Pretendard", fontSize: "30px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal"}}></span> //이 부분은 임의로 작성해둔 것 (메일로 전송받은 인증번호를 어떻게 확인할지에 대해 논의 필요<)
                                 ) : (
-                                    <span class="fail" style = {{color:'red'}}>틀린 인증번호 입니다.</span>
+                                    <span class="fail" style = {{position:"absolute", color:'#F00', fontFamily: "Pretendard", fontSize: "30px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal", top:"509px", left:"24%"}}>틀린 인증번호 입니다.</span>
                                 )}
                             </div>
                         <button style = {styles.loginButton} onClick={handleNextButtonClick}>로그인</button>

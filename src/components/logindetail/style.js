@@ -109,7 +109,7 @@ export const styles = {
         width: "552px",
         height: "90px",
         top:"269px",
-        left:"27%",
+        left:"30%",
         cursor:"pointer"
     },
     button2: {
@@ -130,7 +130,7 @@ export const styles = {
         top:"402px",
         margin: '81px',  
         cursor:"pointer",
-        left:"27%"
+        left:"30%"
     },
     button3: {
         position:"absolute",
@@ -148,11 +148,21 @@ export const styles = {
         width: "552px",
         height: "90px",
         top:"535px",
-        left:"27%",
+        left:"30%",
         margin: '81px',  
         cursor:"pointer"
     },
-
+    pageTitle:{
+        color: "#000",
+        textAlign: "center",
+        fontFamily: "Pretendard",
+        fontSize: "48px",
+        fontStyle: "normal",
+        fontWeight: 600,
+        lineHeight: "normal",
+        position:"absolute",
+        marginTop:"338px"
+    },
     nextButton: {
         position:"absolute",
         marginTop: '665px',
@@ -163,7 +173,9 @@ export const styles = {
         cursor:"pointer"
     },
     loginButton: {
-        marginTop: '176px',
+        border:"none",
+        position:"absolute",
+        marginTop:"1035px",
         width: '324px',  
         height: '77px',
         borderRadius: '40px',
@@ -184,9 +196,17 @@ export const styles = {
         height: '81.54%'
     },
     bar: {
-        marginTop: '151px',
+        position:"absolute",
+        marginTop: '700px',
         width: '934px',
         height: '90px',
-        borderRadius: '50px'
+        borderRadius: "40px",
+        border: "2px solid #000",
+        color: "rgba(0, 0, 0, 0.50)",
+        fontFamily: "Pretendard",
+        fontSize: "30px",
+        fontStyle: "normal",
+        fontWeight: 400,
+        lineHeight: "normal"
     }
 };
