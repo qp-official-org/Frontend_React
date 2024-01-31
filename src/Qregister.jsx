@@ -2,7 +2,7 @@
 import React from "react";
 import Header from "./Header";
 import { styles } from "./components/registerq/style";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Hashtag from "./components/registerq/Hashtag";
 
 function Qregister() {
@@ -11,15 +11,22 @@ function Qregister() {
     const [warnCheck, setWarnCheck] = useState(false);
     const [writeTag, setWriteTag] = useState("햄버거");
     const [title, setTitle] = useState("");
+    const [content, setContent] = useState("")
     const [titleValidateMin, setTitleValidateMin] = useState(false);
     const [titleValidateMax, setTitleValidateMax] = useState(false);
     const [titleValidate, setTitleValidate] = useState(false);
+    const [contentValidateMin, setContentValidateMin] = useState(false);
+    const [contentValidateMax, setContentValidateMax] = useState(false);
     const handleTitleChange = (e) => {
         const value = e.target.value;
         setTitle(value)
         validateTitle()
-        console.log(title)
-    }
+    };
+    const handleContentChange = (e) => {
+        const value = e.target.value;
+        setContent(value)
+        validateContent()
+    };
     //childClicked, adultClicked 보내기
     const handleChildClicked = () => {
         setChildClicked(!childClicked)
@@ -48,9 +55,29 @@ function Qregister() {
         } else {
             setTitleValidate(true)
         }
+    };
+    const validateContent = () => {
+        const minLength = 10;
+        const maxLength = 300;
+        if (content.length < minLength) {
+            setContentValidateMin(false)
+        } else {
+            setContentValidateMin(true)
+        };
 
+        if (content.length > maxLength) {
+            setContentValidateMax(false)
+        } else {
+            setContentValidateMax(true)
+        }
+    };
+    useEffect(() => {
+        validateTitle();
+    }, [title]);
 
-    }
+    useEffect(() => {
+        validateContent();
+    }, [content]);
     return (<div>
         <Header />
         <div style={{ justifyContent: 'center', display: 'flex', }}>
@@ -71,12 +98,12 @@ function Qregister() {
                 </div>
                 <div>
                     <div style={styles.title}>본문</div>
-                    <textarea style={styles.main_content_box}></textarea>
+                    <textarea value={content} onChange={(e) => handleContentChange(e)} style={styles.main_content_box}></textarea>
                     <div style={styles.title_detail}>
                         <div></div>
                         <div style={styles.title_detail_text}>
-                            <div>최소 10자</div>
-                            <div>최대 300자</div>
+                            <div style={contentValidateMin ? { color: 'green' } : { color: 'red' }}>최소 10자</div>
+                            <div style={contentValidateMax ? { color: 'green' } : { color: 'red' }}>최대 300자</div>
                         </div>
                     </div>
                 </div>
