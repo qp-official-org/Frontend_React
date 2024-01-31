@@ -3,13 +3,13 @@ import React from "react";
 import Header from "./Header";
 import { styles } from "./components/registerq/style";
 import { useState, useEffect } from "react";
-import Hashtag from "./components/registerq/Hashtag";
 
 function Qregister() {
     const [childClicked, setChildClicked] = useState(true)
     const [adultClicked, setAdultClicked] = useState(false)
     const [warnCheck, setWarnCheck] = useState(false);
-    const [writeTag, setWriteTag] = useState("햄버거");
+    const [tagList, setTagList] = useState([])
+    const [writeTag, setWriteTag] = useState("");
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("")
     const [titleValidateMin, setTitleValidateMin] = useState(false);
@@ -35,6 +35,16 @@ function Qregister() {
     const handleBtnClicked = () => {
         setWarnCheck(!warnCheck)
     };
+    const handleWriteTagChange = (e) => {
+        const value = e.target.value;
+        setWriteTag(value);
+    };
+    const handleTagKeyDown = (e) => {
+        // Enter 키를 눌렀을 때
+        if (e.key === "Enter") {
+            setTagList([...tagList, writeTag])
+        }
+    }
     const validateTitle = () => {
         const minLength = 5;
         const maxLength = 60;
@@ -109,8 +119,21 @@ function Qregister() {
                 </div>
                 <div>
                     <div style={styles.title}>해시태그(최대3개)</div>
-                    <input style={styles.tag_input} />
-                    <Hashtag />
+                    <input style={styles.tag_input} value={writeTag} onChange={handleWriteTagChange} onKeyDown={handleTagKeyDown} />
+
+
+                    <div style={{ marginTop: '2.5%', display: 'flex' }}>
+                        {tagList.map((tag, index) => (
+                            <div style={{ width: '5vw', marginRight: '1%' }}>
+                                <div style={{ textAlign: 'center', width: '5vw', height: '3.125vh', display: 'flex', borderRadius: '20px', border: '1.5px solid #EB7125', fontSize: '15px', textAlign: 'center', justifyContent: 'center', alignItems: 'center' }}>
+                                    <div style={{ marginRight: '1.5%' }}>{tag}</div>
+                                    <div style={{ color: '#EB7125' }}>X</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+
                 </div>
                 <div style={styles.child_or_adult}>
                     <div style={styles.title}>난이도</div>
