@@ -44,20 +44,29 @@ function Login1() {
             {/* 흰 박스 */}
             <div style={styles.whitebox}>
                 <div>
-                    <div>
+                    <div class="logo">
                         <h1 style={styles.logo}>큐피 로고</h1>
                     </div>
-                    <div>
+
+                    <div class="back">
                         <button onClick={BackBtn} style={styles.previous}>X</button>
                     </div>
+
                     <div style={styles.buttonBox}>
-                        <button style={styles.button1}>네이버로그인</button>
-                        <button style={styles.button2}>카카오로그인</button>
-                        <button style={styles.button3}>구글 로그인</button> 
-                        <img src={nlogo} style={{position: "absolute", top:"269px"}}></img>
-                        <img src={klogo} style={{position: "absolute", top:"402px"}}></img>
-                        <img src={glogo} style={{position: "absolute", top:"535px"}}></img>
+                        <div class="naverLogin">
+                            <button style={styles.button1}>네이버 로그인</button>
+                            <img src={nlogo} style={{position: "absolute", top:"379px", left:"34%"}}></img>
+                        </div>
+                        <div class="kakaoLogin">
+                            <button style={styles.button2}>카카오 로그인</button>
+                            <img src={klogo} style={{position: "absolute", top:"510px", left:"34%"}}></img>
+                        </div>
+                        <div class="googleLogin">
+                            <button style={styles.button3}>구글 로그인</button>
+                            <img src={glogo} style={{position: "absolute", top:"647px", left:"34%"}}></img>
+                        </div>
                     </div>
+
                     <div style={styles.text}>
                         <span style={styles.text1}>전문가이신가요?</span>
                         <Link to = "/Certify" style={linkStyle} onMouseEnter={handleMouseEnter} onMouseLeave = {handleMouseLeave}>전문가 계정으로 로그인하기</Link>

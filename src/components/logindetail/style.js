@@ -12,7 +12,7 @@ export const styles = {
         backgroundColor:"transparent",
         display: "flex",
         position:"absolute",
-        top:"65px",
+        top:"112px",
         right:"131px",
         width: "59px",
         height: "57px",
@@ -57,7 +57,7 @@ export const styles = {
 
     text:{
         position:"absolute",
-        top: "691px",
+        top: "740px",
         left:"39%",
         textAlign: 'center',
         display: 'flex',
@@ -95,8 +95,8 @@ export const styles = {
 
     button1: {
         borderRadius: "40px",
-        background: "#00C73C",
         border: "none",
+        background:"#00C73C",
         color: "#FFF",
         textAlign: "center",
         fontFamily: "Pretendard",
@@ -105,10 +105,11 @@ export const styles = {
         fontWeight: 600,
         lineHeight: "normal",
         position:"absolute",
-        // margin: '81px',  
+        margin: '81px',  
         width: "552px",
         height: "90px",
         top:"269px",
+        left:"27%",
         cursor:"pointer"
     },
     button2: {
@@ -116,14 +117,30 @@ export const styles = {
         // margin: '43px',  
         borderRadius: '40px',
         background: "#FFD740",
+        color: "#424242",
+        textAlign: "center",
+        fontFamily: "Pretendard",
+        fontSize: "28px",
+        fontStyle: "normal",
+        fontWeight: 600,
+        lineHeight: "normal",
         border:"none",
         width: "552px",
         height: "90px",
         top:"402px",
-        cursor:"pointer"
+        margin: '81px',  
+        cursor:"pointer",
+        left:"27%"
     },
     button3: {
         position:"absolute",
+        color: "#424242",
+        textAlign: "center",
+        fontFamily: "Pretendard",
+        fontSize: "28px",
+        fontStyle: "normal",
+        fontWeight: 600,
+        lineHeight: "normal",
         // margin: '43px',  
         borderRadius: '40px',
         background: "#EEE",
@@ -131,6 +148,8 @@ export const styles = {
         width: "552px",
         height: "90px",
         top:"535px",
+        left:"27%",
+        margin: '81px',  
         cursor:"pointer"
     },
 
