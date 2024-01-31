@@ -40,9 +40,9 @@ function Profile() {
             {/* 흰 박스 */}
             <div style={styles.whitebox}>
                 <div style = {styles.buttonBox}>
-                    <h1>프로필 설정</h1>
-                    <button onClick={BackBtn} style={styles.previous}>←</button>
-                    <div>
+                    <h1 style={styles.pageTitle}>프로필 설정</h1>
+                    <button onClick={BackBtn} style={styles.previous2}>←</button>
+                    <div style={styles.setProfile}>
                         <img src={profileimg} alt = "default .img" style={styles.defaultProfileImg}></img>
                         <img src={buttonimg} onClick={() => toggleMenu()} alt = "button .img" style={styles.buttonimg}></img>
                         {isOpen && <Dropdown onProfileChange ={handleProfileChange}/>}

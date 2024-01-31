@@ -70,12 +70,31 @@ export const styles = {
         border: "1px solid #000",
         background: "#FFF",
         width: "195px",
-        height: "92px"
+        height: "92px",
+        left:"156px",
+        top:"125px",
+        zIndex: 9999
     },
     bimg:{
         cursor:"pointer"
     },
-
+    buttonimg:{
+        cursor:"pointer",
+        position: "relative",
+        left:"121%",
+        top:"75px"
+    },
+    setProfile:{
+        position:"absolute",
+        marginTop:"640px"
+    },
+    defaultProfileImg:{
+        position:"absolute",
+        left:"-80%",
+        top:"-80%",
+        width:"192px",
+        height:"197px"
+    },
     text:{
         position:"absolute",
         top: "740px",
