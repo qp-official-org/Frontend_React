@@ -37,16 +37,16 @@ function Nickname() {
             {/* 흰 박스 */}
             <div style={styles.whitebox}>
                 <div style= {styles.buttonBox}>
-                    <h1>닉네임 설정</h1>
-                    <button onClick={BackBtn} style={styles.previous}>←</button>
-                    <h5>6글자 이내, 띄어쓰기 x</h5>
-                    <input placeholder = '큐피에서 사용할 닉네임을 입력해주세요.' style = {styles.bar} 
+                    <h1 style = {styles.pageTitle}>닉네임 설정</h1>
+                    <button onClick={BackBtn} style={styles.previous2}>←</button>
+                    <h5 style={{position:"absolute", top:"275px", fontFamily: "Pretendard", fontSize: "20px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal"}}>6글자 이내, 띄어쓰기 x</h5>
+                    <input placeholder = '큐피에서 사용할 닉네임을 입력해주세요.' style = {styles.bar2} 
                     id="nickname" type="text" value={nickname} onChange={handleNicknameChange}></input>
                         <div class="help">
                             {isValidNickname ? ( 
-                                <span class="success" style = {{color:'green'}}>사용할 수 있는 닉네임입니다.</span>
+                                <span class="success" style = {{position:"absolute", color:'#22C807', fontFamily: "Pretendard", fontSize: "30px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal", top:"509px", left:"24%"}}>사용할 수 있는 닉네임입니다.</span>
                                 ) : (
-                                <span class="fail" style = {{color:'red'}}>사용할 수 없는 닉네임입니다.</span>
+                                <span class="fail" style = {{position:"absolute", color:'#F00', fontFamily: "Pretendard", fontSize: "30px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal", top:"509px", left:"24%"}}>사용할 수 없는 닉네임입니다.</span>
                                 )}
                         </div>
                     <button style = {styles.nextButton} onClick={handleNextButtonClick}>다음</button>

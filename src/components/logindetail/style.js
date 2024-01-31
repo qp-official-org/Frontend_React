@@ -27,6 +27,27 @@ export const styles = {
         lineHeight: "normal",
         cursor:"pointer"
     },
+    previous2:{
+        border:"none",
+        backgroundColor:"transparent",
+        display: "flex",
+        position:"absolute",
+        top:"112px",
+        left:"146px",
+        right:"1242px",
+        width: "59px",
+        height: "57px",
+        flexDirection: "column",
+        justifyContent: "center",
+        color: "rgba(158, 158, 158, 0.63)",
+        textAlign: "center",
+        fontFamily: "NanumSquare",
+        fontSize: "70px",
+        fontStyle: "normal",
+        fontWeight: "400",
+        lineHeight: "normal",
+        cursor:"pointer"
+    },
     logo: {
         position: "relative",
         color: "#EB7125",
@@ -165,12 +186,19 @@ export const styles = {
     },
     nextButton: {
         position:"absolute",
-        marginTop: '665px',
+        border:"none",
+        marginTop:"1035px",
         width: '324px',  
         height: '77px',
         borderRadius: '40px',
         background: '#EB7125',
-        cursor:"pointer"
+        cursor:"pointer",
+        color:"#FFF",
+        textAlign:"center",
+        fontSize:"40px",
+        fontStyle:"normal",
+        fontFamily:"Pretendard",
+        fontWeight:500
     },
     loginButton: {
         border:"none",
@@ -196,6 +224,20 @@ export const styles = {
         height: '81.54%'
     },
     bar: {
+        position:"absolute",
+        marginTop: '700px',
+        width: '934px',
+        height: '90px',
+        borderRadius: "40px",
+        border: "2px solid #000",
+        color: "rgba(0, 0, 0, 0.50)",
+        fontFamily: "Pretendard",
+        fontSize: "30px",
+        fontStyle: "normal",
+        fontWeight: 400,
+        lineHeight: "normal"
+    },
+    bar2: {
         position:"absolute",
         marginTop: '700px',
         width: '934px',
