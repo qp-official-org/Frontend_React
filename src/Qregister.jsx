@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 function Qregister() {
     const [childClicked, setChildClicked] = useState(true)
     const [adultClicked, setAdultClicked] = useState(false)
-    const [warnCheck, setWarnCheck] = useState(false);
+    const [warnCheck, setWarnCheck] = useState(true);
     const [tagList, setTagList] = useState([])
     const [writeTag, setWriteTag] = useState("");
     const [title, setTitle] = useState("");
@@ -45,6 +45,11 @@ function Qregister() {
             setTagList([...tagList, writeTag])
         }
     }
+    const handleTagRemove = (index) => {
+        const newTagList = [...tagList];
+        newTagList.splice(index, 1);
+        setTagList(newTagList);
+    };
     const validateTitle = () => {
         const minLength = 5;
         const maxLength = 60;
@@ -127,7 +132,7 @@ function Qregister() {
                             <div style={{ width: '5vw', marginRight: '1%' }}>
                                 <div style={{ textAlign: 'center', width: '5vw', height: '3.125vh', display: 'flex', borderRadius: '20px', border: '1.5px solid #EB7125', fontSize: '15px', textAlign: 'center', justifyContent: 'center', alignItems: 'center' }}>
                                     <div style={{ marginRight: '1.5%' }}>{tag}</div>
-                                    <div style={{ color: '#EB7125' }}>X</div>
+                                    <div style={{ color: '#EB7125' }} onClick={() => handleTagRemove(index)}>X</div>
                                 </div>
                             </div>
                         ))}
@@ -172,7 +177,12 @@ function Qregister() {
                     </div>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <button style={{ borderRadius: '20px', width: '13.68vw', height: '4.8828vh', border: '3px solid #D9D9D9', background: '#FFFFFF' }}>등록</button>
+                    <button
+                        disabled={warnCheck || !titleValidate || !titleValidateMax || !titleValidateMin || !contentValidateMax || !contentValidateMin}
+                        style={{ borderRadius: '20px', width: '13.68vw', height: '4.8828vh', border: '3px solid #D9D9D9', background: '#FFFFFF' }}
+                    >
+                        등록
+                    </button>
                 </div>
             </div>
         </div>
