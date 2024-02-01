@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import axios from 'axios';
 
 class CookieManager {
@@ -94,11 +96,11 @@ class AxiosConfigurator {
           CookieManager.deleteCookie('session_id');
           throw Promise.reject(error);
         }
-  
+
         const tokenResponse = await AxiosConfigurator.forceRefresh(refreshToken);
         AxiosConfigurator.updateTokens(tokenResponse.result);
         error.config.headers.Authorization = `Bearer ${tokenResponse.result.access_token}`;
-  
+
         return await axios(error.config);
       } catch (refreshError) {
         CookieManager.deleteCookie('access_token');

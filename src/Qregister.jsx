@@ -3,6 +3,7 @@ import React from "react";
 import Header from "./Header";
 import { styles } from "./components/registerq/style";
 import { useState, useEffect } from "react";
+import { Api } from "./api/common.controller"
 
 function Qregister() {
     const [childClicked, setChildClicked] = useState(true)
@@ -94,6 +95,25 @@ function Qregister() {
             setContentValidateMax(true)
         }
     };
+    const handleRegistration = async () => {
+        try {
+            // Api 클래스의 post 메서드를 이용하여 POST 요청 보내기
+            const response = await Api.rPost('/question', {
+                data: {
+                    title,
+                    content,
+                    tags: tagList,
+                    difficulty: childClicked ? 'child' : 'adult', // 예시로 어린이/성인에 따라 difficulty 설정
+                },
+            });
+
+            // 서버 응답에 대한 처리
+            console.log('Registration successful:', response);
+        } catch (error) {
+            // 오류 처리
+            console.error('Registration error:', error);
+        }
+    };
     useEffect(() => {
         validateTitle();
     }, [title]);
@@ -180,7 +200,7 @@ function Qregister() {
                     </div>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <button
+                    <button onClick={handleRegistration}
                         disabled={warnCheck || !titleValidate || !titleValidateMax || !titleValidateMin || !contentValidateMax || !contentValidateMin}
                         style={styles.submit_btn}
                     >

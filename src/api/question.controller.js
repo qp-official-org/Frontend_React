@@ -1,6 +1,6 @@
-import {
-    Api
-} from './common.controller';
+// @ts-nocheck
+
+import { Api } from "./common.controller";
 
 class questionApi extends Api {
 
@@ -11,7 +11,7 @@ class questionApi extends Api {
 
     // 단일질문조회
     findOne = async (id) => {
-        
+
         return this.get(`/questions/${id}`, { content_type: 'application/w-www-form-urlencoded' });
     }
 
