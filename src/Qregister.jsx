@@ -17,6 +17,7 @@ function Qregister() {
     const [titleValidate, setTitleValidate] = useState(false);
     const [contentValidateMin, setContentValidateMin] = useState(false);
     const [contentValidateMax, setContentValidateMax] = useState(false);
+    const [hashTagModal, setHashTagModal] = useState(false);
     const handleTitleChange = (e) => {
         const value = e.target.value;
         setTitle(value)
@@ -42,7 +43,14 @@ function Qregister() {
     const handleTagKeyDown = (e) => {
         // Enter 키를 눌렀을 때
         if (e.key === "Enter") {
-            setTagList([...tagList, writeTag])
+            setWriteTag("")
+            if (tagList.length === 3) {
+                alert('다시 입력하려면 기존 해시태그를 지워주세요')
+                setWriteTag("")
+            } else {
+                setHashTagModal(false)
+                setTagList([...tagList, writeTag])
+            }
         }
     }
     const handleTagRemove = (index) => {
@@ -125,20 +133,16 @@ function Qregister() {
                 <div>
                     <div style={styles.title}>해시태그(최대3개)</div>
                     <input style={styles.tag_input} value={writeTag} onChange={handleWriteTagChange} onKeyDown={handleTagKeyDown} />
-
-
                     <div style={{ marginTop: '2.5%', display: 'flex' }}>
                         {tagList.map((tag, index) => (
-                            <div style={{ width: '5vw', marginRight: '1%' }}>
-                                <div style={{ textAlign: 'center', width: '5vw', height: '3.125vh', display: 'flex', borderRadius: '20px', border: '1.5px solid #EB7125', fontSize: '15px', textAlign: 'center', justifyContent: 'center', alignItems: 'center' }}>
+                            <div style={{ minWidth: '5%', marginRight: '1%' }}>
+                                <div style={{ ...styles.hashtag_block, width: `${tag.length + 1.5}vw` }}>
                                     <div style={{ marginRight: '1.5%' }}>{tag}</div>
                                     <div style={{ color: '#EB7125' }} onClick={() => handleTagRemove(index)}>X</div>
                                 </div>
                             </div>
                         ))}
                     </div>
-
-
                 </div>
                 <div style={styles.child_or_adult}>
                     <div style={styles.title}>난이도</div>
@@ -150,8 +154,7 @@ function Qregister() {
                         </div>
                         <div style={styles.child_guide1}></div>
                         <div style={styles.child_guide2}>
-
-                            <div style={{ color: '#FFFFFF', fontSize: '15px', fontWeight: '400', padding: '10px', }}>
+                            <div style={styles.child_explain_block}>
                                 '어린이'를 활성시키면<br />
                                 어린이 수준에 맞는 답변을 해줍니다.
                             </div>
@@ -159,9 +162,9 @@ function Qregister() {
                     </div>
                 </div>
                 <div>
-                    <div style={{ fontSize: '20px', fontWeight: '700', marginTop: '6%' }}>질문 등록 시 유의사항(필수)</div>
-                    <div style={{ width: "48.3vw", height: '15.234vh', borderRadius: '20px', border: '3px solid #D9D9D9', fontWeight: '700', fontSize: '15px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <div style={{ width: '47vw', height: '8.789vh', justifyContent: 'space-between', display: 'flex', flexDirection: 'column', }}>
+                    <div style={{ ...styles.title, marginTop: '6%' }}>질문 등록 시 유의사항(필수)</div>
+                    <div style={styles.warn_block}>
+                        <div style={styles.warn_text}>
                             <div>작성자님께서 궁금해하고 등록한 질문은 다른 사람들도 궁금해할 만한 질문들입니다.</div>
 
                             <div>질문에 대한 답변을 구매하는 형식이기에 한 사람이라도 답변을 구매한다면 질문을 수정하거나 삭제할 수 없습니다.</div>
@@ -170,16 +173,16 @@ function Qregister() {
                         </div>
                     </div>
                     <div style={{ display: 'flex' }}>
-                        {warnCheck ? <button onClick={handleBtnClicked} style={{ width: '1.25vw', height: '1.25vw', borderRadius: '2px' }}></button>
+                        {warnCheck ? <button onClick={handleBtnClicked} style={styles.before_warn_btn_check}></button>
                             :
-                            <button onClick={handleBtnClicked} style={{ color: '#FFFFFF', width: '1.25vw', height: '1.25vw', background: '#EB7125', border: 'none', borderRadius: '2px' }}>✔</button>}
+                            <button onClick={handleBtnClicked} style={styles.after_warn_btn_check}>✔</button>}
                         <div>유의사항을 모두 읽고 동의합니다.</div>
                     </div>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <button
                         disabled={warnCheck || !titleValidate || !titleValidateMax || !titleValidateMin || !contentValidateMax || !contentValidateMin}
-                        style={{ borderRadius: '20px', width: '13.68vw', height: '4.8828vh', border: '3px solid #D9D9D9', background: '#FFFFFF' }}
+                        style={styles.submit_btn}
                     >
                         등록
                     </button>
