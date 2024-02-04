@@ -67,7 +67,7 @@ class AxiosConfigurator {
     return response;
   }
 
-  static async forceRefresh(refreshToken) {
+  /*static async forceRefresh(refreshToken) {
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/parts/account/refresh`, {
         refresh_token: refreshToken,
@@ -77,6 +77,7 @@ class AxiosConfigurator {
       throw error;
     }
   }
+  */
 
   static async updateTokens(tokens) {
     CookieManager.setCookie('access_token', tokens.access_token, 10);
@@ -97,9 +98,9 @@ class AxiosConfigurator {
           throw Promise.reject(error);
         }
 
-        const tokenResponse = await AxiosConfigurator.forceRefresh(refreshToken);
-        AxiosConfigurator.updateTokens(tokenResponse.result);
-        error.config.headers.Authorization = `Bearer ${tokenResponse.result.access_token}`;
+        //const tokenResponse = await AxiosConfigurator.forceRefresh(refreshToken);
+        //AxiosConfigurator.updateTokens(tokenResponse.result);
+        //error.config.headers.Authorization = `Bearer ${tokenResponse.result.access_token}`;
 
         return await axios(error.config);
       } catch (refreshError) {
@@ -116,7 +117,7 @@ class AxiosConfigurator {
 
 class ApiBase {
   constructor() {
-    this.baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '';
+    this.baseUrl = "http://52.78.248.199:8080";
     this.axiosInstance = AxiosConfigurator.configureAxiosInstance(this.baseUrl);
   }
 }

@@ -6,6 +6,8 @@ import Answer from "./components/qdetail/Answer";
 import Newanswer from "./components/qdetail/Newanswer";
 import Question from "./components/Question";
 import Header from "./Header";
+import { QuestionApi } from "src/api/question.controller";
+
 //import { Link } from "react-router-dom";
 
 function Qdetail() {
@@ -48,6 +50,15 @@ function Qdetail() {
     Answer컴포넌트에서 불러와야할지...*/
 
     //등록하기 누름 => textarea에 있는 내용이 컴포넌트를 불러오는 컴포넌트로 전달 => map으로 돌려서 생성
+    const receiveQuestion = async () => {
+        try {
+            const response = await QuestionApi.findOne(1);
+            console.log(response)
+        } catch (error) {
+            console.error(error)
+        }
+    };
+    receiveQuestion();
     const ddClick = () => {
         setView(!view)
     };

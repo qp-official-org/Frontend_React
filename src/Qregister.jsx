@@ -3,13 +3,15 @@ import React from "react";
 import Header from "./Header";
 import { styles } from "./components/registerq/style";
 import { useState, useEffect } from "react";
-import { Api } from "./api/common.controller"
-
+import { Api } from "./api/common.controller";
+import { QuestionApi } from "./api/question.controller";
+import { RegisterApi } from "./api/register.controller";
+//header에서 userId받아오기
 function Qregister() {
     const [childClicked, setChildClicked] = useState(true)
     const [adultClicked, setAdultClicked] = useState(false)
     const [warnCheck, setWarnCheck] = useState(true);
-    const [tagList, setTagList] = useState([])
+    const [hashtag, setHashtag] = useState([])
     const [writeTag, setWriteTag] = useState("");
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("")
@@ -19,6 +21,8 @@ function Qregister() {
     const [contentValidateMin, setContentValidateMin] = useState(false);
     const [contentValidateMax, setContentValidateMax] = useState(false);
     const [hashTagModal, setHashTagModal] = useState(false);
+    const [userId, setUserId] = useState('1');
+
     const handleTitleChange = (e) => {
         const value = e.target.value;
         setTitle(value)
@@ -45,19 +49,19 @@ function Qregister() {
         // Enter 키를 눌렀을 때
         if (e.key === "Enter") {
             setWriteTag("")
-            if (tagList.length === 3) {
+            if (hashtag.length === 3) {
                 alert('다시 입력하려면 기존 해시태그를 지워주세요')
                 setWriteTag("")
             } else {
                 setHashTagModal(false)
-                setTagList([...tagList, writeTag])
+                setHashtag([...hashtag, writeTag])
             }
         }
     }
     const handleTagRemove = (index) => {
-        const newTagList = [...tagList];
+        const newTagList = [...hashtag];
         newTagList.splice(index, 1);
-        setTagList(newTagList);
+        setHashtag(newTagList);
     };
     const validateTitle = () => {
         const minLength = 5;
@@ -95,25 +99,82 @@ function Qregister() {
             setContentValidateMax(true)
         }
     };
+
+    // POST 요청을 보낼 URL
+    /*    const url = 'http://52.78.248.199:8080/question';
+    
+        // fetch를 사용하여 POST 요청 보내기
+        const handleRegistration = () => {
+            fetch(url, {
+                method: 'POST', // 요청 메소드
+                headers: {
+                    'Content-Type': 'application/json', // 요청 헤더 설정 (JSON 형식으로 데이터를 보낼 경우)
+                    // 기타 필요한 헤더 설정 가능
+                },
+                body: JSON.stringify(postData), // 요청 본문 데이터 설정
+            })
+                .then(response => {
+                    // 서버 응답을 JSON으로 파싱
+                    return response.json();
+                })
+                .then(data => {
+                    // 성공적으로 처리된 경우의 로직
+                    console.log('Success:', data);
+                })
+                .catch(error => {
+                    // 에러 처리
+                    console.error('Error:', error);
+                });
+        }
+        */
+    /*해시태그 에러 고치기 전
+ const handleRegistration = async () => {
+     try {
+         await Promise.all(hashtag.map(async (singleHashtag, index) => {
+             try {
+                 const response = await RegisterApi.findHashtag(singleHashtag);
+                 console.log(response);
+             } catch (error) {
+                 console.log(error);
+             }
+         }));
+
+         const response = await QuestionApi.uploadQuestion({
+             data: {
+                 userId,
+                 title,
+                 content,
+                 hashtag: hashtag,
+             },
+         });
+
+         console.log('등록 성공:', response);
+     } catch (error) {
+         console.error('등록 오류:', error);
+     }
+ };*/
     const handleRegistration = async () => {
         try {
-            // Api 클래스의 post 메서드를 이용하여 POST 요청 보내기
-            const response = await Api.rPost('/question', {
-                data: {
-                    title,
-                    content,
-                    tags: tagList,
-                    difficulty: childClicked ? 'child' : 'adult', // 예시로 어린이/성인에 따라 difficulty 설정
-                },
-            });
-
-            // 서버 응답에 대한 처리
+            const response = await QuestionApi.uploadQuestion(
+                {
+                    data: {
+                        userId,
+                        title,
+                        content,
+                        hashtag
+                    },
+                }
+            );
             console.log('Registration successful:', response);
         } catch (error) {
-            // 오류 처리
             console.error('Registration error:', error);
         }
     };
+    //question s안붙은거 CORS제한 안풀린 거 같음
+    //깃허브 올리라고 하기
+    //질문이랑 답변 대댓글까지 한번에 받아온다고 들었는데 question에 질문한 내용만 담겨있는 거 같음
+    //POST users/auto/signin 무슨 기능인지(그냥 로그인이랑 뭐가 다른건지)
+    //questionid에 답변까지 같이 달라고
     useEffect(() => {
         validateTitle();
     }, [title]);
@@ -154,7 +215,7 @@ function Qregister() {
                     <div style={styles.title}>해시태그(최대3개)</div>
                     <input style={styles.tag_input} value={writeTag} onChange={handleWriteTagChange} onKeyDown={handleTagKeyDown} />
                     <div style={{ marginTop: '2.5%', display: 'flex' }}>
-                        {tagList.map((tag, index) => (
+                        {hashtag.map((tag, index) => (
                             <div style={{ minWidth: '5%', marginRight: '1%' }}>
                                 <div style={{ ...styles.hashtag_block, width: `${tag.length + 1.5}vw` }}>
                                     <div style={{ marginRight: '1.5%' }}>{tag}</div>

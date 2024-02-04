@@ -16,12 +16,12 @@ class questionApi extends Api {
     }
 
     // 질문목록조회
-    findAll = async () => {
-        return this.get('/questions', { content_type: 'application/w-www-form-urlencoded' });
+    findAll = async (page, size) => {
+        return this.get(`/questions?page=${page}&size=${size}`, { content_type: 'application/w-www-form-urlencoded' });
     }
 
     uploadQuestion = async (data) => {
-        return this.post('/questions', { data, content_type: 'multipart/form-data' });
+        return this.post('/questions', { data, content_type: 'application/json' });
     }
 }
 
