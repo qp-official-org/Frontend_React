@@ -1,0 +1,277 @@
+/* 지울거 */
+.testbutton {
+  background-color: transparent;
+  margin: 5px;
+}
+/*제일 위 로고*/
+.mainlogo {
+  display: flex;
+  justify-content: flex-start;
+}
+.wrapper > .mainlogo {
+  align-items: center;
+}
+.wrapper {
+  display: flex;
+}
+.box1,
+.box2 {
+  width: 22vw;
+  height: 45vh;
+
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+/* 첫 박스 부분 */
+
+.first {
+  display: flex;
+  margin-left: 20px;
+  background: linear-gradient(to right, #eb7125, #cb4e00);
+
+  width: 60vw;
+  height: 25vh;
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px lightgray;
+}
+.innerwrap {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 8px;
+  align-items: center;
+}
+.innerwrap > p {
+  font-size: 20px;
+  color: white;
+}
+.balance {
+  font-size: 20px;
+  font-weight: 600;
+}
+.prof_respond {
+  margin-left: 15px;
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  color: white;
+}
+.photo {
+  position: relative;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+.photo1 {
+  border: 1px solid black;
+  border-radius: 90%;
+  background-color: orange;
+}
+
+h3 {
+  margin: 0;
+}
+.date {
+  margin: 0;
+}
+.data {
+  margin-top: 25px;
+  margin-left: 9vw;
+  color: white;
+}
+.modify {
+  margin: 1vh 0.5vw 0 5vw;
+  height: 4.5vh;
+  width: 8vw;
+  border-radius: 15px;
+  border: none;
+  /* border: 0.5px solid gray; */
+  /* background-color: white; */
+}
+/* .modify:hover {
+  box-shadow: 1px 1px 1px 1px gray;
+} */
+.proedit,
+.editno {
+  width: 6vw;
+  height: 4.5vh;
+  margin-right: 7px;
+  border-radius: 15px;
+  border: none;
+  margin-top: 1vh;
+}
+.modifyunit {
+  display: flex;
+  margin-top: 2vh;
+  margin-left: 4vw;
+}
+.second,
+.third,
+.fourth {
+  display: flex;
+  justify-content: space-between;
+}
+.box2_1,
+.box2_2 {
+  width: 29vw;
+  height: 15vh;
+  border: 1px solid black;
+  margin-top: 20px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  flex-direction: column;
+}
+.boxwrap {
+  display: flex;
+  align-items: center;
+}
+
+.box2_1,
+.box3_1,
+.box4_1 {
+  margin-left: 20px;
+}
+
+.box3_1,
+.box3_2,
+.box3_3 {
+  margin-top: 20px;
+  width: 19vw;
+  height: 10vh;
+  border: 1px solid black;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: large;
+  font-weight: 600;
+}
+
+.box4_1,
+.box4_2,
+.box4_3 {
+  margin-top: 15px;
+  width: 19vw;
+  height: 36vh;
+  border-radius: 15px;
+  box-shadow: 1px 1px 1px 1px gray;
+}
+
+.otherprofile > img {
+  border: 1px solid black;
+  border-radius: 90%;
+}
+.otherprofile {
+  margin: 10px;
+}
+
+.temp {
+  margin-left: 15px;
+}
+
+.modalp {
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  width: 60vw;
+  height: 48.5vh;
+  border-radius: 15px;
+  opacity: 0.975;
+  box-shadow: 1px 1px 1px 1px gray;
+}
+.modalwrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.buttonwrap {
+  margin: 3vh 0 0 2vw;
+  width: 30vw;
+  display: flex;
+}
+.buttonwrap > button {
+  margin-left: 1vw;
+  height: 7vh;
+  width: 10vw;
+  border-radius: 15px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  border: 0.5px solid gray;
+}
+
+.closemodal {
+  height: 3vh;
+  position: inherit;
+  background-color: transparent;
+  border: none;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.buttonwrap_parent {
+  display: flex;
+  justify-content: space-between;
+}
+.payarea {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-top: 2vh;
+}
+.paypage {
+  width: 16vw;
+  height: 35vh;
+  background-color: white;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 1px 1px 1px 1px gray;
+}
+/* .naverlogo {
+  background-image: url(https://pm.pstatic.net/resources/asset/sp_main.d5b6c236.png);
+  background-size: 432px 422px;
+  background-position: -361px -156px;
+  background-repeat: no-repeat;
+  width: 1.9vw;
+  height: 3vh;
+  margin-left: 1vw;
+  margin-right: 1vw;
+} */
+.paybutton > button {
+  width: 7vw;
+  height: 4.5vh;
+  border-radius: 15px;
+  background-color: white;
+  border: 0.5px solid gray;
+}
+.paybutton > button:hover {
+  background-color: #eb7125;
+}
+.payyes {
+  margin-right: 0.5vw;
+}
+/* --------------------------------------------- */
+/* 검색화면 부분 */
+.searchwrap {
+  display: flex;
+}
+.s1 {
+  text-align: center;
+
+  height: 3vh;
+  margin-top: 1vw;
+  margin-left: 20vw;
+  border: 1px solid #eb7125;
+  border-radius: 15px;
+  justify-content: space-around;
+  align-items: center;
+}
+.delete {
+  background: none;
+  border: none;
+}
