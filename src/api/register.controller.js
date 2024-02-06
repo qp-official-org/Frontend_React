@@ -9,9 +9,9 @@ class registerApi extends Api {
         return this.get('/questions/test');
     }
     //해시태그조회
-    findHashtag = async () => {
+    findHashtag = async (data) => {
 
-        return this.get('/hashtag/', { content_type: 'application/json' })
+        return this.get('/hashtag/', { data, content_type: 'application/json' })
     }
     //해시태그업로드
     uploadHashtag = async (hashtag) => {

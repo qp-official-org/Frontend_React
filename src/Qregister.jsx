@@ -21,7 +21,8 @@ function Qregister() {
     const [contentValidateMin, setContentValidateMin] = useState(false);
     const [contentValidateMax, setContentValidateMax] = useState(false);
     const [hashTagModal, setHashTagModal] = useState(false);
-    const [userId, setUserId] = useState('1');
+    const [userId, setUserId] = useState(1);
+    const [hashtagId, setHashtagId] = useState([]);
 
     const handleTitleChange = (e) => {
         const value = e.target.value;
@@ -38,15 +39,17 @@ function Qregister() {
         setChildClicked(!childClicked)
         setAdultClicked(!adultClicked)
     };
+    //유의사항 체크
     const handleBtnClicked = () => {
         setWarnCheck(!warnCheck)
     };
+    //올릴 값 반영
     const handleWriteTagChange = (e) => {
         const value = e.target.value;
         setWriteTag(value);
     };
+    //Enter키 눌렀을 때 hashtag리스트에 반영
     const handleTagKeyDown = (e) => {
-        // Enter 키를 눌렀을 때
         if (e.key === "Enter") {
             setWriteTag("")
             if (hashtag.length === 3) {
@@ -58,11 +61,13 @@ function Qregister() {
             }
         }
     }
+    //해시태그 리스트에서 항목 삭제
     const handleTagRemove = (index) => {
         const newTagList = [...hashtag];
         newTagList.splice(index, 1);
         setHashtag(newTagList);
     };
+    //제목 유효성 검사
     const validateTitle = () => {
         const minLength = 5;
         const maxLength = 60;
@@ -84,6 +89,7 @@ function Qregister() {
             setTitleValidate(true)
         }
     };
+    //내용 유효성 검사
     const validateContent = () => {
         const minLength = 10;
         const maxLength = 300;
@@ -99,61 +105,64 @@ function Qregister() {
             setContentValidateMax(true)
         }
     };
-
-    // POST 요청을 보낼 URL
-    /*    const url = 'http://52.78.248.199:8080/question';
-    
-        // fetch를 사용하여 POST 요청 보내기
-        const handleRegistration = () => {
-            fetch(url, {
-                method: 'POST', // 요청 메소드
-                headers: {
-                    'Content-Type': 'application/json', // 요청 헤더 설정 (JSON 형식으로 데이터를 보낼 경우)
-                    // 기타 필요한 헤더 설정 가능
-                },
-                body: JSON.stringify(postData), // 요청 본문 데이터 설정
-            })
-                .then(response => {
-                    // 서버 응답을 JSON으로 파싱
-                    return response.json();
-                })
-                .then(data => {
-                    // 성공적으로 처리된 경우의 로직
-                    console.log('Success:', data);
-                })
-                .catch(error => {
-                    // 에러 처리
-                    console.error('Error:', error);
+    //해시태그 항목들 ID로 변환
+    const hashtagToId = async (hashtag) => {
+        try {
+            const response = await Promise.all(hashtag.map(async (singletag) => {
+                console.log({ "hashtag": singletag })
+                const response = await RegisterApi.findHashtag({
+                    data: {
+                        hashtag: singletag
+                    }
                 });
+                console.log(response)
+            }))
+        } catch (error) {
+            console.error(error)
         }
-        */
+    }
+    useEffect(() => {
+        hashtagToId(hashtag)
+    }, [hashtag])
+    //서버에 POST하는 함수
+
     /*해시태그 에러 고치기 전
- const handleRegistration = async () => {
-     try {
-         await Promise.all(hashtag.map(async (singleHashtag, index) => {
-             try {
-                 const response = await RegisterApi.findHashtag(singleHashtag);
-                 console.log(response);
-             } catch (error) {
-                 console.log(error);
-             }
-         }));
-
-         const response = await QuestionApi.uploadQuestion({
-             data: {
-                 userId,
-                 title,
-                 content,
-                 hashtag: hashtag,
-             },
-         });
-
-         console.log('등록 성공:', response);
-     } catch (error) {
-         console.error('등록 오류:', error);
-     }
- };*/
     const handleRegistration = async () => {
+        try {
+            // hashtag 배열의 각 요소에 대해 병렬로 처리하기 위해 Promise.all을 사용
+            await Promise.all(hashtag.map((singleHashtag, index) => {
+                return RegisterApi.findHashtag(singleHashtag)
+                    .console.log('1')
+                    .catch(error => console.error(error.message));
+            }));
+            // 질문을 업로드
+            const response = await QuestionApi.uploadQuestion({
+                data: {
+                    userId,
+                    title,
+                    content,
+                    hashtag: [1, 2, 3],
+                },
+            });
+
+            console.log('등록 성공:', response);
+        } catch (error) {
+            console.error('등록 오류:', error);
+        }
+        console.log(hashtag)
+    };
+    */
+
+
+
+    const handleRegistration = async () => {
+        let data = {
+            userId,
+            title,
+            content,
+            hashtag
+        }
+        console.log(data)
         try {
             const response = await QuestionApi.uploadQuestion(
                 {
@@ -165,13 +174,12 @@ function Qregister() {
                     },
                 }
             );
-            console.log('Registration successful:', response);
-        } catch (error) {
+            console.log('Registration successful:', data, response);
+        }
+        catch (error) {
             console.error('Registration error:', error);
         }
     };
-    //question s안붙은거 CORS제한 안풀린 거 같음
-    //깃허브 올리라고 하기
     //질문이랑 답변 대댓글까지 한번에 받아온다고 들었는데 question에 질문한 내용만 담겨있는 거 같음
     //POST users/auto/signin 무슨 기능인지(그냥 로그인이랑 뭐가 다른건지)
     //questionid에 답변까지 같이 달라고

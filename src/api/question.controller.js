@@ -21,7 +21,12 @@ class questionApi extends Api {
     }
 
     uploadQuestion = async (data) => {
+        console.log(data)
         return this.post('/questions', { data, content_type: 'application/json' });
+    }
+    //답변조회
+    findParentAnswer = async (id, page, size) => {
+        return this.get(`/answers/questions/${id}?page=${page}&size=${size}`, { content_type: "application/json" });
     }
 }
 

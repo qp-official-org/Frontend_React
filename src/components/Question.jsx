@@ -5,21 +5,9 @@ import { styles } from "./qdetail/style";
 import Dropdown from "./Dropdown";
 import { QuestionApi } from "src/api/question.controller";
 
-function Question() {
+function Question({ title, content }) {
     const [isChild, setIsChiled] = useState(true);
-    const [title, setTitle] = useState("질문 제목");
-    const [content, setContent] = useState('질문내용');
-    const receiveQuestion = async () => {
-        try {
-            const response = await QuestionApi.findOne(1);
-            console.log(response)
-            setTitle(response.result.title)
-            setContent(response.result.content)
-        } catch (error) {
-            console.error(error)
-        }
-    };
-    receiveQuestion();
+
     return (
         <div style={styles.question_container}>
             <div style={styles.q_box}>
