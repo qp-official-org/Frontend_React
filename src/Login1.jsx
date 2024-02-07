@@ -55,15 +55,15 @@ function Login1() {
                     <div style={styles.buttonBox}>
                         <div class="naverLogin">
                             <button style={styles.button1}>네이버 로그인</button>
-                            <img src={nlogo} style={{position: "absolute", top:"379px", left:"38%"}}></img>
+                            <img src={nlogo} style={{position: "absolute", top:"36.7%", left:"35%"}}></img>
                         </div>
                         <div class="kakaoLogin">
                             <button style={styles.button2}>카카오 로그인</button>
-                            <img src={klogo} style={{position: "absolute", top:"510px", left:"38%"}}></img>
+                            <img src={klogo} style={{position: "absolute", top:"53%", left:"35%"}}></img>
                         </div>
                         <div class="googleLogin">
                             <button style={styles.button3}>구글 로그인</button>
-                            <img src={glogo} style={{position: "absolute", top:"647px", left:"38%"}}></img>
+                            <img src={glogo} style={{position: "absolute", top:"68%", left:"35%"}}></img>
                         </div>
                     </div>
 

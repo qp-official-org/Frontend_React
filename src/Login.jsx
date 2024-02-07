@@ -1,3 +1,4 @@
+//컴포넌트 합칠 파일
 //@ts-nocheck
 import React from "react";
 import { styles } from "src/components/logindetail/style";
