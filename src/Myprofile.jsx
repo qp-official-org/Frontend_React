@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 import '../src/pstyle.css';
@@ -26,16 +28,14 @@ import { useState } from 'react';
 const Myprofile = () => {
   const [nickname, setnickname] = useState([]);
   const [userId, setuserId] = useState(null);
-  // const [userCoin, setuserCoin] = useState(null);
   const [message, setmessage] = useState(null);
   const [name, setname] = useState(null);
+  const [ques, setques] = useState(null);
+
   //test user 생성
   useEffect(() => {
     fetch('http://52.78.248.199:8080/users/test', {
       method: 'POST',
-      body: JSON.stringify({
-        nickname: 'abc',
-      }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -51,7 +51,7 @@ const Myprofile = () => {
         })
           .then((res) => res.json())
           .then((ndata) => {
-            setnickname(ndata.code);
+            setnickname(ndata.nickname);
             setmessage(ndata.message);
 
             // setuserCoin(ndata.code); 코인갯수 받는곳
@@ -62,6 +62,21 @@ const Myprofile = () => {
       })
       .catch((error) => {
         console.error('Error fetching userId:', error);
+      });
+    // 질문 받아내는 곳
+    fetch(`http://52.78.248.199:8080/users/questions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((qdata) => {
+        // setques(qdata.result.questions.user);
+        console.log(qdata);
+      })
+      .catch((error) => {
+        console.error('Error fetching ques', error);
       });
   }, []);
 
@@ -186,7 +201,7 @@ const Myprofile = () => {
                 </p>
                 {/* 닉네임 뜨게 하는 곳 -----------------------------------------*/}
                 <p>
-                  {name} {userId}번 유저
+                  {nickname} {name} {userId}번 유저
                 </p>
 
                 <p className="date">{userId}가입</p>
@@ -287,7 +302,7 @@ const Myprofile = () => {
                   <div className="otherprofile">
                     <img style={{ width: '70px' }} src={logo} alt="프사" />
                   </div>
-                  <p className="temp">현재 아르테미스~</p>
+                  <p className="temp">{ques}</p>
                 </div>
                 <div className="box4_2">
                   <div className="otherprofile">
