@@ -5,6 +5,7 @@ import { useState } from "react";
 import Newanswer from "./Newanswer";
 import Dropdown from "../Dropdown";
 import Reanswer from "../Reanswer";
+import { QuestionApi } from "src/api/question.controller";
 
 function Answer({ content, author, reply }) {//props로 답변 내용을 전달받음
     const [view, setView] = useState(false);
@@ -18,6 +19,15 @@ function Answer({ content, author, reply }) {//props로 답변 내용을 전달�
         setAnswerOfAnswer(true);
         setIsBlurred(false);
     };
+
+    const answerRequest = async () => {
+        try {
+            const response = await QuestionApi.findParentAnswer({/*id, page, size*/ });
+            console.log(response)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div style={{ position: 'relative' }}>

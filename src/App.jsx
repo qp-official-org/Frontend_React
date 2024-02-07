@@ -1,8 +1,11 @@
+// @ts-nocheck
+
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "src/Main";
 import Myprofile from "src/Myprofile";
 import Qdetail from "src/Qdetail";
+import Qregister from "./Qregister";
 
 function App() {
   return (
@@ -12,6 +15,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/profile" element={<Myprofile />} />
           <Route path="/detail" element={<Qdetail />} />
+          <Route path="/register" element={<Qregister />} />
         </Routes>
       </BrowserRouter>
     </div>
