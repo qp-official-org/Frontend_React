@@ -3,21 +3,27 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from 'src/Main';
-import Myprofile from './Myprofile';
 import Qdetail from 'src/Qdetail';
-import SearchPage from './SearchPage';
-import Qregister from "./Qregister";
+import Login1 from 'src/Login1';
+import Certify from 'src/Certify';
+import Nickname from 'src/Nickname';
+import Profile from 'src/Profile';
+import Qregister from './Qregister';
+import Myprofile from './Myprofile';
 
 function App() {
   return (
     <div>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/profile" element={<Myprofile />} />
+          <Route path="/" element={<Login1 />} />
           <Route path="/detail" element={<Qdetail />} />
-          <Route path="/search" element={<SearchPage />} />
+          <Route path="/certify" element={<Certify />} />
+          <Route path="/nickname" element={<Nickname />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/mainpage" element={<Main />} />
           <Route path="/register" element={<Qregister />} />
+          <Route path="/myprofile" element={<Myprofile />} />
         </Routes>
       </BrowserRouter>
     </div>
