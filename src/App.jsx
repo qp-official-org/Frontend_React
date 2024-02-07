@@ -3,8 +3,11 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "src/Main";
-import Myprofile from "src/Myprofile";
 import Qdetail from "src/Qdetail";
+import Login1 from "src/Login1";
+import Certify from "src/Certify";
+import Nickname from "src/Nickname";
+import Profile from "src/Profile";
 import Qregister from "./Qregister";
 
 function App() {
@@ -12,9 +15,12 @@ function App() {
     <div>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/profile" element={<Myprofile />} />
+          <Route path="/" element={<Login1 />} />
           <Route path="/detail" element={<Qdetail />} />
+          <Route path="/certify" element={<Certify />} />
+          <Route path="/nickname" element={<Nickname />} />
+          <Route path="/setProfile" element={<Profile />} />
+          <Route path="/mainpage" element={<Main />} />
           <Route path="/register" element={<Qregister />} />
         </Routes>
       </BrowserRouter>
