@@ -106,6 +106,7 @@ function Qregister() {
         }
     };
     //해시태그 항목들 ID로 변환
+    /*해시태그 ID로 변환 고치기 전
     const hashtagToId = async (hashtag) => {
         try {
             const response = await Promise.all(hashtag.map(async (singletag) => {
@@ -124,6 +125,7 @@ function Qregister() {
     useEffect(() => {
         hashtagToId(hashtag)
     }, [hashtag])
+    */
     //서버에 POST하는 함수
 
     /*해시태그 에러 고치기 전
@@ -154,35 +156,33 @@ function Qregister() {
     */
 
 
-
-    const handleRegistration = async () => {
-        let data = {
-            userId,
-            title,
-            content,
-            hashtag
-        }
-        console.log(data)
-        try {
-            const response = await QuestionApi.uploadQuestion(
-                {
-                    data: {
-                        userId,
-                        title,
-                        content,
-                        hashtag
-                    },
-                }
-            );
-            console.log('Registration successful:', data, response);
-        }
-        catch (error) {
-            console.error('Registration error:', error);
-        }
-    };
-    //질문이랑 답변 대댓글까지 한번에 받아온다고 들었는데 question에 질문한 내용만 담겨있는 거 같음
-    //POST users/auto/signin 무슨 기능인지(그냥 로그인이랑 뭐가 다른건지)
-    //questionid에 답변까지 같이 달라고
+    /*질문 등록 에러 고치기 전
+        const handleRegistration = async () => {
+            let data = {
+                userId,
+                title,
+                content,
+                hashtag
+            }
+            console.log(data)
+            try {
+                const response = await QuestionApi.uploadQuestion(
+                    {
+                        data: {
+                            userId,
+                            title,
+                            content,
+                            hashtag
+                        },
+                    }
+                );
+                console.log('Registration successful:', data, response);
+            }
+            catch (error) {
+                console.error('Registration error:', error);
+            }
+        };
+        */
     useEffect(() => {
         validateTitle();
     }, [title]);
@@ -269,7 +269,7 @@ function Qregister() {
                     </div>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <button onClick={handleRegistration}
+                    <button onClick={() => { console.log("제출 완료")/*handleRegistration*/ }}
                         disabled={warnCheck || !titleValidate || !titleValidateMax || !titleValidateMin || !contentValidateMax || !contentValidateMin}
                         style={styles.submit_btn}
                     >

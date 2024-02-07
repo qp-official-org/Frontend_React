@@ -22,6 +22,8 @@ function Qdetail({ qId }) {
     const [content, setContent] = useState('질문내용');
     const [hashtag, setHashtag] = useState("");
     const [answerId, setAnswerId] = useState("")
+    //질문 ID받아오기
+    /*
     const receiveQuestion = async () => {
         try {
             const response = await QuestionApi.findOne({ qId });
@@ -34,19 +36,21 @@ function Qdetail({ qId }) {
         }
     };
     receiveQuestion();
-
-    const receiveAnswer = async () => {
-        try {
-            const response = await QuestionApi.findParentAnswer({ qId }, 10, 0);
-            console.log(response)
-            setAnswerId(response.result.parentAnswerList.answerId)
-            setAnswerList(response.result.parentAnswerList)
-        } catch (error) {
-            console.error(error)
-        }
-    };
-    receiveAnswer();
-
+    */
+    //질문 ID로 답변 ID받아오기
+    /*
+        const receiveAnswer = async () => {
+            try {
+                const response = await QuestionApi.findParentAnswer({ qId }, 10, 0);
+                console.log(response)
+                setAnswerId(response.result.parentAnswerList.answerId)
+                setAnswerList(response.result.parentAnswerList)
+            } catch (error) {
+                console.error(error)
+            }
+        };
+        receiveAnswer();
+    */
 
     const [answerList, setAnswerList] = useState([
         {
