@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "src/Main";
@@ -6,11 +8,12 @@ import Login1 from "src/Login1";
 import Certify from "src/Certify";
 import Nickname from "src/Nickname";
 import Profile from "src/Profile";
+import Qregister from "./Qregister";
 
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="/" element={<Login1 />} />
           <Route path="/detail" element={<Qdetail />} />
@@ -18,6 +21,7 @@ function App() {
           <Route path="/nickname" element={<Nickname />} />
           <Route path="/setProfile" element={<Profile />} />
           <Route path="/mainpage" element={<Main />} />
+          <Route path="/register" element={<Qregister />} />
         </Routes>
       </BrowserRouter>
     </div>
