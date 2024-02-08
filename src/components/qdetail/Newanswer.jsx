@@ -3,8 +3,9 @@ import React from "react";
 import { styles } from "./style";
 import { useState } from "react";
 import Dropdown from "../Dropdown";
+import { QuestionApi } from "src/api/question.controller";
 
-function Newanswer() {
+function Newanswer(qId) {
     const [answerText, setAnswerText] = useState("");
     const [submitBtnClicked, setSubmitBtnClicked] = useState(false);
 
@@ -15,8 +16,25 @@ function Newanswer() {
         setSubmitBtnClicked(true)
     }
 
-    // 나중에 서버에 올릴 값(변수 answerText)
-
+    //새로운 답변 post하는 함수 handleSubmit안에 넣자
+    /*
+    const postAnswer = async () => {
+        try {
+            const response = await QuestionApi.uploadAnswer({
+                data: {
+                    userId: "2",
+                    title: "1",
+                    content: answerText,
+                    catagory,
+                    answerGroup
+                },
+                id: qId
+            })
+        } catch (error) {
+            console.error(error)
+        }
+    }
+*/
     return (
         <div style={styles.newanswer_box}>
             <div style={styles.question_main}>

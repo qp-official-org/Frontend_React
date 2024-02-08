@@ -18,10 +18,15 @@ function Qdetail({ qId }) {
     const [isAnswer, setIsAnswer] = useState(false);
     const [isChild, setIsChiled] = useState(true);
     const [answerOfAnswer, setAnswerOfAnswer] = useState(false);
-    const [title, setTitle] = useState("질문 제목");
+    const [title, setTitle] = useState("질문 제목2");
     const [content, setContent] = useState('질문내용');
     const [hashtag, setHashtag] = useState("");
     const [answerId, setAnswerId] = useState("")
+    const [userId, setUserId] = useState(null)
+    const handleUserIdChange = (newUserId) => {
+        setUserId(newUserId);
+        console.log(userId)
+    }
     //질문 ID받아오기
     /*
     const receiveQuestion = async () => {
@@ -51,33 +56,34 @@ function Qdetail({ qId }) {
         };
         receiveAnswer();
     */
-
+    //부모 답변들의 id가 담겨있는 list
     const [answerList, setAnswerList] = useState([
         {
             content: "이것은 첫 번째 답변입니다.",
-            author: "User1",
-            reply: [{
+            userId: "User1",
+            answerId: [{
                 content: '이것은 첫 번째 답변의 리플1입니다.',
-                author: "User4"
+                userId: "User4"
             },
             {
                 content: '이것은 첫 번째 답변의 리플2입니다.',
-                author: 'User7'
+                userId: 'User7'
             }],
         },
         {
             content: "두 번째 답변입니다.",
-            author: "User2",
-            reply: [{
+            userId: "User2",
+            answerId: [{
             }]
         },
         {
             content: "세 번째 답변입니다.",
-            author: "User3",
-            reply: [{
+            userId: "User3",
+            answerId: [{
                 content: '이것은 세 번째 답변의 리플1입니다.',
-                author: "User6",
-            }]
+                userId: "User6",
+            }],
+
         },
     ]);/*서버에서 받는 답변 리스트
     Answer안에 있는 Reanswer에 대한 내용도 Qdetail에서 받아야할지,
@@ -94,7 +100,7 @@ function Qdetail({ qId }) {
 
     return (
         <div>
-            <Header />
+            <Header onUserIdChange={handleUserIdChange} />
             <div style={styles.full_container}>
                 <div style={styles.search_ad_container}>
                 </div>
@@ -112,12 +118,12 @@ function Qdetail({ qId }) {
                         <div style={{ textAlign: 'center', color: 'white', fontWeight: '600', fontSize: '16px' }}>{answerList.length}명의 전문가가 답변했어요</div>
                         <hr style={styles.hrline} />
                         <div style={btnClicked ? { flex: '1', display: 'flex', justifyContent: 'center', alignItems: 'center' } : { display: 'flex', height: '100%' }}>
-                            {btnClicked ? <Newanswer /> :
+                            {btnClicked ? <Newanswer qId={qId} /> :
                                 <button onClick={answerClick} style={styles.answer_button}>답변하기</button>}
                         </div>
                         {answerList.map((answer, index) => (
                             <div style={styles.answer}>
-                                <Answer key={index} reply={answer.reply} content={answer.content} author={answer.author} />
+                                <Answer key={index} answerId={answer.answerId} content={answer.content} userId={answer.userId} />
                             </div>
                         ))}
                         { }

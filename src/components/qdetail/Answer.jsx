@@ -7,12 +7,12 @@ import Dropdown from "../Dropdown";
 import Reanswer from "../Reanswer";
 import { QuestionApi } from "src/api/question.controller";
 
-function Answer({ content, author, reply }) {//props로 답변 내용을 전달받음
+function Answer({ content, userId, answerId }) {//props로 답변 내용을 전달받음(값 그대로 와서 가공할 필요X)
     const [view, setView] = useState(false);
     const [answerOfAnswer, setAnswerOfAnswer] = useState(false);
     const [isBtnClicked, setIsBtnClicked] = useState(false);
     const [isBlurred, setIsBlurred] = useState(true);
-    const [reanswerList, setReanswerList] = useState(reply);
+    const [reanswerList, setReanswerList] = useState(answerId);
 
     const handleCheckBtn = () => {
         setIsBtnClicked(true);
@@ -20,12 +20,13 @@ function Answer({ content, author, reply }) {//props로 답변 내용을 전달�
         setIsBlurred(false);
     };
 
-    const answerRequest = async () => {
+    const reanswerRequest = async () => {
         try {
-            const response = await QuestionApi.findParentAnswer({/*id, page, size*/ });
+            const response = await QuestionApi.findChildAnswer({ answerId }, 10, 0);
             console.log(response)
+            setReanswerList(response.result.answerList)
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
 
@@ -42,7 +43,7 @@ function Answer({ content, author, reply }) {//props로 답변 내용을 전달�
                     <div style={styles.question_main3}>
                         <Dropdown />
                     </div>
-                    <h3 style={styles.question_title}>{author}</h3>
+                    <h3 style={styles.question_title}>{userId}</h3>
                 </div>
             </div>
             <div style={{ margin: '15px', minHeight: '10vh', filter: isBlurred ? 'blur(5px)' : 'none' }}>
@@ -54,7 +55,7 @@ function Answer({ content, author, reply }) {//props로 답변 내용을 전달�
                     {answerOfAnswer && (
                         <div>
                             {reanswerList.map((reanswer, index) => reanswer.content && reanswer.content.length > 0 ? (
-                                <Reanswer key={index} reply={reanswerList} content={reanswer.content} author={reanswer.author} />
+                                <Reanswer key={index} content={reanswer.content} userId={reanswer.userId} />
                             ) : null)}
                             <Newanswer />
                         </div>

@@ -3,12 +3,20 @@ import React from "react";
 import { styles } from "./components/qdetail/style";
 import { useState } from "react";
 
-function Header() {
+function Header({ onUserIdChange }) {
     const [searchClick, setSearchClick] = useState(false);
     const [searchContent, setSearchContent] = useState('')
     const [isSearchClicked, setIsSearchClicked] = useState(false)
     const [isLogined, setIsLogined] = useState(false)
+    const [userId, setUserId] = useState(null)
+    //userId 부모 컴포넌트로 전달
+    //부모 컴포넌트에서 const handleUserIdChange = (newUserId) => {
+    //    setUserId(newUserId);
+    //    console.log(userId)}로 설정하면 사용가능
     const handleLogin = () => {
+        const newUserId = 2;
+        setUserId(newUserId);
+        onUserIdChange(newUserId);
         setIsLogined(true)
     }
     const handleSearchBlock = () => {

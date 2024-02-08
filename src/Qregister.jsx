@@ -21,7 +21,7 @@ function Qregister() {
     const [contentValidateMin, setContentValidateMin] = useState(false);
     const [contentValidateMax, setContentValidateMax] = useState(false);
     const [hashTagModal, setHashTagModal] = useState(false);
-    const [userId, setUserId] = useState(1);
+    const [userId, setUserId] = useState(2);
     const [hashtagId, setHashtagId] = useState([]);
 
     const handleTitleChange = (e) => {
@@ -156,33 +156,33 @@ function Qregister() {
     */
 
 
-    /*질문 등록 에러 고치기 전
-        const handleRegistration = async () => {
-            let data = {
-                userId,
-                title,
-                content,
-                hashtag
-            }
-            console.log(data)
-            try {
-                const response = await QuestionApi.uploadQuestion(
-                    {
-                        data: {
-                            userId,
-                            title,
-                            content,
-                            hashtag
-                        },
-                    }
-                );
-                console.log('Registration successful:', data, response);
-            }
-            catch (error) {
-                console.error('Registration error:', error);
-            }
-        };
-        */
+
+    const handleRegistration = async () => {
+        let data = {
+            userId,
+            title,
+            content,
+            hashtag
+        }
+        console.log(data)
+        try {
+            const response = await QuestionApi.uploadQuestion(
+                {
+                    data: {
+                        userId,
+                        title,
+                        content,
+                        hashtag
+                    },
+                }
+            );
+            console.log('Registration successful:', data, response);
+        }
+        catch (error) {
+            console.error('Registration error:', error);
+        }
+    };
+
     useEffect(() => {
         validateTitle();
     }, [title]);
@@ -269,7 +269,7 @@ function Qregister() {
                     </div>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <button onClick={() => { console.log("제출 완료")/*handleRegistration*/ }}
+                    <button onClick={handleRegistration}
                         disabled={warnCheck || !titleValidate || !titleValidateMax || !titleValidateMin || !contentValidateMax || !contentValidateMin}
                         style={styles.submit_btn}
                     >
