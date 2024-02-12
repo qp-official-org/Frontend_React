@@ -21,7 +21,7 @@ function Qregister() {
     const [contentValidateMin, setContentValidateMin] = useState(false);
     const [contentValidateMax, setContentValidateMax] = useState(false);
     const [hashTagModal, setHashTagModal] = useState(false);
-    const [userId, setUserId] = useState(2);
+    const [userId, setUserId] = useState(3);
     const [hashtagId, setHashtagId] = useState([]);
 
     const handleTitleChange = (e) => {
@@ -58,6 +58,7 @@ function Qregister() {
             } else {
                 setHashTagModal(false)
                 setHashtag([...hashtag, writeTag])
+                console.log(hashtag)
             }
         }
     }
@@ -128,60 +129,67 @@ function Qregister() {
     */
     //서버에 POST하는 함수
 
-    /*해시태그 에러 고치기 전
     const handleRegistration = async () => {
         try {
-            // hashtag 배열의 각 요소에 대해 병렬로 처리하기 위해 Promise.all을 사용
-            await Promise.all(hashtag.map((singleHashtag, index) => {
-                return RegisterApi.findHashtag(singleHashtag)
-                    .console.log('1')
-                    .catch(error => console.error(error.message));
+            const newHashtagIds = await Promise.all(hashtag.map((singleHashtag) => {
+                const data = {
+                    hashtag: singleHashtag
+                };
+
+                return RegisterApi.uploadHashtag(data)
+                    .then(response => response.result.hashtagId)
+                    .catch(error => {
+                        console.error('해시태그 업로드 오류:', error);
+                        throw error;
+                    });
             }));
-            // 질문을 업로드
+
+            // 질문을 업로드할 때, 새로운 해시태그 ID 배열을 전송
             const response = await QuestionApi.uploadQuestion({
-                data: {
+                data: JSON.stringify({
                     userId,
                     title,
                     content,
-                    hashtag: [1, 2, 3],
-                },
+                    hashtag: newHashtagIds,
+                }),
             });
 
             console.log('등록 성공:', response);
         } catch (error) {
             console.error('등록 오류:', error);
         }
-        console.log(hashtag)
+        console.log(hashtagId)
     };
-    */
 
 
 
-    const handleRegistration = async () => {
-        let data = {
-            userId,
-            title,
-            content,
-            hashtag
-        }
-        console.log(data)
-        try {
-            const response = await QuestionApi.uploadQuestion(
-                {
-                    data: {
-                        userId,
-                        title,
-                        content,
-                        hashtag
-                    },
-                }
-            );
-            console.log('Registration successful:', data, response);
-        }
-        catch (error) {
-            console.error('Registration error:', error);
-        }
-    };
+
+    /*
+        const handleRegistration = async () => {
+            let data = {
+                userId,
+                title,
+                content,
+                hashtag
+            }
+            console.log(data)
+            try {
+                const response = await QuestionApi.uploadQuestion(
+                    {
+                        data: {
+                            userId,
+                            title,
+                            content,
+                            hashtag
+                        },
+                    }
+                );
+                console.log('Registration successful:', data, response);
+            }
+            catch (error) {
+                console.error('Registration error:', error);
+            }
+        };*/
 
     useEffect(() => {
         validateTitle();
