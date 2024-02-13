@@ -7,6 +7,8 @@ import Newanswer from "./components/qdetail/Newanswer";
 import Question from "./components/Question";
 import Header from "./Header";
 import { QuestionApi } from "src/api/question.controller";
+import { accesstoken, userIdState } from "./atom/atoms";
+import { useRecoilState } from "recoil";
 
 //import { Link } from "react-router-dom";
 //questionId를 받고 호출받음
@@ -27,6 +29,9 @@ function Qdetail({ qId }) {
         setUserId(newUserId);
         console.log(userId)
     }
+    const [callAccesstoken, setCallAccesstoken] = useRecoilState(accesstoken)
+    console.log(callAccesstoken)
+    setCallAccesstoken("ㅇㅇㅇ")
     //질문 ID받아오기
     /*
     const receiveQuestion = async () => {

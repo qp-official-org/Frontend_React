@@ -55,9 +55,9 @@ function Answer({ content, userId, answerId }) {//props로 답변 내용을 전�
                     {answerOfAnswer && (
                         <div>
                             {reanswerList.map((reanswer, index) => reanswer.content && reanswer.content.length > 0 ? (
-                                <Reanswer key={index} content={reanswer.content} userId={reanswer.userId} />
+                                <Reanswer key={index} content={reanswer.content} userId={reanswer.userId} answerId={answerId} />
                             ) : null)}
-                            <Newanswer />
+                            <Newanswer answerId={answerId} />{/* answerGroup에 부모답변 id입력 */}
                         </div>
                     )}
                 </div>

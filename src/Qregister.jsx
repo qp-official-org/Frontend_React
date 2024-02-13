@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { Api } from "./api/common.controller";
 import { QuestionApi } from "./api/question.controller";
 import { RegisterApi } from "./api/register.controller";
+import { useRecoilState } from "recoil";
+import { accesstoken } from "./atom/atoms";
 //header에서 userId받아오기
 function Qregister() {
     const [childClicked, setChildClicked] = useState(true)
@@ -21,8 +23,9 @@ function Qregister() {
     const [contentValidateMin, setContentValidateMin] = useState(false);
     const [contentValidateMax, setContentValidateMax] = useState(false);
     const [hashTagModal, setHashTagModal] = useState(false);
-    const [userId, setUserId] = useState(3);
+    const [userId, setUserId] = useState(1);
     const [hashtagId, setHashtagId] = useState([]);
+    const [callAccesstoken, setCallAccesstoken] = useRecoilState(accesstoken)
 
     const handleTitleChange = (e) => {
         const value = e.target.value;
@@ -158,7 +161,6 @@ function Qregister() {
         } catch (error) {
             console.error('등록 오류:', error);
         }
-        console.log(hashtagId)
     };
 
 

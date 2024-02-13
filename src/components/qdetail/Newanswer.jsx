@@ -5,7 +5,7 @@ import { useState } from "react";
 import Dropdown from "../Dropdown";
 import { QuestionApi } from "src/api/question.controller";
 
-function Newanswer(qId) {
+function Newanswer(qId, answerId) {
     const [answerText, setAnswerText] = useState("");
     const [submitBtnClicked, setSubmitBtnClicked] = useState(false);
 
@@ -25,8 +25,8 @@ function Newanswer(qId) {
                     userId: "2",
                     title: "1",
                     content: answerText,
-                    catagory,
-                    answerGroup
+                    catagory: 답변에도 필요한가..?,
+                    answerGroup: 
                 },
                 id: qId
             })
