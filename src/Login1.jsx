@@ -16,7 +16,7 @@ function Login1() {
     const navigate = useNavigate();
     
     const BackBtn = () => {
-        navigate('/Main'); // 바로 이전 페이지로 이동
+        navigate('/mainpage'); // 바로 이전 페이지로 이동
         };
 
     const handleMouseEnter = () => {
@@ -58,7 +58,10 @@ function Login1() {
                             <img src={nlogo} style={{position: "absolute", top:"36.7%", left:"35%"}}></img>
                         </div>
                         <div class="kakaoLogin">
-                            <button style={styles.button2}>카카오 로그인</button>
+                            <button style={styles.button2} 
+                             onClick={() => window.location.href=
+                             `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${'1d5868c6919c5a981e66913f02262514'}&redirect_uri=${'http://localhost:3000/auth/kako/login'}&prompt=select_account
+                             `}>카카오 로그인</button>
                             <img src={klogo} style={{position: "absolute", top:"53%", left:"35%"}}></img>
                         </div>
                         <div class="googleLogin">

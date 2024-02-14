@@ -6,6 +6,7 @@ import Login1 from "src/Login1";
 import Certify from "src/Certify";
 import Nickname from "src/Nickname";
 import Profile from "src/Profile";
+import Auth from "src/Auth";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           <Route path="/nickname" element={<Nickname />} />
           <Route path="/setProfile" element={<Profile />} />
           <Route path="/mainpage" element={<Main />} />
+          <Route path="/auth/kakao/login" element={<Auth />}/>
+          {/* 정의되지 않은 경로에 접근시 해당 페이지로 이동 */}
+          <Route path="*" element={<Main/>}></Route> 
         </Routes>
       </BrowserRouter>
     </div>

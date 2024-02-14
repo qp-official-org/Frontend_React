@@ -183,7 +183,7 @@ export const styles = {
         fontWeight: 600,
         lineHeight: "normal",
         position:"absolute",
-        marginTop:"28%"
+        marginTop:"20%"
     },
     nextButton: {
         position:"absolute",
