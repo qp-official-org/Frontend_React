@@ -2,22 +2,27 @@
 import React from "react";
 import { styles } from "./components/qdetail/style";
 import { useState } from "react";
+import { accesstokenState } from "./atom/atoms";
+import { userIdState } from "./atom/atoms";
+import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
-function Header({ onUserIdChange }) {
+function Header() {
     const [searchClick, setSearchClick] = useState(false);
     const [searchContent, setSearchContent] = useState('')
     const [isSearchClicked, setIsSearchClicked] = useState(false)
     const [isLogined, setIsLogined] = useState(false)
-    const [userId, setUserId] = useState(null)
     //userId 부모 컴포넌트로 전달
     //부모 컴포넌트에서 const handleUserIdChange = (newUserId) => {
     //    setUserId(newUserId);
     //    console.log(userId)}로 설정하면 사용가능
+    const [accesstoken, setAccessToken] = useRecoilState(accesstokenState);
+    const [userId, setUserId] = useRecoilState(userIdState);
     const handleLogin = () => {
-        const newUserId = 2;
-        setUserId(newUserId);
-        onUserIdChange(newUserId);
         setIsLogined(true)
+        setAccessToken("tb_UinyQMdGZU6ybPuNgHta5vRxyn3TQQdAKKiUPAAABjaKSJuFHueF-5ScOZw")
+        setUserId("1")
+        console.log(accesstoken, userId)
     }
     const handleSearchBlock = () => {
         setIsSearchClicked(!isSearchClicked)

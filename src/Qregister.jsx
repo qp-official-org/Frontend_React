@@ -6,8 +6,8 @@ import { useState, useEffect } from "react";
 import { Api } from "./api/common.controller";
 import { QuestionApi } from "./api/question.controller";
 import { RegisterApi } from "./api/register.controller";
-import { useRecoilState } from "recoil";
-import { accesstoken } from "./atom/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { accesstokenState, userIdState } from "./atom/atoms";
 //header에서 userId받아오기
 function Qregister() {
     const [childClicked, setChildClicked] = useState(true)
@@ -23,9 +23,10 @@ function Qregister() {
     const [contentValidateMin, setContentValidateMin] = useState(false);
     const [contentValidateMax, setContentValidateMax] = useState(false);
     const [hashTagModal, setHashTagModal] = useState(false);
-    const [userId, setUserId] = useState(1);
     const [hashtagId, setHashtagId] = useState([]);
-    const [callAccesstoken, setCallAccesstoken] = useRecoilState(accesstoken)
+
+    const accesstoken = useRecoilValue(accesstokenState)
+    const userId = useRecoilValue(userIdState)
 
     const handleTitleChange = (e) => {
         const value = e.target.value;
@@ -41,6 +42,7 @@ function Qregister() {
     const handleChildClicked = () => {
         setChildClicked(!childClicked)
         setAdultClicked(!adultClicked)
+        console.log(accesstoken, userId)
     };
     //유의사항 체크
     const handleBtnClicked = () => {
