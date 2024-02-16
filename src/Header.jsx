@@ -20,8 +20,8 @@ function Header() {
     const [userId, setUserId] = useRecoilState(userIdState);
     const handleLogin = () => {
         setIsLogined(true)
-        setAccessToken("tb_UinyQMdGZU6ybPuNgHta5vRxyn3TQQdAKKiUPAAABjaKSJuFHueF-5ScOZw")
-        setUserId("1")
+        setAccessToken("eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcwODA2ODM5MiwiZXhwIjoxNzA4MDc1NTkyfQ._s7Vqi7S56qLWIrZIkj95Glpu_in8MncWJTBmBbhh5niQn5zF_tvYp6T_wPXZpUclQ1hgnXK4CThKWoRpAY5Tw")
+        setUserId("6")
         console.log(accesstoken, userId)
     }
     const handleSearchBlock = () => {

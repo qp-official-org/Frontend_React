@@ -8,7 +8,6 @@ import { QuestionApi } from "./api/question.controller";
 import { RegisterApi } from "./api/register.controller";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { accesstokenState, userIdState } from "./atom/atoms";
-//header에서 userId받아오기
 function Qregister() {
     const [childClicked, setChildClicked] = useState(true)
     const [adultClicked, setAdultClicked] = useState(false)
@@ -150,13 +149,15 @@ function Qregister() {
             }));
 
             // 질문을 업로드할 때, 새로운 해시태그 ID 배열을 전송
+            const data = {
+                userId,
+                title,
+                content,
+                hashtag: newHashtagIds,
+                Headers: accesstoken
+            }
             const response = await QuestionApi.uploadQuestion({
-                data: JSON.stringify({
-                    userId,
-                    title,
-                    content,
-                    hashtag: newHashtagIds,
-                }),
+                data
             });
 
             console.log('등록 성공:', response);

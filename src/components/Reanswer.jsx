@@ -10,6 +10,7 @@ function Reanswer({ content, userId, answerId }) {
     const [isBlurred, setIsBlurred] = useState(false);
 
 
+
     return (
         <div style={styles.newanswer_box}>
             <div style={styles.question_main}>

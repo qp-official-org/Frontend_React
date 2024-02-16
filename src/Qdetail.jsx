@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { styles } from "src/components/qdetail/style";
 import Answer from "./components/qdetail/Answer";
@@ -27,10 +27,11 @@ function Qdetail({ qId }) {
     const userId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
     //질문 ID받아오기
-    /*
+
+
     const receiveQuestion = async () => {
         try {
-            const response = await QuestionApi.findOne({ qId });
+            const response = await QuestionApi.findOne(1);
             console.log(response)
             setTitle(response.result.title)
             setContent(response.result.content)
@@ -39,52 +40,31 @@ function Qdetail({ qId }) {
             console.error(error)
         }
     };
-    receiveQuestion();
-    */
-    //질문 ID로 답변 ID받아오기
-    /*
-        const receiveAnswer = async () => {
-            try {
-                const response = await QuestionApi.findParentAnswer({ qId }, 10, 0);
-                console.log(response)
-                setAnswerId(response.result.parentAnswerList.answerId)
-                setAnswerList(response.result.parentAnswerList)
-            } catch (error) {
-                console.error(error)
-            }
-        };
-        receiveAnswer();
-    */
-    //부모 답변들의 id가 담겨있는 list
-    const [answerList, setAnswerList] = useState([
-        {
-            content: "이것은 첫 번째 답변입니다.",
-            userId: "User1",
-            answerId: [{
-                content: '이것은 첫 번째 답변의 리플1입니다.',
-                userId: "User4"
-            },
-            {
-                content: '이것은 첫 번째 답변의 리플2입니다.',
-                userId: 'User7'
-            }],
-        },
-        {
-            content: "두 번째 답변입니다.",
-            userId: "User2",
-            answerId: [{
-            }]
-        },
-        {
-            content: "세 번째 답변입니다.",
-            userId: "User3",
-            answerId: [{
-                content: '이것은 세 번째 답변의 리플1입니다.',
-                userId: "User6",
-            }],
+    useEffect(() => {
+        receiveQuestion()
+    }, [])
 
-        },
-    ]);/*서버에서 받는 답변 리스트
+    //질문 ID로 답변 ID받아오기
+
+    const receiveAnswer = async () => {
+        try {
+            const response = await QuestionApi.findParentAnswer(1, 0, 5);
+            console.log(response)
+            setAnswerId(response.result.parentAnswerList.answerId)
+            setAnswerList(response.result.parentAnswerList)
+        } catch (error) {
+            console.error(error)
+        }
+    };
+    useEffect(() => {
+        receiveAnswer()
+    }, [])
+
+    //부모 답변들의 id가 담겨있는 list
+
+    const [answerList, setAnswerList] = useState([]);
+
+    /*서버에서 받는 답변 리스트
     Answer안에 있는 Reanswer에 대한 내용도 Qdetail에서 받아야할지,
     Answer컴포넌트에서 불러와야할지...*/
 

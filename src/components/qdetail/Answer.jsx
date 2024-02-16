@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from "react";
+import React, { useEffect } from "react";
 import { styles } from "./style";
 import { useState } from "react";
 import Newanswer from "./Newanswer";
@@ -12,24 +12,27 @@ function Answer({ content, userId, answerId }) {//props로 답변 내용을 전�
     const [answerOfAnswer, setAnswerOfAnswer] = useState(false);
     const [isBtnClicked, setIsBtnClicked] = useState(false);
     const [isBlurred, setIsBlurred] = useState(true);
-    const [reanswerList, setReanswerList] = useState(answerId);
+    const [reanswerList, setReanswerList] = useState([answerId]);
 
     const handleCheckBtn = () => {
         setIsBtnClicked(true);
         setAnswerOfAnswer(true);
         setIsBlurred(false);
     };
+    console.log(answerId)
+    useEffect(() => {
+        reanswerRequest()
+    }, [])
 
     const reanswerRequest = async () => {
         try {
-            const response = await QuestionApi.findChildAnswer({ answerId }, 10, 0);
+            const response = await QuestionApi.findChildAnswer(answerId, 0, 5);
             console.log(response)
-            setReanswerList(response.result.answerList)
+            setReanswerList(response.result.childAnswerList)
         } catch (error) {
-            console.error(error)
+            console.error("통신에러", error)
         }
     }
-
     return (
         <div style={{ position: 'relative' }}>
             {isBtnClicked ? null : (
@@ -52,14 +55,14 @@ function Answer({ content, userId, answerId }) {//props로 답변 내용을 전�
 
             {answerOfAnswer && (
                 <div>
-                    {answerOfAnswer && (
+                    {reanswerList && reanswerList.length > 0 ? (
                         <div>
                             {reanswerList.map((reanswer, index) => reanswer.content && reanswer.content.length > 0 ? (
                                 <Reanswer key={index} content={reanswer.content} userId={reanswer.userId} answerId={answerId} />
                             ) : null)}
                             <Newanswer answerId={answerId} />{/* answerGroup에 부모답변 id입력 */}
                         </div>
-                    )}
+                    ) : (<Newanswer answerId={answerId} />)}
                 </div>
             )}
         </div >
