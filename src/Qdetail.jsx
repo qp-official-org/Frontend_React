@@ -48,7 +48,7 @@ function Qdetail({ qId }) {
 
     const receiveAnswer = async () => {
         try {
-            const response = await QuestionApi.findParentAnswer(1, 0, 5);
+            const response = await QuestionApi.findParentAnswer(1, 0, 10);
             console.log(response)
             setAnswerId(response.result.parentAnswerList.answerId)
             setAnswerList(response.result.parentAnswerList)

@@ -6,6 +6,7 @@ import Newanswer from "./Newanswer";
 import Dropdown from "../Dropdown";
 import Reanswer from "../Reanswer";
 import { QuestionApi } from "src/api/question.controller";
+import Childnewanswer from "./Childnewanswer";
 
 function Answer({ content, userId, answerId }) {//props로 답변 내용을 전달받음(값 그대로 와서 가공할 필요X)
     const [view, setView] = useState(false);
@@ -60,9 +61,9 @@ function Answer({ content, userId, answerId }) {//props로 답변 내용을 전�
                             {reanswerList.map((reanswer, index) => reanswer.content && reanswer.content.length > 0 ? (
                                 <Reanswer key={index} content={reanswer.content} userId={reanswer.userId} answerId={answerId} />
                             ) : null)}
-                            <Newanswer answerId={answerId} />{/* answerGroup에 부모답변 id입력 */}
+                            <Childnewanswer answerId={answerId} />{/* answerGroup에 부모답변 id입력 */}
                         </div>
-                    ) : (<Newanswer answerId={answerId} />)}
+                    ) : (<Childnewanswer answerId={answerId} />)}
                 </div>
             )}
         </div >
