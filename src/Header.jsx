@@ -20,7 +20,7 @@ function Header() {
     const [userId, setUserId] = useRecoilState(userIdState);
     const handleLogin = () => {
         setIsLogined(true)
-        setAccessToken("eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcwODA2ODM5MiwiZXhwIjoxNzA4MDc1NTkyfQ._s7Vqi7S56qLWIrZIkj95Glpu_in8MncWJTBmBbhh5niQn5zF_tvYp6T_wPXZpUclQ1hgnXK4CThKWoRpAY5Tw")
+        setAccessToken("eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcwODA5NTY2OSwiZXhwIjoxNzA4MTAyODY5fQ.FtMMZo3IFPk5gRQmUAn3NtacFe8t7vMDmo6NVblEmdz-erOtTwCwUj4RKnbUkdy6UBQvMLOeEIp6CPJ7Ongdxg")
         setUserId("6")
         console.log(accesstoken, userId)
     }
