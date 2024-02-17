@@ -7,47 +7,54 @@ import { userIdState } from "./atom/atoms";
 import { useSetRecoilState } from "recoil";
 import { useRecoilState } from "recoil";
 
+
 function Header() {
     const [searchClick, setSearchClick] = useState(false);
-    const [searchContent, setSearchContent] = useState('')
-    const [isSearchClicked, setIsSearchClicked] = useState(false)
+    const [searchContent, setSearchContent] = useState('');
+    const [isSearchClicked, setIsSearchClicked] = useState(false);
     const [accesstoken, setAccessToken] = useRecoilState(accesstokenState);
     const [userId, setUserId] = useRecoilState(userIdState);
-    const [isLogined, setIsLogined] = useRecoilState(loginState)
-    useEffect(() => {
-        localStorage.setItem('isLogined', JSON.stringify(isLogined));
-    }, [isLogined]);
+    const [isLogined, setIsLogined] = useState(false);
+
     const handleLogin = () => {
-        setIsLogined(true)
-        setAccessToken("eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcwODE1MjA4MSwiZXhwIjoxNzA4MTU5MjgxfQ.S3Zk45AasfR7ScdGjkfaqB8ykq-ffrMLxEoemoxLNRNvjcT9KdweX8jK9gur3FwMmLtHUlLsvvI7f4MjUBSHhA")
-        setUserId("6")
-        console.log(accesstoken, userId)
+        setIsLogined(true);
+        setAccessToken("eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcwODE1MjA4MSwiZXhwIjoxNzA4MTU5MjgxfQ.S3Zk45AasfR7ScdGjkfaqB8ykq-ffrMLxEoemoxLNRNvjcT9KdweX8jK9gur3FwMmLtHUlLsvvI7f4MjUBSHhA");
+        setUserId("6");
+        localStorage.setItem('isLoggedIn', 'true');
     }
-    useEffect(() => {
-        handleLogin()
-    }, [loginState])
-    const handleSearchBlock = () => {
-        setIsSearchClicked(!isSearchClicked)
-        console.log(isSearchClicked)
-    }
-    const handleSearchClick = (event) => {
-        setSearchContent(event.target.value)
-    }
-    const handleSearchBlockBack = () => {
-        setIsSearchClicked(!isSearchClicked)
-        console.log(isSearchClicked)
-    }
+
     const handleLogout = () => {
-        setIsLogined(false)
-        localStorage.setItem('isLogined', JSON.stringify(false));
+        setIsLogined(false);
+        setAccessToken(null); // 로그아웃 시 엑세스 토큰 초기화
+        localStorage.removeItem('isLoggedIn');
     }
+
     useEffect(() => {
-        // 로컬 스토리지에서 저장된 로그인 상태 가져오기
-        const storedIsLogined = localStorage.getItem('isLogined');
-        if (storedIsLogined) {
-            setIsLogined(JSON.parse(storedIsLogined));
+        const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
+        setIsLogined(storedIsLoggedIn === 'true');
+    }, []);
+
+    // 페이지가 처음 로드될 때 한 번만 실행
+    useEffect(() => {
+        if (isLogined) {
+            handleLogin();
         }
-    }, [isLogined]);
+    }, []);
+
+    const handleSearchBlock = () => {
+        setIsSearchClicked(!isSearchClicked);
+        console.log(isSearchClicked);
+    }
+
+    const handleSearchClick = (event) => {
+        setSearchContent(event.target.value);
+    }
+
+    const handleSearchBlockBack = () => {
+        setIsSearchClicked(!isSearchClicked);
+        console.log(isSearchClicked);
+    }
+
 
     return (
         <div style={styles.header_block}>
