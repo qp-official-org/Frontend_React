@@ -22,7 +22,7 @@ function Qdetail({ qId }) {
     const [answerOfAnswer, setAnswerOfAnswer] = useState(false);
     const [title, setTitle] = useState("질문 제목2");
     const [content, setContent] = useState('질문내용');
-    const [hashtag, setHashtag] = useState("");
+    const [hashtags, setHashtags] = useState("");
     const [answerId, setAnswerId] = useState("")
     const userId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
@@ -35,7 +35,7 @@ function Qdetail({ qId }) {
             console.log(response)
             setTitle(response.result.title)
             setContent(response.result.content)
-            setHashtag(response.result.hashtags)
+            setHashtags(response.result.hashtags)
         } catch (error) {
             console.error(error)
         }
@@ -93,7 +93,7 @@ function Qdetail({ qId }) {
                     </div>
                     <div style={styles.main_orange_container}>
                         <div style={{ flex: '1' }}>
-                            <Question title={title} content={content} />
+                            <Question hashtags={hashtags} title={title} content={content} />
                         </div>
                         <div style={{ textAlign: 'center', color: 'white', fontWeight: '600', fontSize: '16px' }}>{answerList.length}명의 전문가가 답변했어요</div>
                         <hr style={styles.hrline} />

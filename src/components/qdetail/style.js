@@ -118,7 +118,8 @@ export const styles = {
         position: 'relative',
     },
     question_hashtag: {
-        flex: '5'
+        display: 'flex',
+        flex: '5',
     },
     dropdownbtn: {
         listStyle: 'none',

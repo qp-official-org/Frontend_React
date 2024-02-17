@@ -9,4 +9,10 @@ export const accesstokenState = atom({
     key: 'accesstoken',
     default: null
 });
+const ls = localStorage.getItem('isLogined');
+
+export const loginState = atom({
+    key: "login",
+    default: ls
+})
 // 6에 "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcwODA2ODM5MiwiZXhwIjoxNzA4MDc1NTkyfQ._s7Vqi7S56qLWIrZIkj95Glpu_in8MncWJTBmBbhh5niQn5zF_tvYp6T_wPXZpUclQ1hgnXK4CThKWoRpAY5Tw"

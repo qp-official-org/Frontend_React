@@ -6,6 +6,7 @@ import Dropdown from "../Dropdown";
 import { QuestionApi } from "src/api/question.controller";
 import { accesstokenState, userIdState } from "../../atom/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
+import axios from "axios";
 
 function Newanswer(qId, answerId) {
     const userId = useRecoilValue(userIdState)
@@ -19,32 +20,37 @@ function Newanswer(qId, answerId) {
     const handleSubmit = () => {
         setSubmitBtnClicked(true)
         postAnswer()
+        window.location.reload()
     }
 
-    //새로운 답변 post하는 함수 handleSubmit안에 넣자
 
+    //id에는 question id
     const postAnswer = async () => {
-        const requestData = {
-            id: "1",
-            data: {
+        try {
+            const id = 1;
+            const apiUrl = `http://52.78.248.199:8080/answers/questions/${id}`;
+
+            const postData = {
                 userId: userId,
                 title: "1",
                 content: answerText,
-                catagory: "PARENT",
-                answerGroup: "0"
-            },
-            accessToken: accesstoken
-        };
+                category: "PARENT",
+                answerGroup: ""
+            };
 
-        console.log("보낼 데이터:", requestData); // 요청 전에 보낼 데이터를 로그로 출력
+            const headers = {
+                accessToken: accesstoken
+            }
+            console.log(accesstoken)
+            console.log(headers)
+            const response = await axios.post(apiUrl, postData, { headers });
 
-        try {
-            const response = await QuestionApi.uploadAnswer(requestData);
-            console.log("응답:", response); // 요청이 성공하면 서버로부터 받은 응답을 출력
+            console.log('POST 요청 성공:', response.data);
         } catch (error) {
-            console.error("통신에러", error); // 요청이 실패하면 에러 출력
+            console.error('POST 요청 실패:', error);
         }
     };
+
 
 
 

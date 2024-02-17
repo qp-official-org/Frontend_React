@@ -3,9 +3,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { styles } from "./qdetail/style";
 import Dropdown from "./Dropdown";
-import { QuestionApi } from "src/api/question.controller";
 
-function Question({ title, content }) {
+function Question({ title, content, hashtags }) {
     const [isChild, setIsChiled] = useState(true);
 
     return (
@@ -15,7 +14,11 @@ function Question({ title, content }) {
                     <div style={styles.profile_box}><div style={styles.profile_img}></div></div>
                     <div style={styles.question_main2}>
                         <div style={styles.question_main3}>
-                            <div style={styles.question_hashtag}>#해시태그</div>
+                            {hashtags.length > 0 && (
+                                <div style={styles.question_hashtag}>
+                                    {hashtags.map((tag, index) => <div style={{ marginRight: '2%' }} key={index}>#{tag.hashtag}</div>)}
+                                </div>
+                            )}
                             <div style={{ flex: '1' }}>{isChild ? "어린이" : null}</div>
                             <Dropdown />
                         </div>
