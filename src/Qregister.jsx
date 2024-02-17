@@ -8,6 +8,7 @@ import { QuestionApi } from "./api/question.controller";
 import { RegisterApi } from "./api/register.controller";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { accesstokenState, userIdState } from "./atom/atoms";
+import axios from "axios";
 function Qregister() {
     const [childClicked, setChildClicked] = useState(true)
     const [adultClicked, setAdultClicked] = useState(false)
@@ -148,17 +149,19 @@ function Qregister() {
                     });
             }));
 
+            const apiUrl = "http://52.78.248.199:8080/questions/";
+
             // 질문을 업로드할 때, 새로운 해시태그 ID 배열을 전송
             const data = {
-                userId,
-                title,
-                content,
+                userId: userId,
+                title: title,
+                content: content,
                 hashtag: newHashtagIds,
-                Headers: accesstoken
             }
-            const response = await QuestionApi.uploadQuestion({
-                data
-            });
+            const headers = {
+                accessToken: accesstoken
+            }
+            const response = await axios.post(apiUrl, data, { headers });
 
             console.log('등록 성공:', response);
         } catch (error) {
