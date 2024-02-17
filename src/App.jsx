@@ -20,8 +20,8 @@ function App() {
           <Route path="/setProfile" element={<Profile />} />
           <Route path="/mainpage" element={<Main />} />
           <Route path="/auth/kakao/login" element={<Auth />}/>
-          {/* 정의되지 않은 경로에 접근시 해당 페이지로 이동 */}
-          <Route path="*" element={<Main/>}></Route> 
+          {/* 정의되지 않은 경로에 접근시 해당 페이지로 이동*/}
+          <Route path="*" element={<Auth />}/>
         </Routes>
       </BrowserRouter>
     </div>
