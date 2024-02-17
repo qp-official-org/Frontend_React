@@ -5,7 +5,7 @@ import { styles } from "src/components/MainPageDetail/style";
 import answericon from 'src/default.svg';
 import panswericon from 'src/professor.svg';
 
-function Qdummy({title, answerCount, expertCount, createdAt, hashtag, user, childStatus, profileImg }) {
+function Qdummy({title, answerCount, expertCount, createdAt, hashtag, user, childStatus, profileImg, questionId}) {
     const [isHovered, setIsHovered] = useState(false);
     const childTag = childStatus === 'ACTIVE' ? '어린이' : '어른이';
     const handleMouseEnter = () => {
