@@ -34,7 +34,6 @@ function Header() {
         setIsLogined(storedIsLoggedIn === 'true');
     }, []);
 
-    // 페이지가 처음 로드될 때 한 번만 실행
     useEffect(() => {
         if (isLogined) {
             handleLogin();
@@ -80,7 +79,7 @@ function Header() {
                 <div onClick={handleLogout} style={styles.header_logout}>로그아웃</div>
                 <div style={styles.header_profile_box}>
                     <div style={styles.header_profile_img}></div>
-                    <div style={styles.header_profile_nickname}>닉네임</div>
+                    <div style={styles.header_profile_nickname}>{userId}</div>
                     <div style={styles.header_profile_point}>100P</div>
                     <div style={styles.header_profile_charge_btn}>충전하러 가기</div>
                 </div>

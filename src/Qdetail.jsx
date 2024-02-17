@@ -23,11 +23,38 @@ function Qdetail({ qId }) {
     const [title, setTitle] = useState("질문 제목2");
     const [content, setContent] = useState('질문내용');
     const [hashtags, setHashtags] = useState("");
-    const [answerId, setAnswerId] = useState("")
+    const [answerId, setAnswerId] = useState("");
+    const [howLong, setHowlong] = useState("1시간 전");
     const userId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
     //질문 ID받아오기
+    const getTimeAgo = (dateString) => {
+        const date = new Date(dateString);
+        const now = new Date();
 
+        const elapsed = now - date;
+
+        const seconds = Math.floor(elapsed / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        const months = Math.floor(days / 30);
+        const years = Math.floor(months / 12);
+
+        if (years > 0) {
+            return `${years}년 전`;
+        } else if (months > 0) {
+            return `${months}달 전`;
+        } else if (days > 0) {
+            return `${days}일 전`;
+        } else if (hours > 0) {
+            return `${hours}시간 전`;
+        } else if (minutes > 0) {
+            return `${minutes}분 전`;
+        } else {
+            return `${seconds}초 전`;
+        }
+    }
 
     const receiveQuestion = async () => {
         try {
@@ -36,10 +63,14 @@ function Qdetail({ qId }) {
             setTitle(response.result.title)
             setContent(response.result.content)
             setHashtags(response.result.hashtags)
+            const howLong = getTimeAgo(response.result.createdAt);
+            setHowlong(howLong)
+            console.log(howLong); // 로그로 확인
         } catch (error) {
             console.error(error)
         }
     };
+
     useEffect(() => {
         receiveQuestion()
     }, [])
@@ -93,7 +124,7 @@ function Qdetail({ qId }) {
                     </div>
                     <div style={styles.main_orange_container}>
                         <div style={{ flex: '1' }}>
-                            <Question hashtags={hashtags} title={title} content={content} />
+                            <Question time={howLong} hashtags={hashtags} title={title} content={content} />
                         </div>
                         <div style={{ textAlign: 'center', color: 'white', fontWeight: '600', fontSize: '16px' }}>{answerList.length}명의 전문가가 답변했어요</div>
                         <hr style={styles.hrline} />
