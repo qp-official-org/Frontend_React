@@ -240,6 +240,7 @@ export const styles = {
         width: '40vw'
     },
     header_not_login: {
+        cursor: "pointer",
         justifyContent: 'center',
         textAlign: 'center',
         borderRadius: '40px',
@@ -259,6 +260,7 @@ export const styles = {
         left: '88%'
     },
     header_logout: {
+        cursor: "pointer",
         marginTop: '5%',
         marginRight: '10%',
         textAlign: 'right',

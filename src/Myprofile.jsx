@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useState, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 import '../src/pstyle.css';
@@ -174,7 +175,7 @@ const Myprofile = () => {
         const titles = qdata.result.questions.map((question) => question.title);
         const profileImage =
           Array.isArray(qdata.result.questions) &&
-          qdata.result.questions.length > 0
+            qdata.result.questions.length > 0
             ? qdata.result.questions[0].user.profileImage
             : null;
         setquestitle(titles);
@@ -235,8 +236,8 @@ const Myprofile = () => {
                     color: isModifyVisible
                       ? 'transparent'
                       : isValidNickname
-                      ? 'black'
-                      : 'red',
+                        ? 'black'
+                        : 'red',
                   }}
                   onClick={handleModifyClick}
                 >

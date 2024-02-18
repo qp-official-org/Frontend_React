@@ -1,5 +1,4 @@
 // @ts-nocheck
-import { Link, useParams} from "react-router-dom";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { styles } from "src/components/qdetail/style";
@@ -10,11 +9,12 @@ import Header from "./Header";
 import { QuestionApi } from "src/api/question.controller";
 import { accesstokenState, userIdState } from "./atom/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { Link, useParams } from 'react-router-dom';
 
 //questionId를 받고 호출받음
-function Qdetail({ qId }) {
-    const {questionId}=useParams();
-    console.log(questionId);
+function Qdetail() {
+    const params = useParams();
+    const qId = parseInt(params.questionId)
     const [isLogined, setIsLogined] = useState(false);
     const [btnClicked, setBtnClicked] = useState(false);
     const [view, setView] = useState(false);
@@ -59,14 +59,14 @@ function Qdetail({ qId }) {
 
     const receiveQuestion = async () => {
         try {
-            const response = await QuestionApi.findOne(questionId);
+            const response = await QuestionApi.findOne(qId);
             console.log(response)
             setTitle(response.result.title)
             setContent(response.result.content)
             setHashtags(response.result.hashtags)
             const howLong = getTimeAgo(response.result.createdAt);
             setHowlong(howLong)
-            console.log(howLong); // 로그로 확인
+            console.log(howLong);
         } catch (error) {
             console.error(error)
         }
@@ -74,23 +74,22 @@ function Qdetail({ qId }) {
 
     useEffect(() => {
         receiveQuestion()
+        receiveAnswer()
     }, [])
 
     //질문 ID로 답변 ID받아오기
 
     const receiveAnswer = async () => {
         try {
-            const response = await QuestionApi.findParentAnswer(1, 0, 10);
+            console.log('질문받기전', qId)
+            const response = await QuestionApi.findParentAnswer(qId, 0, 10);
             console.log(response)
             setAnswerId(response.result.parentAnswerList.answerId)
             setAnswerList(response.result.parentAnswerList)
         } catch (error) {
-            console.error(error)
+            console.error("답변", error)
         }
     };
-    useEffect(() => {
-        receiveAnswer()
-    }, [])
 
     //부모 답변들의 id가 담겨있는 list
 

@@ -1,7 +1,6 @@
 // //메인화면 레이아웃
 //@ts-nocheck
 import axios from 'axios';
-import Header from 'src/Header';
 import profile1 from 'src/p1.svg';
 import profile2 from 'src/p2.svg';
 import profile3 from 'src/p3.svg';
@@ -12,6 +11,8 @@ import React, { useState, useEffect } from "react";
 import { styles } from "./components/MainPageDetail/style";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Qdummy from "./Qdummy";
+import Header from './Header';
+import { Link } from 'react-router-dom';
 
 function MainPage() {
   const [questions, setQuestions] = useState([]);
@@ -25,13 +26,14 @@ function MainPage() {
       const response = await axios.get(apiUrl, { content_type: 'application/w-www-form-urlencoded' });
       setQuestions(response.data.result.questions);
 
-      console.log('POST 요청 성공:', response);
+      console.log('GET 요청 성공:', response);
     } catch (error) {
-      console.error('POST 요청 실패:', error);
+      console.error('GET 요청 실패:', error);
     }
   };
-
-  getQuestions(0, 10);
+  useEffect(() => {
+    getQuestions(0, 10)
+  }, [])
   const fetchMoreData = () => {
     if (items.length >= 24) { // 최대 아이템 수
       setHasMore(false);

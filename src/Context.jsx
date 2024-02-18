@@ -1,4 +1,5 @@
 // SearchContentContext.js
+//@ts-nocheck
 import React, { createContext, useContext, useState } from 'react';
 
 const SearchContentContext = createContext();

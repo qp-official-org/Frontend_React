@@ -2,14 +2,12 @@
 import React from 'react';
 import { styles } from './components/qdetail/style';
 import { useState, useEffect } from 'react';
-//페이지이동위한 코드
 import { useNavigate } from 'react-router-dom';
 import { useSearchContent } from './Context';
 import { accesstokenState, loginState } from "./atom/atoms";
 import { userIdState } from "./atom/atoms";
 import { useSetRecoilState } from "recoil";
 import { useRecoilState } from "recoil";
-
 
 function Header() {
     const [searchClick, setSearchClick] = useState(false);
@@ -18,6 +16,9 @@ function Header() {
     const [accesstoken, setAccessToken] = useRecoilState(accesstokenState);
     const [userId, setUserId] = useRecoilState(userIdState);
     const [isLogined, setIsLogined] = useState(false);
+    const GoLogin = () => {
+        navigate("/"); 
+      };
     const handleLogin = () => {
         setIsLogined(true);
         setAccessToken("eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcwODIzNzM5NCwiZXhwIjoxNzA4MjQ0NTk0fQ.Hf2qB8IOnorpm3zYg0i2zUY8rFqwHF_tbB0t0s6Wi3dHlTTwx3DfbDj9VruWdVY10fFKX7EUdDYw4bYqp495mA");
@@ -131,7 +132,7 @@ function Header() {
                 </div>
             ) : (
                 <div onClick={handleLogin} style={styles.header_not_login}>
-                    <div style={styles.header_login_btn}>로그인하기</div>
+                    <div onClick={GoLogin} style={styles.header_login_btn}>로그인하기</div>
                 </div>
             )}
         </div>
