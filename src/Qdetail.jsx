@@ -127,7 +127,7 @@ function Qdetail({ qId }) {
                         </div>
                         {answerList.map((answer, index) => (
                             <div style={styles.answer}>
-                                <Answer key={index} answerId={answer.answerId} content={answer.content} userId={answer.userId} />
+                                <Answer key={index} like={answer.likeCount} answerId={answer.answerId} content={answer.content} userId={answer.nickname} />
                             </div>
                         ))}
                         { }

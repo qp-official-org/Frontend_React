@@ -21,6 +21,7 @@ function Childnewanswer({ qId, answerId }) {
     const handleSubmit = () => {
         setSubmitBtnClicked(true)
         postAnswer()
+        window.location.reload()
     }
     console.log(answerId)
     //id에는 question id,
