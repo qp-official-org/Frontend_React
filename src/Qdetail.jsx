@@ -27,7 +27,6 @@ function Qdetail({ qId }) {
     const [howLong, setHowlong] = useState("1시간 전");
     const userId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
-    //질문 ID받아오기
     const getTimeAgo = (dateString) => {
         const date = new Date(dateString);
         const now = new Date();
@@ -94,12 +93,6 @@ function Qdetail({ qId }) {
     //부모 답변들의 id가 담겨있는 list
 
     const [answerList, setAnswerList] = useState([]);
-
-    /*서버에서 받는 답변 리스트
-    Answer안에 있는 Reanswer에 대한 내용도 Qdetail에서 받아야할지,
-    Answer컴포넌트에서 불러와야할지...*/
-
-    //등록하기 누름 => textarea에 있는 내용이 컴포넌트를 불러오는 컴포넌트로 전달 => map으로 돌려서 생성
     const ddClick = () => {
         setView(!view)
     };

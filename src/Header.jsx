@@ -18,15 +18,19 @@ function Header() {
 
     const handleLogin = () => {
         setIsLogined(true);
-        setAccessToken("eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcwODE1MjA4MSwiZXhwIjoxNzA4MTU5MjgxfQ.S3Zk45AasfR7ScdGjkfaqB8ykq-ffrMLxEoemoxLNRNvjcT9KdweX8jK9gur3FwMmLtHUlLsvvI7f4MjUBSHhA");
+        setAccessToken("eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcwODIyNjk1MSwiZXhwIjoxNzA4MjM0MTUxfQ.ACMstL5dXic0dQgLMBP_DrxhfouJ-ocZWH5EK-2wNbBD785NbH9DuzoYzkQITrta2eJiaBVlJVOHfx0cZZRvAg");
         setUserId("6");
         localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('accesstoken', "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcwODIyNjk1MSwiZXhwIjoxNzA4MjM0MTUxfQ.ACMstL5dXic0dQgLMBP_DrxhfouJ-ocZWH5EK-2wNbBD785NbH9DuzoYzkQITrta2eJiaBVlJVOHfx0cZZRvAg")
+        localStorage.setItem('userId', '6')
     }
 
     const handleLogout = () => {
         setIsLogined(false);
         setAccessToken(null); // 로그아웃 시 엑세스 토큰 초기화
         localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('accesstoken')
+        localStorage.removeItem('userId')
     }
 
     useEffect(() => {
