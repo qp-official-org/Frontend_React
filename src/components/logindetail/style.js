@@ -49,6 +49,7 @@ export const styles = {
     cursor: 'pointer',
   },
   logo: {
+    paddingTop: '7%',
     position: 'relative',
     color: '#EB7125',
     textAlign: 'center',
@@ -58,7 +59,6 @@ export const styles = {
     fontWeight: 600,
     lineHeight: 'normal',
     letterSpacing: '-5px',
-    margin: '128px 0 647px 0',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -96,13 +96,14 @@ export const styles = {
     height: '197px',
   },
   text: {
-    position: 'absolute',
-    top: '740px',
+    top: '80%',
     left: '39%',
     textAlign: 'center',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: '2%',
+
     // flexDirection: 'column'
   },
   text1: {
@@ -124,15 +125,6 @@ export const styles = {
     cursor: 'pointer',
     textDecoration: 'none',
   },
-
-  buttonBox: {
-    textAlign: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
   button1: {
     borderRadius: '40px',
     border: 'none',
@@ -144,16 +136,12 @@ export const styles = {
     fontStyle: 'normal',
     fontWeight: 600,
     lineHeight: 'normal',
-    position: 'absolute',
-    margin: '81px',
+    margin: '40px',
     width: '552px',
     height: '90px',
-    top: '269px',
-    left: '30%',
     cursor: 'pointer',
   },
   button2: {
-    position: 'absolute',
     // margin: '43px',
     borderRadius: '40px',
     background: '#FFD740',
@@ -167,13 +155,10 @@ export const styles = {
     border: 'none',
     width: '552px',
     height: '90px',
-    top: '402px',
-    margin: '81px',
+    margin: '20px',
     cursor: 'pointer',
-    left: '30%',
   },
   button3: {
-    position: 'absolute',
     color: '#424242',
     textAlign: 'center',
     fontFamily: 'Pretendard',
@@ -187,9 +172,7 @@ export const styles = {
     border: 'none',
     width: '552px',
     height: '90px',
-    top: '535px',
-    left: '30%',
-    margin: '81px',
+    margin: '20px',
     cursor: 'pointer',
   },
   pageTitle: {
@@ -201,7 +184,7 @@ export const styles = {
     fontWeight: 600,
     lineHeight: 'normal',
     position: 'absolute',
-    marginTop: '338px',
+    marginTop: '23%',
   },
   nextButton: {
     position: 'absolute',
@@ -241,6 +224,17 @@ export const styles = {
     boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
     width: '86.25%',
     height: '81.54%',
+    display: 'flex',
+    // justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
+  buttonBox: {
+    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   bar: {
     position: 'absolute',

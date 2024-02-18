@@ -1,4 +1,3 @@
-//@ts-nocheck
 import profile1 from 'src/p1.svg';
 import profile2 from 'src/p2.svg';
 import profile3 from 'src/p3.svg';
@@ -11,7 +10,7 @@ import otherProfileImg from 'src/example.svg'; //사진보관함에서 선택한
 import { styles } from 'src/components/logindetail/style';
 import { useState } from 'react';
 
-function Dropdown({ onProfileChange }) {
+function DropMPro({ onProfileChange }) {
   const [imgitems, setImgItems] = useState([
     profile1,
     profile2,
@@ -37,11 +36,11 @@ function Dropdown({ onProfileChange }) {
   };
 
   return (
-    <div style={styles.toggle}>
+    <div className="dropprofile">
       <div>
         <div
           style={{
-            marginTop: '15px',
+            marginTop: '0px',
             textAlign: 'center',
             display: 'flex',
             alignItems: 'center',
@@ -51,13 +50,15 @@ function Dropdown({ onProfileChange }) {
         >
           <li
             style={{
+              marginTop: '15px',
               color: '#000',
               fontFamily: 'Pretendard',
-              fontSize: '16px',
+              fontSize: '14px',
               fontStyle: 'normal',
               fontWeight: 400,
               lineHeight: 'normal',
               cursor: 'pointer',
+              paddingBottom: '2px',
             }}
             // onClick={()=>onProfileChange(defaultProfileImg)} //화면 설계서 속 기본 프로필
             onClick={handleDefaultProfileClick} //메인 화면 속 기본 프로필
@@ -66,12 +67,13 @@ function Dropdown({ onProfileChange }) {
           >
             기본프로필
           </li>
+
           <li
             style={{
               marginTop: '20px',
               color: '#000',
               fontFamily: 'Pretendard',
-              fontSize: '16px',
+              fontSize: '14px',
               fontStyle: 'normal',
               fontWeight: 400,
               lineHeight: 'normal',
@@ -88,4 +90,4 @@ function Dropdown({ onProfileChange }) {
     </div>
   );
 }
-export default Dropdown;
+export default DropMPro;

@@ -1,6 +1,4 @@
-// @ts-nocheck
-
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 import '../src/pstyle.css';
 import logo from '../src/components/mprofile/images/apple.png';
@@ -8,77 +6,17 @@ import naverlogo from '../src/components/mprofile/images/naverlogo.png';
 import kakaologo from '../src/components/mprofile/images/kakao.png';
 import coin from '../src/components/mprofile/images/coin.png';
 import gear from '../src/components/mprofile/images/Vector.png';
-import { useState } from 'react';
-// import axios from 'axios';
-
-// test용
-// fetch('http://52.78.248.199:8080/hashtag/', {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-//   body: JSON.stringify({ key: 'value' }),
-// })
-//   .then((response) => response.json())
-//   .then((data) => console.log(data))
-//   .catch((error) => console.error('Error:', error));
-// 여기까지 테스트
-// 값을 꺼내 쓸때는 map을 사용하면 될 듯
+import Header from './Header';
+import DropMPro from './DropMPro';
 
 const Myprofile = () => {
-  const [nickname, setnickname] = useState([]);
+  const [nickname, setNickname] = useState([]);
   const [userId, setuserId] = useState(null);
   const [message, setmessage] = useState(null);
   const [name, setname] = useState(null);
-  const [ques, setques] = useState(null);
-
-  //test user 생성
-  useEffect(() => {
-    fetch('http://52.78.248.199:8080/users/test', {
-      method: 'POST',
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        const username = data.message;
-        const fetchuserId = data.result.userId;
-        console.log(data);
-        setuserId(fetchuserId);
-        setname(username);
-
-        // 닉네임부분 api
-        fetch(`http://52.78.248.199:8080/users/${fetchuserId}`, {
-          method: 'GET',
-        })
-          .then((res) => res.json())
-          .then((ndata) => {
-            setnickname(ndata.nickname);
-            setmessage(ndata.message);
-
-            // setuserCoin(ndata.code); 코인갯수 받는곳
-          })
-          .catch((error) => {
-            console.error('Error fetching nickname:', error);
-          });
-      })
-      .catch((error) => {
-        console.error('Error fetching userId:', error);
-      });
-    // 질문 받아내는 곳
-    fetch(`http://52.78.248.199:8080/users/questions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((qdata) => {
-        // setques(qdata.result.questions.user);
-        console.log(qdata);
-      })
-      .catch((error) => {
-        console.error('Error fetching ques', error);
-      });
-  }, []);
+  const [questiontitle, setquestitle] = useState(null);
+  const [quesHashs, setquesHash] = useState(null);
+  const [isOpen, setMenu] = useState(false);
 
   const [isClicked, setIsClicked] = useState(false);
   const [clickedBox, setClickedBox] = useState(null);
@@ -109,22 +47,6 @@ const Myprofile = () => {
     setnaver(false);
     setkakao(false);
   };
-
-  const [isModifyVisible, setModifyVisible] = useState(true);
-  const [isProeditVisible, setProeditVisible] = useState(false);
-  const [isEditnoVisible, setEditnoVisible] = useState(false);
-
-  const handleModifyClick = () => {
-    setModifyVisible(false);
-    setProeditVisible(true);
-    setEditnoVisible(true);
-  };
-
-  const handleEditnoClick = () => {
-    setModifyVisible(true);
-    setProeditVisible(false);
-    setEditnoVisible(false);
-  };
   // 얼마 충전할것인지 물어보는 창
   const [isboxclicked, setboxclicked] = useState(false);
   const [isbox2clicked, setbox2clicked] = useState(false);
@@ -150,59 +72,204 @@ const Myprofile = () => {
 
   const balance = userId;
   const point = balance / 10;
+
+  //프로필 수정버튼
+  const [isModifyVisible, setModifyVisible] = useState(true);
+  const [isProeditVisible, setProeditVisible] = useState(false);
+  const [isEditnoVisible, setEditnoVisible] = useState(false);
+
+  const handleModifyClick = () => {
+    setModifyVisible(false);
+    setProeditVisible(true);
+    setEditnoVisible(true);
+  };
+
+  const handleEditnoClick = () => {
+    setModifyVisible(true);
+    setProeditVisible(false);
+    setEditnoVisible(false);
+  };
+
+  // 닉네임관련
+  const [holder, holdervisible] = useState(false);
+  const handleholder = () => {
+    holdervisible(true);
+  };
+  const [isValidNickname, setIsValidNickname] = useState(false);
+  const handleNicknameChange = (event) => {
+    const newNickname = event.target.value;
+    setNickname(newNickname);
+    //여기에서 닉네임 유효성 체크
+    const isValid =
+      newNickname.length <= 6 &&
+      newNickname.length > 0 &&
+      /^[a-zA-Z0-9가-힣]*$/g.test(newNickname) &&
+      !/\s/g.test(newNickname);
+
+    setIsValidNickname(isValid);
+  };
+  // 프로필사진 선택관련
+  const [profileImage, setphoto] = useState(null);
+  const toggleMenu = () => {
+    setMenu((isOpen) => !isOpen);
+  };
+  const [profileimg, setProfileImg] = useState(logo);
+  const handleProfileChange = (newProfileImg) => {
+    setProfileImg(newProfileImg);
+  };
+  //test user 생성 API연결 코드
+  useEffect(() => {
+    fetch('http://52.78.248.199:8080/users/test', {
+      method: 'POST',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const fetchuserId = data.result.userId;
+        const userToken = data.result.accessToken;
+        console.log(data);
+        setuserId(fetchuserId);
+        console.log('id:', fetchuserId);
+        console.log(userToken);
+
+        // 닉네임부분 api
+        if (fetchuserId) {
+          fetch(`http://52.78.248.199:8080/users/${fetchuserId}`, {
+            method: 'GET',
+            headers: { accessToken: 'userToken' },
+            // headers: { 'accessToken' : '123'} 이런식으로 나중에 userlogin에서 accesstoken 받아와야함
+          })
+            .then((res) => res.json())
+            .then((ndata) => {
+              const username = data.result.name;
+              setname(username);
+              // console.log(ndata);
+              setNickname(ndata.nickname);
+              setmessage(ndata.message);
+
+              // setuserCoin(ndata.code); 코인갯수 받는곳
+            })
+            .catch((error) => {
+              console.error('Error fetching nickname:', error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching userId:', error);
+      });
+  }, []);
+  // 질문 받아내는 곳
+  const page = 1;
+  const size = 10;
+  useEffect(() => {
+    fetch(`http://52.78.248.199:8080/questions?page=${page}&size=${size}`, {
+      // cache: 'no-store',
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((qdata) => {
+        const titles = qdata.result.questions.map((question) => question.title);
+        const profileImage =
+          Array.isArray(qdata.result.questions) &&
+          qdata.result.questions.length > 0
+            ? qdata.result.questions[0].user.profileImage
+            : null;
+        setquestitle(titles);
+        const quesHash = qdata.result.questions.map(
+          (question) => question.hashtags
+        );
+        setquesHash(quesHash);
+        console.log(quesHash);
+        setphoto(profileImage);
+        console.log(qdata);
+      })
+      .catch((error) => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+  }, []);
+
   return (
     <>
-      <div className="mainlogo">
-        <img
-          style={{ width: '50px', margin: '5px' }}
-          src={logo}
-          alt="큐피로고"
-        />
-      </div>
+      <Header />
+      <div className="mainlogo" style={{ marginTop: '4vh' }}></div>
       <div className="wrapper">
         <div className="modalwrap">
           <div className="fixed">
-            <div className="box1">
-              <button className="testbutton">Q</button>
-            </div>
+            <div className="box1"></div>
             <div className="box2"></div>
           </div>
-          {/* 1번 박스 잔액이랑 답변확인 , 글 누르면 링크로  연결되게 */}
+          {/* 1번 박스 잔액이랑 답변확인*/}
           <div className="wrap1">
             <div className="first">
               <div className="photo">
                 <img
                   className="photo1"
                   style={{ width: '100px', position: 'absolute' }}
-                  src={logo}
+                  src={profileImage}
                   alt="프사"
                 />
-                <img
-                  className="photo2"
-                  style={{
-                    width: '30px',
-                    position: 'absolute',
-                    zIndex: '1',
-                    margin: '70px',
-                    display: isModifyVisible ? 'none' : 'block',
-                  }}
-                  onClick={handleModifyClick}
-                  src={gear}
-                  alt="톱니"
-                />
+                <div className="imagechange">
+                  <img
+                    className="photo2"
+                    style={{
+                      width: '30px',
+                      position: 'absolute',
+                      zIndex: '1',
+                      margin: '70px',
+                      display: isModifyVisible ? 'none' : 'block',
+                    }}
+                    onClick={(handleModifyClick, toggleMenu)}
+                    src={gear}
+                    alt="톱니"
+                  />
+                  {isOpen && <DropMPro onProfileChange={handleProfileChange} />}
+                </div>
               </div>
               <div className="data">
-                {/* 삼항연산자 한 번 더 써서 유효성에 따라 색 바뀌게  */}
                 <p
-                  style={{ color: isModifyVisible ? 'transparent' : 'black' }}
+                  style={{
+                    fontSize: 'small',
+                    color: isModifyVisible
+                      ? 'transparent'
+                      : isValidNickname
+                      ? 'black'
+                      : 'red',
+                  }}
                   onClick={handleModifyClick}
                 >
-                  유효성검사 뜨는 곳
+                  {isValidNickname
+                    ? '사용할 수 있는 닉네임입니다'
+                    : '사용할 수 없는 닉네임입니다'}
                 </p>
-                {/* 닉네임 뜨게 하는 곳 -----------------------------------------*/}
-                <p>
-                  {nickname} {name} {userId}번 유저
+                <p
+                  style={{
+                    display: isModifyVisible ? 'block' : 'none',
+                    fontSize: 'large',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  큐피
                 </p>
+                <input
+                  placeholder={holdervisible ? name : ''}
+                  id="nickname"
+                  type="text"
+                  value={nickname}
+                  onChange={handleNicknameChange}
+                  style={{
+                    marginBottom: '1vw',
+                    display: isModifyVisible ? 'none' : 'block',
+                    height: '5vh',
+                    width: '10vw ',
+                    fontSize: 'large',
+                    fontWeight: 'bold',
+                    backgroundColor: 'transparent',
+                    border: '1px solid white',
+                  }}
+                />
 
                 <p className="date">{userId}가입</p>
                 <div className="innerwrap">
@@ -239,7 +306,7 @@ const Myprofile = () => {
                 </button>
               </div>
             </div>
-            {/* 2번 박스 여기도 state로 클릭시 모달뜨게*/}
+            {/* 2번 박스*/}
             <div className="wrap2">
               <div className="second">
                 <div
@@ -297,28 +364,72 @@ const Myprofile = () => {
             {/* 4번 박스 */}
             <div className="wrap3">
               <div className="fourth">
-                {/* 박스 다 link로 use state */}
                 <div className="box4_1">
                   <div className="otherprofile">
-                    <img style={{ width: '70px' }} src={logo} alt="프사" />
+                    <img
+                      style={{ width: '70px' }}
+                      src={profileImage}
+                      alt="프사"
+                    />
                   </div>
-                  <p className="temp">{ques}</p>
+                  {Array.isArray(questiontitle) && questiontitle.length > 0 && (
+                    <p className="temp">{questiontitle[0]}</p>
+                  )}
+
+                  {Array.isArray(quesHashs) && quesHashs.length > 0 && (
+                    <div className="qhashtags">
+                      {quesHashs[0].map((hashTag, index) => (
+                        <p key={index}>#{hashTag.hashtag}</p>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <div className="box4_2">
                   <div className="otherprofile">
-                    <img style={{ width: '70px' }} src={logo} alt="프사" />
+                    <img
+                      style={{ width: '70px' }}
+                      src={profileImage}
+                      alt="프사"
+                    />
+
+                    {Array.isArray(questiontitle) &&
+                      questiontitle.length > 0 && (
+                        <p className="temp">{questiontitle[1]}</p>
+                      )}
+                    {Array.isArray(quesHashs) && quesHashs.length > 0 && (
+                      <div className="qhashtags">
+                        {quesHashs[1].map((hashTag, index) => (
+                          <p key={index}>#{hashTag.hashtag}</p>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="box4_3">
                   <div className="otherprofile">
-                    <img style={{ width: '70px' }} src={logo} alt="프사" />
+                    <img
+                      style={{ width: '70px' }}
+                      src={profileImage}
+                      alt="프사"
+                    />
+                    {Array.isArray(questiontitle) &&
+                      questiontitle.length > 0 && (
+                        <p className="temp">{questiontitle[2]}</p>
+                      )}
+                    {Array.isArray(quesHashs) && quesHashs.length > 0 && (
+                      <div className="qhashtags">
+                        {quesHashs[2].map((hashTag, index) => (
+                          <p key={index}>#{hashTag.hashtag}</p>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div
-            // 클릭했을때 결제창뜨게
+            // 클릭했을때 뜨는 결제창
             className="modalp"
             style={{ display: isClicked ? 'block' : 'none' }}
           >
@@ -333,7 +444,6 @@ const Myprofile = () => {
                     naverclick();
                   }}
                 >
-                  {/* <div className="naverlogo"></div> */}
                   <img
                     style={{ width: '1.6vw', marginLeft: '0.5vw' }}
                     src={naverlogo}
