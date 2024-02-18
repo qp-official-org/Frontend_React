@@ -7,6 +7,13 @@ import panswericon from 'src/professor.svg';
 
 function Qdummy({title, answerCount, expertCount, createdAt, hashtag, user, childStatus, profileImg, questionId}) {
     const [isHovered, setIsHovered] = useState(false);
+    // const [quesHashs, setquesHash] = useState(null);
+    // const quesHash = qdata.result.questions.map(
+    //       (question) => question.hashtags
+    //     );
+    console.log(hashtag); //해시태그 잘 불러와지는지
+    console.log(questionId); //questionId 잘 불러와지는지
+
     const childTag = childStatus === 'ACTIVE' ? '어린이' : '어른이';
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -47,9 +54,9 @@ function Qdummy({title, answerCount, expertCount, createdAt, hashtag, user, chil
                     <div style={hoverQdummy}>
                         <div style={styles.contents}>
                             <img src={ profileImg } style={styles.profile}></img>
-                            <div class="level" style={{fontSize:"16px", marginTop:"28px", marginLeft:"200px"}}>
+                            <div class="level" style={{fontSize:"16px", marginTop:"28px", marginLeft:"200px", color: childStatus === 'ACTIVE' ? "#FFF" : "transparent"}}>
                                 {/* <h5>어린이</h5> */}
-                                {childTag}
+                                <h5>{childTag}</h5>
                             </div>
                             <div class="date" style={{fontSize:"13px", marginTop:"62px"}}>
                                 {/* <h5>2023. 12. 20. 8:00am</h5> */}
@@ -72,7 +79,8 @@ function Qdummy({title, answerCount, expertCount, createdAt, hashtag, user, chil
                                 {/* <span>#해시태그</span>
                                 <span style={{marginLeft:"17px"}}>#해시태그</span>
                                 <span style={{marginLeft:"17px"}}>#해시태그</span> */}
-                                <span>#</span>{hashtag}
+                                {/* {quesHashs[index].map((hashTag, idx) => (<span key={idx}>#{hashTag.hashtag}</span>))} */}
+                                <span>#{hashtag}</span>
                             </div>
                         </div>
                     </div>
@@ -80,9 +88,9 @@ function Qdummy({title, answerCount, expertCount, createdAt, hashtag, user, chil
                     <div style={defaultQdummy}>
                         <div style={styles.contents}>
                             <img src={ profileImg } style={styles.profile}></img>
-                            <div class="level" style={{fontSize:"16px", marginTop:"28px", marginLeft:"200px", color:"#EB7125"}}>
+                            <div class="level" style={{fontSize:"16px", marginTop:"28px", marginLeft:"200px", color: childStatus === 'ACTIVE' ? "#EB7125" : "transparent"}}>
                                 {/* <h5>어린이</h5> */}
-                                {childTag}
+                                <h5>{childTag}</h5>
                             </div>
                             <div class="date" style={{fontSize:"13px", marginTop:"62px"}}>
                                 {/* <h5>2023. 12. 20. 8:00am</h5> */}
@@ -103,7 +111,8 @@ function Qdummy({title, answerCount, expertCount, createdAt, hashtag, user, chil
                                 {/* <span>#해시태그</span>
                                 <span style={{marginLeft:"17px"}}>#해시태그</span>
                                 <span style={{marginLeft:"17px"}}>#해시태그</span> */}
-                                <span>#</span>{hashtag}
+                                {/* {quesHashs[index].map((hashTag, idx) => (<span key={idx}>#{hashTag.hashtag}</span>))} */}
+                                <span>#{hashtag}</span>
                             </div>
                         </div>
                     </div>

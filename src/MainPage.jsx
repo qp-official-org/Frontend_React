@@ -17,7 +17,7 @@ function MainPage() {
     const [imgitems, setImgItems] = useState([profile1,profile2,profile3,profile4,profile5,profile6]); //기본 프로필 이미지 배열
     const [items, setItems] = useState(Array.from({ length: 12 })); // 초기에 불러올 아이템 수
     const [hasMore, setHasMore] = useState(true); // 더 불러올 아이템이 있는지
-
+    
     const getQuestions = async (page,size) => {
         try {
             const apiUrl = `http://52.78.248.199:8080/questions?page=${page}&size=${size}`;
@@ -29,6 +29,7 @@ function MainPage() {
             console.error('POST 요청 실패:', error);
         }
     };
+
     getQuestions(0,10);
     const fetchMoreData = () => {
         if (items.length >= 24) { // 최대 아이템 수
