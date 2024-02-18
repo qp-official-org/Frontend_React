@@ -18,10 +18,14 @@ function Answer({ content, userId, answerId, like }) {//props로 답변 내용�
     const [isBlurred, setIsBlurred] = useState(true);
     const [reanswerList, setReanswerList] = useState([answerId]);
     const [answerCount, setAnswerCount] = useState('')
+    const [fixClick, setFixClick] = useState(false)
+    const [answerText, setAnswerText] = useState(content);
     const LuserId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
     console.log(accesstoken)
-
+    const onChangeText = (event) => {
+        setAnswerText(event.target.value);
+    }
 
     const handleCheckBtn = () => {
         setIsBtnClicked(true);
@@ -71,18 +75,36 @@ function Answer({ content, userId, answerId, like }) {//props로 답변 내용�
                 <div style={styles.profile_box}><div style={styles.profile_img}></div></div>
                 <div style={styles.question_main2}>
                     <div style={styles.question_main3}>
-                        <Dropdown />
+                        {isBtnClicked ?
+                            <ul onClick={() => { setView(!view) }} style={styles.dropdownbtn}>⋮
+                                {view && (
+                                    <div style={{ background: 'white', border: '1px solid #000' }}>
+                                        <li onClick={() => { setFixClick(true) }} style={{ order: '-1', height: '25px', width: "100px" }}>수정하기</li>
+                                        <li style={{ order: '-1', height: '25px', width: "100px" }}>신고하기</li>
+                                    </div>
+                                )}
+                            </ul> : null}
                     </div>
                     <h3 style={styles.question_title}>{userId}</h3>
                 </div>
             </div>
-            <div style={{ margin: '15px', minHeight: '10vh', filter: isBlurred ? 'blur(5px)' : 'none' }}>
-                {content}
-            </div>
+            {fixClick ?
+                <div>
+                    <div style={{ ...styles.inputBox, background: "#D9D9D9" }}>
+                        <textarea
+                            placeholder="답변을 입력해주세요."
+                            style={styles.inputBox2}
+                            onChange={onChangeText}
+                        />
+                    </div>
+                </div> :
+                <div style={{ margin: '15px', minHeight: '10vh', filter: isBlurred ? 'blur(5px)' : 'none' }}>
+                    {content}
+                </div>}
             {answerOfAnswer && (
                 <div>
-                    <div style={{ display: 'flex' }}>
-                        <div>💬{answerCount}</div>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '3%' }}>
+                        <div style={{ marginRight: '1%' }}>💬{answerCount}</div>
                         <div onClick={handleClickLike}>👍{like}</div>
                     </div>
                     {reanswerList && reanswerList.length > 0 ? (

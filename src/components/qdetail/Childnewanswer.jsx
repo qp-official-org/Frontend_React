@@ -58,7 +58,6 @@ function Childnewanswer({ qId, answerId }) {
                 <div style={styles.profile_box}><div style={styles.profile_img}></div></div>
                 <div style={styles.question_main2}>
                     <div style={styles.question_main3}>
-                        <Dropdown />
                     </div>
                     <h3 style={styles.question_title}>답변자 정보</h3>
                 </div>
