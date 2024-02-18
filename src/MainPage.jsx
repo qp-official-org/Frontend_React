@@ -11,6 +11,8 @@ import React, { useState, useEffect } from "react";
 import { styles } from "./components/MainPageDetail/style";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Qdummy from "./Qdummy";
+import Header from './Header';
+import { Link } from 'react-router-dom';
 
 function MainPage() {
   const [questions, setQuestions] = useState([]);
@@ -24,13 +26,14 @@ function MainPage() {
       const response = await axios.get(apiUrl, { content_type: 'application/w-www-form-urlencoded' });
       setQuestions(response.data.result.questions);
 
-      console.log('POST 요청 성공:', response);
+      console.log('GET 요청 성공:', response);
     } catch (error) {
-      console.error('POST 요청 실패:', error);
+      console.error('GET 요청 실패:', error);
     }
   };
-
-  getQuestions(0, 10);
+  useEffect(() => {
+    getQuestions(0, 10)
+  }, [])
   const fetchMoreData = () => {
     if (items.length >= 24) { // 최대 아이템 수
       setHasMore(false);
@@ -43,25 +46,28 @@ function MainPage() {
   } //새로운 데이터 컴포넌트 추가
 
   return (
-    <div style={styles.container}>
-      <div style={styles.DummyBox}>
-        <InfiniteScroll
-          dataLength={items.length}
-          next={fetchMoreData}
-          hasMore={hasMore}
-          loader={<h4>Loading…</h4>}
-          endMessage={
-            <p>
-              <b>모든 게시물을 확인하셨습니다.</b>
-            </p>
-          } style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridGap: "15px" }}
-        >
-          {hasMore ? fetchMoreData : addQdummy}
-          {questions.map((question, index) => (
-            <Qdummy key={index} title={question.title} answerCount={question.answerCount} createdAt={question.createdAt} expertCount={question.expertCount}
-              hashtag={question.hashtag} user={question.user} childStatus={question.childStatus} profileImg={question.user.profileImage} questionId={question.questionId} /> // 이 부분에서 Qdummy 컴포넌트를 사용하여 렌더링을 해줍니다.
-          ))}
-        </InfiniteScroll>
+    <div>
+      <Header />
+      <div style={styles.container}>
+        <div style={styles.DummyBox}>
+          <InfiniteScroll
+            dataLength={items.length}
+            next={fetchMoreData}
+            hasMore={hasMore}
+            loader={<h4>Loading…</h4>}
+            endMessage={
+              <p>
+                <b>모든 게시물을 확인하셨습니다.</b>
+              </p>
+            } style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridGap: "15px" }}
+          >
+            {hasMore ? fetchMoreData : addQdummy}
+            {questions.map((question, index) => (
+              <Qdummy key={index} title={question.title} answerCount={question.answerCount} createdAt={question.createdAt} expertCount={question.expertCount}
+                hashtag={question.hashtag} user={question.user} childStatus={question.childStatus} profileImg={question.user.profileImage} questionId={question.questionId} /> // 이 부분에서 Qdummy 컴포넌트를 사용하여 렌더링을 해줍니다.
+            ))}
+          </InfiniteScroll>
+        </div>
       </div>
     </div>
   );

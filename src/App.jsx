@@ -25,7 +25,7 @@ function App() {
           <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Routes>
               <Route path="/" element={<Login1 />} />
-              <Route path="/detail" element={<Qdetail />} />
+              <Route path="/detail/:questionId" element={<Qdetail />} />
               <Route path="/certify" element={<Certify />} />
               <Route path="/nickname" element={<Nickname />} />
               <Route path="/setProfile" element={<Profile />} />
@@ -43,17 +43,17 @@ function App() {
   );
 }
 
-// if ('serviceWorker' in navigator) {
-//   window.addEventListener('load', () => {
-//     navigator.serviceWorker
-//       .register('/service-worker.js', { type: 'text/javascript' })
-//       .then((registration) => {
-//         console.log('SW registered: ', registration);
-//       })
-//       .catch((registrationError) => {
-//         console.log('SW registration failed: ', registrationError);
-//       });
-//   });
-// }
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/service-worker.js', { type: 'text/javascript' })
+      .then((registration) => {
+        console.log('SW registered: ', registration);
+      })
+      .catch((registrationError) => {
+        console.log('SW registration failed: ', registrationError);
+      });
+  });
+}
 
 export default App;

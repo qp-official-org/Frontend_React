@@ -2,14 +2,12 @@
 import React from 'react';
 import { styles } from './components/qdetail/style';
 import { useState, useEffect } from 'react';
-//페이지이동위한 코드
 import { useNavigate } from 'react-router-dom';
 import { useSearchContent } from './Context';
 import { accesstokenState, loginState } from "./atom/atoms";
 import { userIdState } from "./atom/atoms";
 import { useSetRecoilState } from "recoil";
 import { useRecoilState } from "recoil";
-
 
 function Header() {
     const [searchClick, setSearchClick] = useState(false);

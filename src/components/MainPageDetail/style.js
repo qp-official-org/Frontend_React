@@ -9,6 +9,7 @@ export const styles = {
     width: '100vw',
     height: '100vh',
     display: 'flex',
+    justifyContent: 'center'
   },
 
   defaultQdummy: {
@@ -81,9 +82,7 @@ export const styles = {
   },
   DummyBox: {
     position: 'absolute',
-    marginTop: '156px',
-    marginLeft: '352px',
-    marginRight: '229px',
+    marginTop: '5%',
     width: '889px',
     minHeight: '355px',
   },
