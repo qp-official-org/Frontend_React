@@ -23,7 +23,6 @@ function Newanswer(qId, answerId) {
         window.location.reload()
     }
 
-
     //id에는 question id
     const postAnswer = async () => {
         try {
