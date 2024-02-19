@@ -20,7 +20,6 @@ function Newanswer(qId, answerId) {
     const handleSubmit = () => {
         setSubmitBtnClicked(true)
         postAnswer()
-        window.location.reload()
     }
 
     //id에는 question id

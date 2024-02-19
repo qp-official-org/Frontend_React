@@ -8,6 +8,7 @@ import { accesstokenState, loginState } from "./atom/atoms";
 import { userIdState } from "./atom/atoms";
 import { useSetRecoilState } from "recoil";
 import { useRecoilState } from "recoil";
+import axios from 'axios';
 
 function Header() {
     const [searchClick, setSearchClick] = useState(false);
@@ -16,18 +17,28 @@ function Header() {
     const [accesstoken, setAccessToken] = useRecoilState(accesstokenState);
     const [userId, setUserId] = useRecoilState(userIdState);
     const [isLogined, setIsLogined] = useState(false);
+    const [userInfo, setUserInfo] = useState([])
+    //localStorage에서 getItem하고
+    //값이 있으면 로그인 상태 바꾸고, recoil에 저장
+    //값이 없으면 로그인 상태 그대로두고 
+
+    const gAccessToken = localStorage.getItem('accesstoken')
+    const gUserId = localStorage.getItem('userId')
+    const totalLogin = () => {
+        gAccessToken && gUserId ? handleLogin() : handleLogout()
+    }
+
     const handleLogin = () => {
         setIsLogined(true);
-        setAccessToken("eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcwODIzNzM5NCwiZXhwIjoxNzA4MjQ0NTk0fQ.Hf2qB8IOnorpm3zYg0i2zUY8rFqwHF_tbB0t0s6Wi3dHlTTwx3DfbDj9VruWdVY10fFKX7EUdDYw4bYqp495mA");
-        setUserId("6");
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('accesstoken', "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcwODIzNzM5NCwiZXhwIjoxNzA4MjQ0NTk0fQ.Hf2qB8IOnorpm3zYg0i2zUY8rFqwHF_tbB0t0s6Wi3dHlTTwx3DfbDj9VruWdVY10fFKX7EUdDYw4bYqp495mA")
-        localStorage.setItem('userId', '6')
+        setAccessToken(gAccessToken);
+        setUserId(gUserId);
+        getUserInfo()
     }
 
     const handleLogout = () => {
         setIsLogined(false);
         setAccessToken(null); // 로그아웃 시 엑세스 토큰 초기화
+        setUserId(null)
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('accesstoken')
         localStorage.removeItem('userId')
@@ -39,10 +50,23 @@ function Header() {
     }, []);
 
     useEffect(() => {
-        if (isLogined) {
-            handleLogin();
-        }
+        totalLogin()
     }, []);
+
+    const getUserInfo = async () => {
+        try {
+            const apiUrl = `http://52.78.248.199:8080/users/${gUserId}`;
+
+            const headers = {
+                accessToken: gAccessToken
+            }
+            const response = await axios.get(apiUrl, { headers });
+            setUserInfo(response.data.result)
+            console.log('Get 요청 성공:', response.data);
+        } catch (error) {
+            console.error('Get 요청 실패:', error);
+        }
+    };
 
     // 페이지 이동을 위한 코드 추가
 
@@ -122,8 +146,8 @@ function Header() {
                     </div>
                     <div style={styles.header_profile_box}>
                         <div style={styles.header_profile_img}></div>
-                        <div style={styles.header_profile_nickname}>{userId}</div>
-                        <div style={styles.header_profile_point}>100P</div>
+                        <div style={styles.header_profile_nickname}>{userInfo.nickname}</div>
+                        <div style={styles.header_profile_point}>{userInfo.point}</div>
                         <div style={styles.header_profile_charge_btn}>충전하러 가기</div>
                     </div>
                 </div>
