@@ -14,8 +14,6 @@ import {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <RecoilRoot>
-    <React.StrictMode>
       <App />
-    </React.StrictMode>
   </RecoilRoot>
 );
