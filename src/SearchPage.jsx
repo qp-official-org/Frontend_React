@@ -2,16 +2,27 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import { useSearchContent } from './Context';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 const SearchPage = ({}) => {
+  const ls =localStorage.getItem("isLogedIn");
+  const navigate = useNavigate();
   const [questiontitle, setquestitle] = useState(null);
   const [profileImage, setphoto] = useState(null);
   const [quesHashs, setquesHash] = useState(null);
   const [qcount, setqcount] = useState('');
   const { AsearchContent, setASearchContent } = useSearchContent();
+  const [questionId, setquesId] = useState(null);
+  const [selectedBoxIndex, setSelectedBoxIndex] = useState(null); // 클릭한 박스의 인덱스를 저장할 상태 변수
   const page = 1;
   const size = 10;
 
+  // 클릭 이벤트 핸들러
+  const handleBoxClick = (index) => {
+    setSelectedBoxIndex(index);
+  };
+  const GoRegister = () => {
+    {ls ? navigate("/register") : alert("로그인이 필요합니다.")}
+  };
   console.log(AsearchContent);
   useEffect(() => {
     if (!AsearchContent || !AsearchContent.trim()) return;
@@ -33,6 +44,11 @@ const SearchPage = ({}) => {
         console.log(counts);
         const titles = qdata.result.questions.map((question) => question.title);
         setquestitle(titles);
+        const quesId = qdata.result.questions.map(
+          (question) => question.questionId
+        );
+        setquesId(quesId);
+        console.log('qid', quesId);
         const profileImage =
           Array.isArray(qdata.result.questions) &&
           qdata.result.questions.length > 0
@@ -56,45 +72,39 @@ const SearchPage = ({}) => {
       <p style={{ textAlign: 'center', marginTop: '5vh' }}>
         총 {qcount}개의 질문이 있습니다
       </p>
-      <div
-        className="questionwrap"
-        style={{ display: 'flex', flexWrap: 'wrap' }}
-      >
+
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {questiontitle &&
           questiontitle.map((title, index) => (
-            <div key={index} className="searchItem">
-              <div
-                className="boxq"
-                style={{
-                  width: '18vw',
-                  height: '36vh',
-                  borderRadius: '15px',
-                  border: '1px solid gray',
-                  marginTop: '5vh',
-                  marginLeft: '3vw',
-                }}
+            <div className="questionwrap" key={index}>
+              <Link
+                to={`/detail/${questionId[index]}`}
+                style={{ textDecoration: 'none', color: 'black' }}
               >
-                <div className="otherprofile">
-                  <img
-                    style={{ width: '70px' }}
-                    src={profileImage}
-                    alt="프사"
-                  />
-                </div>
-                <p className="temp">{title}</p>{' '}
-                {/* 각 박스에 질문 제목을 출력 */}
-                {/* 질문 제목 이외의 데이터 출력 예시 */}
-                {/* <p>{profileImage}</p> */}
-                {/* <p>{quesHashs[index].map(hashTag => `#${hashTag.hashtag}`).join(' ')}</p> */}
-                {/* 질문과 관련된 해시태그 출력 */}
-                {Array.isArray(quesHashs) && quesHashs.length > 0 && (
-                  <div className="qhashtags">
-                    {quesHashs[index].map((hashTag, idx) => (
-                      <p key={idx}>#{hashTag.hashtag}</p>
-                    ))}
+                <div
+                  className="searchItem"
+                  onClick={() => handleBoxClick(index)}
+                >
+                  <div className="boxq">
+                    <div className="otherprofile">
+                      <img
+                        style={{ width: '70px' }}
+                        src={profileImage}
+                        alt="프사"
+                      />
+                    </div>
+                    <p className="temp">{title}</p>
+                    {/* 질문과 관련된 해시태그 출력 */}
+                    {Array.isArray(quesHashs) && quesHashs.length > 0 && (
+                      <div className="qhashtags">
+                        {quesHashs[index].map((hashTag, idx) => (
+                          <p key={idx}>#{hashTag.hashtag}</p>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
+                </div>
+              </Link>
             </div>
           ))}
       </div>
@@ -120,15 +130,17 @@ const SearchPage = ({}) => {
             border: 'none',
           }}
         >
-          <Link
+          {/* <Link
             to="/register"
             style={{ textDecoration: 'none', color: 'inherit' }}
           >
             질문하러 가기
-          </Link>
+          </Link> */}
+        <div onClick={GoRegister} style={{ textDecoration: 'none', color: 'inherit' }}>질문하러 가기</div>
         </button>
       </div>
     </>
   );
 };
+
 export default SearchPage;

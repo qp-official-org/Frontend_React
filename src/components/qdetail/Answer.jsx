@@ -11,7 +11,7 @@ import { useRecoilValue } from "recoil";
 import Childnewanswer from "./Childnewanswer";
 import { accesstokenState, userIdState } from "../../atom/atoms";
 
-function Answer({ content, userId, answerId, like }) {//props로 답변 내용을 전달받음(값 그대로 와서 가공할 필요X)
+function Answer({ qId, content, userId, answerId, like }) {//props로 답변 내용을 전달받음(값 그대로 와서 가공할 필요X)
     const [view, setView] = useState(false);
     const [answerOfAnswer, setAnswerOfAnswer] = useState(false);
     const [isBtnClicked, setIsBtnClicked] = useState(false);
@@ -23,10 +23,6 @@ function Answer({ content, userId, answerId, like }) {//props로 답변 내용�
     const LuserId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
     console.log(accesstoken)
-    const onChangeText = (event) => {
-        setAnswerText(event.target.value);
-    }
-
     const handleCheckBtn = () => {
         setIsBtnClicked(true);
         setAnswerOfAnswer(true);
@@ -37,7 +33,7 @@ function Answer({ content, userId, answerId, like }) {//props로 답변 내용�
     }, [])
     const postLike = async () => {
         try {
-            const apiUrl = `http://52.78.248.199:8080/answers/${answerId}/users/${6}`;
+            const apiUrl = `http://52.78.248.199:8080/answers/${answerId}/users/${LuserId}`;
 
             const headers = {
                 accessToken: accesstoken
@@ -62,6 +58,32 @@ function Answer({ content, userId, answerId, like }) {//props로 답변 내용�
             setAnswerCount(response.result.totalElements)
         } catch (error) {
             console.error("통신에러", error)
+        }
+    }
+    const handleSubmit = () => {
+        fixAnswer()
+        window.location.reload()
+    }
+    const fixAnswer = async () => {
+        try {
+            const apiUrl = `http://52.78.248.199:8080/answers/${answerId}`;
+
+            const postData = {
+                userId: LuserId,
+                title: "1",
+                content: answerText,
+            };
+
+            const headers = {
+                accessToken: accesstoken
+            }
+            console.log(accesstoken)
+            console.log(headers)
+            const response = await axios.patch(apiUrl, postData, { headers });
+
+            console.log('POST 요청 성공:', response.data);
+        } catch (error) {
+            console.error('POST 요청 실패:', error);
         }
     }
     return (
@@ -92,11 +114,12 @@ function Answer({ content, userId, answerId, like }) {//props로 답변 내용�
                 <div>
                     <div style={{ ...styles.inputBox, background: "#D9D9D9" }}>
                         <textarea
-                            placeholder="답변을 입력해주세요."
                             style={styles.inputBox2}
-                            onChange={onChangeText}
+                            onChange={(event) => setAnswerText(event.target.value)}
+                            value={answerText}
                         />
                     </div>
+                    <button onClick={handleSubmit} style={styles.answer_button}>답변수정</button>
                 </div> :
                 <div style={{ margin: '15px', minHeight: '10vh', filter: isBlurred ? 'blur(5px)' : 'none' }}>
                     {content}
@@ -104,17 +127,17 @@ function Answer({ content, userId, answerId, like }) {//props로 답변 내용�
             {answerOfAnswer && (
                 <div>
                     <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '3%' }}>
-                        <div style={{ marginRight: '1%' }}>💬{answerCount}</div>
-                        <div onClick={handleClickLike}>👍{like}</div>
+                        <div style={{ marginRight: '1%'}}>💬{answerCount}</div>
+                        <div onClick={handleClickLike} style={{cursor:"pointer"}}>👍{like}</div>
                     </div>
                     {reanswerList && reanswerList.length > 0 ? (
                         <div>
                             {reanswerList.map((reanswer, index) => reanswer.content && reanswer.content.length > 0 ? (
                                 <Reanswer key={index} content={reanswer.content} userId={reanswer.nickname} answerId={answerId} />
                             ) : null)}
-                            <Childnewanswer answerId={answerId} />{/* answerGroup에 부모답변 id입력 */}
+                            <Childnewanswer qId={qId} answerId={answerId} />{/* answerGroup에 부모답변 id입력 */}
                         </div>
-                    ) : (<Childnewanswer answerId={answerId} />)}
+                    ) : (<Childnewanswer qId={qId} answerId={answerId} />)}
                 </div>
             )}
         </div >

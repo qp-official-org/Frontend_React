@@ -8,44 +8,80 @@ import { accesstokenState, loginState } from "./atom/atoms";
 import { userIdState } from "./atom/atoms";
 import { useSetRecoilState } from "recoil";
 import { useRecoilState } from "recoil";
+import axios from 'axios';
 
 function Header() {
+    const ls = localStorage.getItem("isLoggedIn");
     const [searchClick, setSearchClick] = useState(false);
     const [searchContent, setSearchContent] = useState('');
     const [isSearchClicked, setIsSearchClicked] = useState(false);
     const [accesstoken, setAccessToken] = useRecoilState(accesstokenState);
     const [userId, setUserId] = useRecoilState(userIdState);
     const [isLogined, setIsLogined] = useState(false);
+    const [userInfo, setUserInfo] = useState([])
+
+    const gAccessToken = localStorage.getItem('accesstoken')
+    const gUserId = localStorage.getItem('userId')
+    const totalLogin = () => {
+        gAccessToken && gUserId ? handleLogin() : handleLogout()
+    }
     const GoLogin = () => {
-        navigate("/"); 
-      };
+        if(!ls){
+            navigate('/');
+        }
+    }
+
     const handleLogin = () => {
+    //     if(ls){
+    //         setIsLogined(true);
+    //         setAccessToken(gAccessToken);
+    //         setUserId(gUserId);
+    //         getUserInfo();
+    //     }else{navigate("/");
+    // }
         setIsLogined(true);
-        setAccessToken("eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcwODIzNzM5NCwiZXhwIjoxNzA4MjQ0NTk0fQ.Hf2qB8IOnorpm3zYg0i2zUY8rFqwHF_tbB0t0s6Wi3dHlTTwx3DfbDj9VruWdVY10fFKX7EUdDYw4bYqp495mA");
-        setUserId("6");
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('accesstoken', "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcwODIzNzM5NCwiZXhwIjoxNzA4MjQ0NTk0fQ.Hf2qB8IOnorpm3zYg0i2zUY8rFqwHF_tbB0t0s6Wi3dHlTTwx3DfbDj9VruWdVY10fFKX7EUdDYw4bYqp495mA")
-        localStorage.setItem('userId', '6')
+        setAccessToken(gAccessToken);
+        setUserId(gUserId);
+        getUserInfo();
     }
 
     const handleLogout = () => {
         setIsLogined(false);
         setAccessToken(null); // 로그아웃 시 엑세스 토큰 초기화
+        setUserId(null)
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('accesstoken')
         localStorage.removeItem('userId')
     }
 
+    const GoMain = () => {
+        navigate("/mainpage");
+      };
+
+      
     useEffect(() => {
         const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
         setIsLogined(storedIsLoggedIn === 'true');
     }, []);
 
     useEffect(() => {
-        if (isLogined) {
-            handleLogin();
-        }
+        totalLogin()
     }, []);
+
+    const getUserInfo = async () => {
+        try {
+            const apiUrl = `http://52.78.248.199:8080/users/${gUserId}`;
+
+            const headers = {
+                accessToken: gAccessToken
+            }
+            const response = await axios.get(apiUrl, { headers });
+            setUserInfo(response.data.result)
+            console.log('Get 요청 성공:', response.data);
+        } catch (error) {
+            console.error('Get 요청 실패:', error);
+        }
+    };
 
     // 페이지 이동을 위한 코드 추가
 
@@ -81,11 +117,11 @@ function Header() {
     const handleSearchBlock = () => {
         setIsSearchClicked(!isSearchClicked);
         console.log(isSearchClicked);
-    }
+    };
 
     return (
         <div style={styles.header_block}>
-            <div style={{ color: '#EB7125', fontWeight: 'bold', width: '6vw' }}>
+            <div style={{ color: '#EB7125', fontWeight: 'bold', width: '6vw', cursor:"pointer" }} onClick={GoMain}>
                 큐피로고
             </div>
             {/*로고 이미지로 대체*/}
@@ -124,15 +160,15 @@ function Header() {
                         로그아웃
                     </div>
                     <div style={styles.header_profile_box}>
-                        <div style={styles.header_profile_img}></div>
-                        <div style={styles.header_profile_nickname}>{userId}</div>
-                        <div style={styles.header_profile_point}>100P</div>
+                        <img src={userInfo.profileImage} style={styles.header_profile_img}></img>
+                        <div style={styles.header_profile_nickname}>{userInfo.nickname}</div>
+                        <div style={styles.header_profile_point}>{userInfo.point}</div>
                         <div style={styles.header_profile_charge_btn}>충전하러 가기</div>
                     </div>
                 </div>
             ) : (
-                <div onClick={handleLogin} style={styles.header_not_login}>
-                    <div onClick={GoLogin} style={styles.header_login_btn}>로그인하기</div>
+                <div onClick={handleLogin, GoLogin} style={styles.header_not_login}>
+                    <div style={styles.header_login_btn}>로그인하기</div>
                 </div>
             )}
         </div>

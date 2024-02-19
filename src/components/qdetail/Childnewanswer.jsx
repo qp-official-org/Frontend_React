@@ -28,8 +28,7 @@ function Childnewanswer({ qId, answerId }) {
     //answerGroup에는 상위 답변의 answerId
     const postAnswer = async () => {
         try {
-            const id = 1;
-            const apiUrl = `http://52.78.248.199:8080/answers/questions/${id}`;
+            const apiUrl = `http://52.78.248.199:8080/answers/questions/${qId}`;
 
             const postData = {
                 userId: userId,

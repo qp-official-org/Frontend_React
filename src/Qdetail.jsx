@@ -22,11 +22,12 @@ function Qdetail() {
     const [isAnswer, setIsAnswer] = useState(false);
     const [isChild, setIsChiled] = useState(true);
     const [answerOfAnswer, setAnswerOfAnswer] = useState(false);
-    const [title, setTitle] = useState("질문 제목2");
-    const [content, setContent] = useState('질문내용');
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
     const [hashtags, setHashtags] = useState("");
     const [answerId, setAnswerId] = useState("");
     const [howLong, setHowlong] = useState("1시간 전");
+    const [response, setResponse] = useState([])
     const userId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
     const getTimeAgo = (dateString) => {
@@ -56,26 +57,26 @@ function Qdetail() {
             return `${seconds}초 전`;
         }
     }
+    useEffect(() => {
+        receiveQuestion();
+        receiveAnswer();
+    }, []);
 
     const receiveQuestion = async () => {
         try {
             const response = await QuestionApi.findOne(qId);
-            console.log(response)
-            setTitle(response.result.title)
-            setContent(response.result.content)
-            setHashtags(response.result.hashtags)
+            console.log(response);
+            setTitle(response.result.title);
+            setContent(response.result.content);
+            setHashtags(response.result.hashtags);
             const howLong = getTimeAgo(response.result.createdAt);
-            setHowlong(howLong)
+            setHowlong(howLong);
             console.log(howLong);
         } catch (error) {
-            console.error(error)
+            console.error(error);
         }
     };
 
-    useEffect(() => {
-        receiveQuestion()
-        receiveAnswer()
-    }, [])
 
     //질문 ID로 답변 ID받아오기
 
@@ -118,7 +119,7 @@ function Qdetail() {
                     </div>
                     <div style={styles.main_orange_container}>
                         <div style={{ flex: '1' }}>
-                            <Question time={howLong} hashtags={hashtags} title={title} content={content} />
+                            <Question time={howLong} qId={qId} hashtags={hashtags} title={title} content={content} />
                         </div>
                         <div style={{ textAlign: 'center', color: 'white', fontWeight: '600', fontSize: '16px' }}>{answerList.length}명의 전문가가 답변했어요</div>
                         <hr style={styles.hrline} />
@@ -128,7 +129,7 @@ function Qdetail() {
                         </div>
                         {answerList.map((answer, index) => (
                             <div style={styles.answer}>
-                                <Answer key={index} like={answer.likeCount} answerId={answer.answerId} content={answer.content} userId={answer.nickname} />
+                                <Answer key={index} qId={qId} like={answer.likeCount} answerId={answer.answerId} content={answer.content} userId={answer.nickname} />
                             </div>
                         ))}
                         { }

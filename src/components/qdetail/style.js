@@ -114,12 +114,13 @@ export const styles = {
     },
     question_main3: {
         display: 'flex',
-        flex: '2',
+        flex: '1',
         position: 'relative',
     },
     question_hashtag: {
         display: 'flex',
         flex: '5',
+        height: '10%'
     },
     dropdownbtn: {
         listStyle: 'none',
@@ -261,7 +262,7 @@ export const styles = {
     },
     header_logout: {
         cursor: "pointer",
-        marginTop: '10%',
+        marginTop: '13%',
         marginRight: '10%',
         textAlign: 'right',
         fontWeight: '600',
@@ -279,6 +280,7 @@ export const styles = {
     header_profile_img: {
         width: '9vh',
         height: '9vh',
+        margin:"5%",
         borderRadius: '50%',
         backgroundColor: 'rgba(255,255,255,0.5)',
         border: '1px solid white'
@@ -287,7 +289,7 @@ export const styles = {
         fontWeight: '900',
         fontSize: '21px',
         color: 'white',
-        margin: '4.5%'
+        margin: '6%'
     },
     header_profile_point: {
         fontWeight: '900',
@@ -297,12 +299,12 @@ export const styles = {
     },
     header_profile_charge_btn: {
         background: 'white',
-        width: '7.617vw',
+        width: '5.617vw',
         height: "1.597vh",
         borderRadius: '20px',
         fontWeight: '700',
         fontSize: '10px',
-        margin: '4.5%'
+        margin: '2%'
     },
     header_login_btn: {
         color: 'white',

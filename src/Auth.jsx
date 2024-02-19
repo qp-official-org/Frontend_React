@@ -80,6 +80,7 @@ function Auth() {
         console.log(ret.data.result.accessToken);
         let { isSuccess, result } = ret.data;
         let { isNew } = result;
+        console.log(ret)
         if (isSuccess) {
             if (isNew) {
                 localStorage.setItem('accesstoken', ret.data.result.accessToken);
