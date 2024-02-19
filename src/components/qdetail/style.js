@@ -114,12 +114,13 @@ export const styles = {
     },
     question_main3: {
         display: 'flex',
-        flex: '2',
+        flex: '1',
         position: 'relative',
     },
     question_hashtag: {
         display: 'flex',
         flex: '5',
+        height: '10%'
     },
     dropdownbtn: {
         listStyle: 'none',

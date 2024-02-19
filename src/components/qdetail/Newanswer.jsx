@@ -13,20 +13,22 @@ function Newanswer(qId, answerId) {
     const accesstoken = useRecoilValue(accesstokenState)
     const [answerText, setAnswerText] = useState("");
     const [submitBtnClicked, setSubmitBtnClicked] = useState(false);
-
+    const questionId = qId.qId
+    console.log(questionId)
     const onChangeText = (event) => {
         setAnswerText(event.target.value);
     }//서버에 추가할 답변 내용
     const handleSubmit = () => {
         setSubmitBtnClicked(true)
         postAnswer()
+        window.location.reload()
+
     }
 
     //id에는 question id
     const postAnswer = async () => {
         try {
-            const id = 1;
-            const apiUrl = `http://52.78.248.199:8080/answers/questions/${id}`;
+            const apiUrl = `http://52.78.248.199:8080/answers/questions/${questionId}`;
 
             const postData = {
                 userId: userId,

@@ -18,9 +18,6 @@ function Header() {
     const [userId, setUserId] = useRecoilState(userIdState);
     const [isLogined, setIsLogined] = useState(false);
     const [userInfo, setUserInfo] = useState([])
-    //localStorage에서 getItem하고
-    //값이 있으면 로그인 상태 바꾸고, recoil에 저장
-    //값이 없으면 로그인 상태 그대로두고 
 
     const gAccessToken = localStorage.getItem('accesstoken')
     const gUserId = localStorage.getItem('userId')
@@ -102,7 +99,7 @@ function Header() {
     const handleSearchBlock = () => {
         setIsSearchClicked(!isSearchClicked);
         console.log(isSearchClicked);
-    }
+    };
 
     return (
         <div style={styles.header_block}>

@@ -24,6 +24,7 @@ function Qregister() {
     const [contentValidateMax, setContentValidateMax] = useState(false);
     const [hashTagModal, setHashTagModal] = useState(false);
     const [hashtagId, setHashtagId] = useState([]);
+    const [childState, setChildState] = useState("ACTIVE");
 
     const accesstoken = useRecoilValue(accesstokenState)
     const userId = useRecoilValue(userIdState)
@@ -42,6 +43,11 @@ function Qregister() {
     const handleChildClicked = () => {
         setChildClicked(!childClicked)
         setAdultClicked(!adultClicked)
+        if (childClicked) {
+            setChildState("ACTIVE")
+        } else {
+            setChildState("INACTIVE")
+        }
         console.log(accesstoken, userId)
     };
     //유의사항 체크
@@ -156,6 +162,7 @@ function Qregister() {
                 userId: userId,
                 title: title,
                 content: content,
+                childStatus: childState,
                 hashtag: newHashtagIds,
             }
             const headers = {
