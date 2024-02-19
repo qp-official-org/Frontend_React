@@ -252,7 +252,7 @@ export const styles = {
     },
     header_profile: {
         width: '8.948vw',
-        height: '24.9vh',
+        height: '26.9vh',
         background: 'linear-gradient(to bottom, rgba(235, 113, 37, 1),rgba(203, 78, 0, 1))',
         borderRadius: '40px',
         justifyContent: 'center',
@@ -261,7 +261,7 @@ export const styles = {
     },
     header_logout: {
         cursor: "pointer",
-        marginTop: '5%',
+        marginTop: '10%',
         marginRight: '10%',
         textAlign: 'right',
         fontWeight: '600',
