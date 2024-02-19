@@ -1,4 +1,10 @@
+// @ts-nocheck
+import { useRecoilValue } from 'recoil';
+import { accesstokenState } from './atom/atoms';
+import { userIdState } from './atom/atoms';
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 // import { Link } from 'react-router-dom';
 import '../src/pstyle.css';
 import logo from '../src/components/mprofile/images/apple.png';
@@ -10,6 +16,25 @@ import Header from './Header';
 import DropMPro from './DropMPro';
 // accessToken: eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUyMCwiaWF0IjoxNzA4MjY5ODI4LCJleHAiOjE3MDgyNzcwMjh9.SrKdPOljkWwMdIaLQzBkblMSOqMkqzcSvPmXTssq1g35R39mRPK4SSEg9KRSLO65kNCM-lNWOkBjtL1GWsnTAA
 const Myprofile = () => {
+  // @ts-nocheck
+
+  const gUserId = useRecoilValue(userIdState);
+  const gAccessToken = useRecoilValue(accesstokenState);
+  const [userInfo, setUserInfo] = useState([]);
+  const getUserInfo = async () => {
+    try {
+      const apiUrl = `http://52.78.248.199:8080/users/${gUserId}`;
+
+      const headers = {
+        accessToken: gAccessToken,
+      };
+      const response = await axios.get(apiUrl, { headers });
+      setUserInfo(response.data.result);
+      console.log('Get 요청 성공:', response.data);
+    } catch (error) {
+      console.error('Get 요청 실패:', error);
+    }
+  };
   const [nickname, setNickname] = useState([]);
   const [userId, setuserId] = useState(null);
   const [message, setmessage] = useState(null);
@@ -126,7 +151,7 @@ const Myprofile = () => {
       headers: {
         'Content-Type': 'application/json',
         accessToken:
-          'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUyMCwiaWF0IjoxNzA4Mjc5MjE4LCJleHAiOjE3MDgyODY0MTh9.DM070e4nXYPguWSKUINEyLYQGHKGwuBq9qrF7tbH7uXXwNNOQlABvLSIwni2pZaTsZ8SbXLiRi9zvtzkmg7UPQ',
+          'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUyMCwiaWF0IjoxNzA4MzI2Mzc5LCJleHAiOjE3MDgzMzM1Nzl9.q4AIfXx9vSvOY7-KVgxuRlPCBmOR2PEYDVueZtuYpJEEaXekVVjWxhd1scUOGAJ30IAzT9NU0uvbJXFJhy2i9A',
       },
       body: JSON.stringify(updatedData), // 수정된 데이터를 JSON 형식으로 변환하여 전송
     })
@@ -182,7 +207,7 @@ const Myprofile = () => {
       method: 'GET',
       headers: {
         accessToken:
-          'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUyMCwiaWF0IjoxNzA4Mjc5MjE4LCJleHAiOjE3MDgyODY0MTh9.DM070e4nXYPguWSKUINEyLYQGHKGwuBq9qrF7tbH7uXXwNNOQlABvLSIwni2pZaTsZ8SbXLiRi9zvtzkmg7UPQ',
+          'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUyMCwiaWF0IjoxNzA4MzI2Mzc5LCJleHAiOjE3MDgzMzM1Nzl9.q4AIfXx9vSvOY7-KVgxuRlPCBmOR2PEYDVueZtuYpJEEaXekVVjWxhd1scUOGAJ30IAzT9NU0uvbJXFJhy2i9A',
       },
     })
       .then((res) => res.json())
@@ -310,7 +335,8 @@ const Myprofile = () => {
                     fontWeight: 'bold',
                   }}
                 >
-                  {name}
+                  {userInfo.nickname}
+                  {/* {name} */}
                 </p>
                 <input
                   placeholder={holdervisible ? name : ''}
@@ -337,7 +363,7 @@ const Myprofile = () => {
                   <p>&nbsp;POINT&nbsp;&nbsp;|&nbsp;</p>
 
                   <div className="prof_respond">
-                    {point}개의 답변을 볼 수 있어요!
+                    {userInfo.point}개의 답변을 볼 수 있어요!
                   </div>
                 </div>
               </div>
