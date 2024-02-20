@@ -105,7 +105,8 @@ export const styles = {
         borderRadius: "50%",
         width: "8vh",
         height: "8vh",
-        margin: '2px'
+        margin: '2px',
+        border: "2px solid #f9f9f9"
     },
     question_main2: {
         flexDirection: 'column',

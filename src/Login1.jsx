@@ -63,7 +63,7 @@ function Login1() {
             <div class="kakaoLogin">
               <button style={styles.button2}
                 onClick={() => window.location.href =
-                  `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${'9c0435350e0714d02ef07e6bccb168ab'}&redirect_uri=${window.location.href + 'auth/kakao/login'}`}>
+                  `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${'9c0435350e0714d02ef07e6bccb168ab'}&redirect_uri=${window.location.href + '/auth/kakao/login'}`}>
                 <img src={klogo} style={{ marginRight: "28%" }}></img>
                 <span style={styles.button2Text}>카카오로 간편 가입하기</span>
               </button>

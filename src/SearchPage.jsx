@@ -5,7 +5,7 @@ import { useSearchContent } from './Context';
 import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { loginState } from './atom/atoms';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const SearchPage = ({ }) => {
   const [questiontitle, setquestitle] = useState(null);
@@ -16,8 +16,8 @@ const SearchPage = ({ }) => {
   const { AsearchContent, setASearchContent } = useSearchContent();
   const [questionId, setquesId] = useState(null);
   const [selectedBoxIndex, setSelectedBoxIndex] = useState(null); // 클릭한 박스의 인덱스를 저장할 상태 변수
-  const ls = useRecoilValue(loginState)
-  const page = 1;
+  const ls = useRecoilValue(loginState);
+  const page = 0;
   const size = 10;
 
   // 클릭 이벤트 핸들러
@@ -25,7 +25,9 @@ const SearchPage = ({ }) => {
     setSelectedBoxIndex(index);
   };
   const GoRegister = () => {
-    { ls ? navigate("/register") : alert("로그인이 필요합니다.") }
+    {
+      ls ? navigate('/register') : alert('로그인이 필요합니다.');
+    }
   };
   console.log(AsearchContent);
   useEffect(() => {
@@ -134,7 +136,12 @@ const SearchPage = ({ }) => {
             border: 'none',
           }}
         >
-          <div onClick={GoRegister} style={{ textDecoration: 'none', color: 'inherit' }}>질문하러 가기</div>
+          <div
+            onClick={GoRegister}
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
+            질문하러 가기
+          </div>
         </button>
       </div>
     </>

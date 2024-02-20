@@ -1,24 +1,44 @@
 // @ts-nocheck
 import { useRecoilValue } from 'recoil';
-import { accesstokenState } from './atom/atoms';
+import { Link } from 'react-router-dom';
+import { accesstokenState, loginState } from './atom/atoms';
 import { userIdState } from './atom/atoms';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 // import { Link } from 'react-router-dom';
 import '../src/pstyle.css';
 import logo from '../src/components/mprofile/images/apple.png';
 import naverlogo from '../src/components/mprofile/images/naverlogo.png';
-import kakaologo from '../src/components/mprofile/images/kakao.png';
+//import kakaologo from '../src/components/mprofile/images/katalk.png';
 import coin from '../src/components/mprofile/images/coin.png';
 import gear from '../src/components/mprofile/images/Vector.png';
+//import badge from '../src/components/mprofile/images/badge.png';
 import Header from './Header';
 import DropMPro from './DropMPro';
-const Myprofile = () => {
+import ProfileQ from './ProfileQ';
 
+// accessToken: eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUyMCwiaWF0IjoxNzA4MjY5ODI4LCJleHAiOjE3MDgyNzcwMjh9.SrKdPOljkWwMdIaLQzBkblMSOqMkqzcSvPmXTssq1g35R39mRPK4SSEg9KRSLO65kNCM-lNWOkBjtL1GWsnTAA
+const Myprofile = () => {
+  // @ts-nocheck
+  const ls = useRecoilValue(loginState)
   const gUserId = useRecoilValue(userIdState);
   const gAccessToken = useRecoilValue(accesstokenState);
   const [userInfo, setUserInfo] = useState([]);
+  const [nickname, setNickname] = useState([]);
+  const [userId, setuserId] = useState(null);
+  const [message, setmessage] = useState(null);
+  const [name, setname] = useState(null);
+  const [questiontitle, setquestitle] = useState(null);
+  const [quesHashs, setquesHash] = useState(null);
+  const [isOpen, setMenu] = useState(false);
+  const [registerD, setregiD] = useState(null);
+  const [myQuestions, setMyQuestions] = useState([]);
+  const [alarmQuestions, setAlarmQuestions] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
+  const [clickedBox, setClickedBox] = useState(null);
+  const [myQ, setMyQ] = useState(true)
+  const [buyQ, setBuyQ] = useState(false)
+  const [alarmQ, setAlarmQ] = useState(false)
   const getUserInfo = async () => {
     try {
       const apiUrl = `http://52.78.248.199:8080/users/${gUserId}`;
@@ -28,23 +48,15 @@ const Myprofile = () => {
       };
       const response = await axios.get(apiUrl, { headers });
       setUserInfo(response.data.result);
-      console.log('Get 요청 성공:', response.data);
+      console.log('유저 정보 받아오기(프로필)', response.data);
     } catch (error) {
-      console.error('Get 요청 실패:', error);
+      console.error('유저 정보 받아오기(프로필)', error);
     }
   };
-  const [nickname, setNickname] = useState([]);
-  const [userId, setuserId] = useState(null);
-  const [message, setmessage] = useState(null);
-  const [name, setname] = useState(null);
-  const [questiontitle, setquestitle] = useState(null);
-  const [quesHashs, setquesHash] = useState(null);
-  const [isOpen, setMenu] = useState(false);
-  const [registerD, setregiD] = useState(null);
-
-  const [isClicked, setIsClicked] = useState(false);
-  const [clickedBox, setClickedBox] = useState(null);
-
+  useEffect(() => {
+    getUserInfo()
+  }, [])
+  // @ts-ignore
   const clicked = (box) => {
     setIsClicked(true);
     setClickedBox(box);
@@ -56,9 +68,11 @@ const Myprofile = () => {
   };
   const [Payment, setPayment] = useState('(결제수단 선택)');
 
+  // @ts-ignore
   const paybutton = (method) => {
     setPayment(method);
   };
+  //결제창 모달
   const [payclick, ispayclicked] = useState(false);
   const payresume = () => {
     ispayclicked(true);
@@ -71,6 +85,24 @@ const Myprofile = () => {
   // 얼마 충전할것인지 물어보는 창
   const [isboxclicked, setboxclicked] = useState(false);
   const [isbox2clicked, setbox2clicked] = useState(false);
+  const [isbox3clicked, setbox3clicked] = useState(false);
+  const [isbox4clicked, setbox4clicked] = useState(false);
+  const [isbox5clicked, setbox5clicked] = useState(false);
+  const box3clicked = () => {
+    setbox3clicked(true);
+    setbox4clicked(false);
+    setbox5clicked(false);
+  };
+  const box4clicked = () => {
+    setbox3clicked(false);
+    setbox4clicked(true);
+    setbox5clicked(false);
+  };
+  const box5clicked = () => {
+    setbox3clicked(false);
+    setbox4clicked(false);
+    setbox5clicked(true);
+  };
   const boxclicked = () => {
     setboxclicked(true);
     setbox2clicked(false);
@@ -112,6 +144,7 @@ const Myprofile = () => {
   };
 
   // 닉네임관련
+  const [Role, setRole] = useState(null);
   const [holder, holdervisible] = useState(false);
   const handleholder = () => {
     holdervisible(true);
@@ -141,12 +174,12 @@ const Myprofile = () => {
     };
 
     // 서버에 PATCH 요청 보내기
-    fetch(`http://52.78.248.199:8080/users/520`, {
+    fetch(`http://52.78.248.199:8080/users/538`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         accessToken:
-          'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUyMCwiaWF0IjoxNzA4MzI2Mzc5LCJleHAiOjE3MDgzMzM1Nzl9.q4AIfXx9vSvOY7-KVgxuRlPCBmOR2PEYDVueZtuYpJEEaXekVVjWxhd1scUOGAJ30IAzT9NU0uvbJXFJhy2i9A',
+          'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUzOCwiaWF0IjoxNzA4NDM5NzQxLCJleHAiOjE3MDg0NDY5NDF9.bMUvQM804NFgE7SmpUI8_QSuKKe56Z6OXZ_GqIyHGl-b94D0VmB16hHJfFUmX5rIC9-YuYiT6Ez-Kvqxl8ng-Q',
       },
       body: JSON.stringify(updatedData), // 수정된 데이터를 JSON 형식으로 변환하여 전송
     })
@@ -195,46 +228,8 @@ const Myprofile = () => {
   const handleProfileChange = (newProfileImg) => {
     setProfileImg(newProfileImg);
   };
-  //test user 생성 API연결 코드
-  useEffect(() => {
-    // fetch 요청
-    fetch(`http://52.78.248.199:8080/users/520`, {
-      method: 'GET',
-      headers: {
-        accessToken:
-          'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUyMCwiaWF0IjoxNzA4MzI2Mzc5LCJleHAiOjE3MDgzMzM1Nzl9.q4AIfXx9vSvOY7-KVgxuRlPCBmOR2PEYDVueZtuYpJEEaXekVVjWxhd1scUOGAJ30IAzT9NU0uvbJXFJhy2i9A',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.result && data.result.nickname) {
-          const username = data.result.nickname;
-          setname(username);
-          const registerDay = data.result.createdAt;
-          const dateObject = new Date(registerDay);
-          const formattedDate = `${dateObject.getFullYear()}-${(
-            dateObject.getMonth() + 1
-          )
-            .toString()
-            .padStart(2, '0')}-${dateObject
-              .getDate()
-              .toString()
-              .padStart(2, '0')}`;
-          console.log(data);
-          console.log(formattedDate);
-          setregiD(formattedDate);
-        } else {
-          console.error('Error fetching user data: Invalid response format');
-        }
-      })
-      .catch((error) => {
-        // 요청 실패 시 에러 처리
-        console.error('Error fetching user data:', error);
-      });
-  }, []);
-
   // 질문 받아내는 곳
-  const page = 1;
+  const page = 0;
   const size = 10;
   useEffect(() => {
     fetch(`http://52.78.248.199:8080/questions?page=${page}&size=${size}`, {
@@ -266,7 +261,49 @@ const Myprofile = () => {
         console.error('There was a problem with the fetch operation:', error);
       });
   }, []);
-
+  //내가 한 질문 받는 함수
+  const getQuestionMe = async () => {
+    try {
+      const apiUrl = `http://52.78.248.199:8080/questions/user/${gUserId}?page=0&size=3`;
+      const headers = {
+        accessToken: gAccessToken
+      }
+      const response = await axios.get(apiUrl, { headers });
+      setMyQuestions(response.data.result.questions);
+      console.log('내가 한 질문 받기 성공', response);
+    } catch (error) {
+      console.error('내가 한 질문 받기 실패', error);
+    }
+  };
+  useEffect(() => {
+    getQuestionMe()
+  }, [])
+  //내가 구매한 답변 받는 함수
+  const getAlarmQ = async () => {
+    try {
+      const apiUrl = `http://52.78.248.199:8080/questions/alarms/user/${gUserId}`;
+      const response = await axios.get(apiUrl, { content_type: 'application/w-www-form-urlencoded' });
+      setAlarmQuestions(response.data.result.questions);
+      console.log("구매한 답변", response)
+    } catch (error) {
+      console.error("구매한답변실패", error)
+    }
+  }
+  const handleMyQ = () => {
+    setMyQ(true);
+    setAlarmQ(false)
+    setBuyQ(false)
+  }
+  const handleBuyA = () => {
+    setMyQ(false);
+    setAlarmQ(false)
+    setBuyQ(true)
+  }
+  const handleAlarmQ = () => {
+    setMyQ(false);
+    setAlarmQ(true)
+    setBuyQ(false)
+  }
   return (
     <>
       <Header />
@@ -284,7 +321,7 @@ const Myprofile = () => {
                 <img
                   className="photo1"
                   style={{ width: '100px', position: 'absolute' }}
-                  src={profileImage}
+                  src={userInfo.profileImage}
                   alt="프사"
                 />
                 <div className="imagechange">
@@ -304,8 +341,21 @@ const Myprofile = () => {
                     src={gear}
                     alt="톱니"
                   />
+
                   {isOpen && <DropMPro onProfileChange={handleProfileChange} />}
                 </div>
+                <img
+                  className="photo2"
+                  style={{
+                    width: '30px',
+                    position: 'absolute',
+                    zIndex: '1',
+                    margin: '3px',
+                    // display: (Role = 'EXPERT' ? 'block' : 'none'),
+                  }}
+                  src={{/*badge*/ }}
+                  alt="뱃지"
+                />
               </div>
               <div className="data">
                 <p
@@ -314,7 +364,7 @@ const Myprofile = () => {
                     color: isModifyVisible
                       ? 'transparent'
                       : isValidNickname
-                        ? 'black'
+                        ? 'white'
                         : 'red',
                   }}
                   onClick={handleModifyClick}
@@ -331,10 +381,9 @@ const Myprofile = () => {
                   }}
                 >
                   {userInfo.nickname}
-                  {/* {name} */}
                 </p>
                 <input
-                  placeholder={holdervisible ? name : ''}
+                  placeholder={holdervisible ? userInfo.nickname : ''}
                   id="nickname"
                   type="text"
                   value={nickname}
@@ -355,7 +404,7 @@ const Myprofile = () => {
                 <div className="innerwrap">
                   <img style={{ width: '80px' }} src={coin} alt="프사" />
                   <p className="balance">{balance}</p>
-                  <p>&nbsp;POINT&nbsp;&nbsp;|&nbsp;</p>
+                  <p>&nbsp;{userInfo.point}POINT&nbsp;&nbsp;|&nbsp;</p>
 
                   <div className="prof_respond">
                     {userInfo.point}개의 답변을 볼 수 있어요!
@@ -390,6 +439,22 @@ const Myprofile = () => {
                 </button>
               </div>
             </div>
+            <div
+              className="expert"
+              style={{ display: 'flex', justifyContent: 'center' }}
+            >
+              <p className="exp1" style={{ marginRight: '5px' }}>
+                전문가이신가요?
+              </p>
+              <p
+                className="exp2"
+                style={{ textDecoration: 'underline', color: '#eb7125' }}
+              >
+                <Link to="/certify" style={{ color: '#eb7125' }}>
+                  전문가 인증하기
+                </Link>
+              </p>
+            </div>
             {/* 2번 박스*/}
             <div className="wrap2">
               <div className="second">
@@ -397,6 +462,7 @@ const Myprofile = () => {
                   className="box2_1"
                   style={{
                     backgroundColor: isboxclicked ? '#eb7125' : 'white',
+                    color: isboxclicked ? 'white' : 'black',
                   }}
                   onClick={() => {
                     clicked('1000');
@@ -404,8 +470,14 @@ const Myprofile = () => {
                   }}
                 >
                   <div className="boxwrap">
-                    <img style={{ width: '55px' }} src={coin} alt="동전" />
-                    <h3>1천원 충전하기</h3>
+                    <img
+                      style={{ width: '55px', marginTop: '20px' }}
+                      src={coin}
+                      alt="동전"
+                    />
+                    <h3 style={{ marginRight: '17px', marginTop: '20px' }}>
+                      1천원 충전하기
+                    </h3>
                   </div>
                   <p style={{ fontSize: '13px', textAlign: 'center' }}>
                     1000P가 충전돼요
@@ -418,6 +490,7 @@ const Myprofile = () => {
                   className="box2_2"
                   style={{
                     backgroundColor: isbox2clicked ? '#eb7125' : 'white',
+                    color: isbox2clicked ? 'white' : 'black',
                   }}
                   onClick={() => {
                     clicked('10000');
@@ -425,8 +498,14 @@ const Myprofile = () => {
                   }}
                 >
                   <div className="boxwrap">
-                    <img style={{ width: '55px' }} src={coin} alt="동전" />
-                    <h3>1만원 충전하기</h3>
+                    <img
+                      style={{ width: '55px', marginTop: '20px' }}
+                      src={coin}
+                      alt="동전"
+                    />
+                    <h3 style={{ marginRight: '17px', marginTop: '20px' }}>
+                      1만원 충전하기
+                    </h3>
                   </div>
                   <p style={{ fontSize: '13px', textAlign: 'center' }}>
                     10000P가 충전돼요
@@ -437,80 +516,57 @@ const Myprofile = () => {
               </div>
             </div>
             {/* 3번 박스 질문,답변 컴포넌트 만들어서 불러올 수 있게 */}
-            <div className="wrap3">
-              <div className="third">
-                {/* 박스 use state onclick -> 아래가 바뀌게  */}
-                <div className="box3_1">내가 한 질문</div>
-                <div className="box3_2">내가 구매한 답변</div>
-                <div className="box3_3">알림 신청한 질문</div>
+            <div style={{ width: '60vw', marginTop: '3%' }}>
+              <div style={{ width: '60vw', display: 'flex', justifyContent: "space-between" }}>
+                <div style={{ flex: '1', textAlign: 'center' }}>
+                  <button onClick={handleMyQ} style={{ width: '90%', border: '2px solid #D9D9D9', background: 'white', height: '8vh', borderRadius: '20px' }}>내가 한 질문</button>
+                </div>
+                <div style={{ flex: '1', textAlign: 'center' }}>
+                  <button onClick={handleBuyA} style={{ width: '90%', marginLeft: '5%', float: 'center', border: '2px solid #D9D9D9', background: 'white', height: '8vh', borderRadius: '20px' }}>내가 구매한 답변</button>
+                </div>
+                <div style={{ flex: '1' }}>
+                  <button onClick={handleAlarmQ} style={{ width: '90%', float: 'right', border: '2px solid #D9D9D9', background: 'white', height: '8vh', borderRadius: '20px' }}>알림신청한 질문</button>
+                </div>
               </div>
             </div>
+            <div style={{ display: 'flex' }}>
+              {myQ ? (
+                myQuestions.map((myQuestion, index) => (
+                  <ProfileQ
+                    key={index}
+                    qId={myQuestion.questionId}
+                    title={myQuestion.title}
+                    img={myQuestion.user.profileImage}
+                    child={myQuestion.childStatus}
+                    hashtags={myQuestion.hashtags.map((hashtag) => hashtag.hashtag).join(' #')}
+                  />
+                ))
+              ) : buyQ ? (
+                <div style={{ fontSize: '30px', fontWeight: '700', width: '60vw', textAlign: 'center', height: '33vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>구매한 답변이 없습니다</div>
+              ) : (
+                alarmQ ? (
+                  alarmQuestions.length === 0 ? (
+                    <div style={{ fontSize: '30px', fontWeight: '700', width: '60vw', textAlign: 'center', height: '33vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>알람 신청한 질문이 없습니다</div>
+                  ) : (
+                    alarmQuestions.map((alarmQuestion, index) => (
+                      <ProfileQ
+                        key={index}
+                        qId={alarmQuestion.questionId}
+                        title={alarmQuestion.title}
+                        img={alarmQuestion.user.profileImage}
+                        child={alarmQuestion.childStatus}
+                        hashtags={alarmQuestion.hashtags.map((hashtag) => hashtag.hashtag).join(' #')}
+                      />
+                    ))
+                  )
+                ) : null
+              )}
+
+
+            </div>
+
             {/* 4번 박스 */}
-            <div className="wrap3">
-              <div className="fourth">
-                <div className="box4_1">
-                  <div className="otherprofile">
-                    <img
-                      style={{ width: '70px' }}
-                      src={profileImage}
-                      alt="프사"
-                    />
-                  </div>
-                  {Array.isArray(questiontitle) && questiontitle.length > 0 && (
-                    <p className="temp">{questiontitle[0]}</p>
-                  )}
 
-                  {Array.isArray(quesHashs) && quesHashs.length > 0 && (
-                    <div className="qhashtags">
-                      {quesHashs[0].map((hashTag, index) => (
-                        <p key={index}>#{hashTag.hashtag}</p>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <div className="box4_2">
-                  <div className="otherprofile">
-                    <img
-                      style={{ width: '70px' }}
-                      src={profileImage}
-                      alt="프사"
-                    />
-
-                    {Array.isArray(questiontitle) &&
-                      questiontitle.length > 0 && (
-                        <p className="temp">{questiontitle[1]}</p>
-                      )}
-                    {Array.isArray(quesHashs) && quesHashs.length > 0 && (
-                      <div className="qhashtags">
-                        {quesHashs[1].map((hashTag, index) => (
-                          <p key={index}>#{hashTag.hashtag}</p>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className="box4_3">
-                  <div className="otherprofile">
-                    <img
-                      style={{ width: '70px' }}
-                      src={profileImage}
-                      alt="프사"
-                    />
-                    {Array.isArray(questiontitle) &&
-                      questiontitle.length > 0 && (
-                        <p className="temp">{questiontitle[2]}</p>
-                      )}
-                    {Array.isArray(quesHashs) && quesHashs.length > 0 && (
-                      <div className="qhashtags">
-                        {quesHashs[2].map((hashTag, index) => (
-                          <p key={index}>#{hashTag.hashtag}</p>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
           <div
             // 클릭했을때 뜨는 결제창
@@ -553,8 +609,8 @@ const Myprofile = () => {
                   }}
                 >
                   <img
-                    style={{ width: '3vw' }}
-                    src={kakaologo}
+                    style={{ width: '30px', marginLeft: '4px' }}
+                    src={{/*kakaologo*/ }}
                     alt="카카오로고"
                   />
                   <p
@@ -568,9 +624,6 @@ const Myprofile = () => {
                   </p>
                 </button>
               </div>
-              <button className="closemodal" onClick={closed}>
-                X
-              </button>
             </div>
             <div
               className="payarea"
@@ -583,7 +636,7 @@ const Myprofile = () => {
                 </p>
                 <div className="paybutton">
                   <button className="payyes">네</button>
-                  <button className="payno" onClick={payclose}>
+                  <button className="payno" onClick={closed}>
                     아니요
                   </button>
                 </div>

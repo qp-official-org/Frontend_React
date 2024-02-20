@@ -7,7 +7,7 @@ import { accesstokenState, userIdState } from "src/atom/atoms";
 import { useRecoilValue } from "recoil";
 import axios from "axios";
 
-function Question({ isChild, time, title, content, hashtags, qId, writerId }) {
+function Question({ isChild, time, title, content, hashtags, qId, writerId, pImg }) {
     const [view, setView] = useState(false);
     const [fixClick, setFixClick] = useState(false)
     const [questionTitle, setQuestionTitle] = useState(title);
@@ -50,7 +50,7 @@ function Question({ isChild, time, title, content, hashtags, qId, writerId }) {
         <div style={styles.question_container}>
             <div style={styles.q_box}>
                 <div style={styles.question_main}>
-                    <div style={styles.profile_box}><div style={styles.profile_img}></div></div>
+                    <div style={styles.profile_box}><img src={pImg} style={styles.profile_img}></img></div>
                     <div style={styles.question_main2}>
                         <div style={styles.question_main3}>
                             {hashtags.length > 0 ? (

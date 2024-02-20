@@ -31,6 +31,7 @@ function Qdetail() {
     const [response, setResponse] = useState([])
     const [expertCount, setExpertCount] = useState('')
     const [writerId, setWriterId] = useState("")
+    const [pImg, setPImg] = useState("")
     const ls = useRecoilValue(loginState)
     const userId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
@@ -85,6 +86,7 @@ function Qdetail() {
             setExpertCount(response.result.expertCount)
             setWriterId(response.result.user.userId)
             setIsChildStatus(response.result.childstatus)
+            setPImg(response.result.user.profileImage)
             console.log(howLong);
             handleChildStatus()
         } catch (error) {
@@ -138,7 +140,7 @@ function Qdetail() {
                     </div>
                     <div style={styles.main_orange_container}>
                         <div style={{ flex: '1' }}>
-                            <Question time={howLong} isChild={isChild} qId={qId} writerId={writerId} hashtags={hashtags} title={title} content={content} />
+                            <Question time={howLong} isChild={isChild} qId={qId} writerId={writerId} hashtags={hashtags} title={title} content={content} pImg={pImg} />
                         </div>
                         <div style={{ textAlign: 'center', color: 'white', fontWeight: '600', fontSize: '16px' }}>{expertCount}명의 전문가가 답변했어요</div>
                         <hr style={styles.hrline} />

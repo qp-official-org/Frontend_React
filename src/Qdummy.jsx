@@ -86,7 +86,7 @@ function Qdummy({ title, answerCount, expertCount, createdAt, hashtag, user, chi
                                     <span style={{marginLeft:"17px"}}>#해시태그</span>
                                     <span style={{marginLeft:"17px"}}>#해시태그</span> */}
                                         {/* {quesHashs[index].map((hashTag, idx) => (<span key={idx}>#{hashTag.hashtag}</span>))} */}
-                                        <span>#{hashtag}</span>
+                                        {hashtag.length === 0 ? <span>{hashtag}</span> : <span>#{hashtag}</span>}
                                     </div>
                                 </div>
                             </div>
@@ -109,10 +109,10 @@ function Qdummy({ title, answerCount, expertCount, createdAt, hashtag, user, chi
                                     </div>
                                     <div class="reply" style={styles.answer}>
                                         <img src={answericon2}></img>
-                                        <span style={{marginLeft:"8px", color:"black"}}>   </span>
+                                        <span style={{ marginLeft: "8px", color: "black" }}>   </span>
                                         {answerCount}
-                                        <img src={panswericon2} style={{marginLeft:"8px", filter: "grayscale(100%)"}}></img>
-                                        <span style={{marginLeft:"8px", color:"black"}}>   </span>
+                                        <img src={panswericon2} style={{ marginLeft: "8px", filter: "grayscale(100%)" }}></img>
+                                        <span style={{ marginLeft: "8px", color: "black" }}>   </span>
                                         {expertCount}
                                     </div>
                                     <div class="tag" style={{ fontSize: "15px", marginTop: "24%" }}>
@@ -120,7 +120,7 @@ function Qdummy({ title, answerCount, expertCount, createdAt, hashtag, user, chi
                                     <span style={{marginLeft:"17px"}}>#해시태그</span>
                                     <span style={{marginLeft:"17px"}}>#해시태그</span> */}
                                         {/* {quesHashs[index].map((hashTag, idx) => (<span key={idx}>#{hashTag.hashtag}</span>))} */}
-                                        <span>#{hashtag}</span>
+                                        {hashtag.length === 0 ? <span>{hashtag}</span> : <span>#{hashtag}</span>}
                                     </div>
                                 </div>
                             </div>

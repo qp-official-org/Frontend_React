@@ -64,7 +64,7 @@ function MainPage() {
             {hasMore ? fetchMoreData : addQdummy}
             {questions.map((question, index) => (
               <Qdummy key={index} title={question.title} answerCount={question.answerCount} createdAt={question.createdAt} expertCount={question.expertCount}
-                hashtag={question.hashtag} user={question.user} childStatus={question.childStatus} profileImg={question.user.profileImage} questionId={question.questionId} /> // 이 부분에서 Qdummy 컴포넌트를 사용하여 렌더링을 해줍니다.
+                hashtag={question.hashtags.map(hashtag => hashtag.hashtag).join(' #')} user={question.user} childStatus={question.childStatus} profileImg={question.user.profileImage} questionId={question.questionId} /> // 이 부분에서 Qdummy 컴포넌트를 사용하여 렌더링을 해줍니다.
             ))}
           </InfiniteScroll>
         </div>
