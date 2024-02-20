@@ -10,11 +10,15 @@ import { QuestionApi } from "src/api/question.controller";
 import { accesstokenState, userIdState, loginState } from "./atom/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Link, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+
 
 //questionId를 받고 호출받음
 function Qdetail() {
     const params = useParams();
     const qId = parseInt(params.questionId)
+    const navigate = useNavigate();
     const [isLogined, setIsLogined] = useState(false);
     const [btnClicked, setBtnClicked] = useState(false);
     const [view, setView] = useState(false);
@@ -32,13 +36,41 @@ function Qdetail() {
     const [expertCount, setExpertCount] = useState('')
     const [writerId, setWriterId] = useState("")
     const [pImg, setPImg] = useState("")
+    const [sideQ, setSideQ] = useState([])
+    const [beforeQ, setBeforeQ] = useState("")
+    const [afterQ, setAfterQ] = useState("")
     const ls = useRecoilValue(loginState)
     const userId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
     const handleChildStatus = () => {
         (isChildStatus == "ACTIVE") ? setIsChild(true) : setIsChild(false)
     }
-
+    const handleBeforeQ = () => {
+        setBeforeQ(sideQ.olderQuestion.questionId)
+        navigate(`/detail/${beforeQ}`)
+    }
+    const handleAfterQ = () => {
+        setAfterQ(sideQ.laterQuestion.questionId)
+        navigate(`/detail/${afterQ}`)
+    }
+    /*useEffect(() => {
+        getSideQs()
+    }, [])
+    useEffect(() => {
+        setBeforeQ()
+        setAfterQ()
+    }, [sideQ])
+    const getSideQs = async () => {
+        try {
+            const apiUrl = `http://52.78.248.199:8080/questions/${qId}/adjacent`;
+            const response = await axios.get(apiUrl, { content_type: 'application/w-www-form-urlencoded' });
+            setSideQ(response.data.result);
+            console.log('GET 요청 성공:', response);
+            console.log("이전질문", sideQ.olderQuestion.questionId)
+        } catch (error) {
+            console.error('GET 요청 실패:', error);
+        }
+    };*/
     useEffect(() => {
         handleChildStatus()
     }, [title])
@@ -133,9 +165,9 @@ function Qdetail() {
                 </div>
                 <div style={styles.question_detail_main_container}>
                     <div style={styles.after_before_question_container}>
-                        <div style={styles.before_question_container}>◀ 이전 질문으로 이동 칸</div>
+                        <div onClick={handleBeforeQ} style={styles.before_question_container}>◀ 이전 질문으로 이동 칸</div>
                         {/*Link 컴포넌트로 바꿀 태그*/}
-                        <div style={styles.after_question_container}>다음 질문으로 이동 칸 ▶</div>
+                        <div onClick={handleAfterQ} style={styles.after_question_container}>다음 질문으로 이동 칸 ▶</div>
                         {/*Link 컴포넌트로 바꿀 태그*/}
                     </div>
                     <div style={styles.main_orange_container}>

@@ -94,6 +94,9 @@ h3 {
 
 .date {
   margin: 0;
+  margin-top: -4%;
+  font-weight: 900;
+  font-size: 24px;
 }
 
 .data {
@@ -128,7 +131,7 @@ h3 {
 .modifyunit {
   display: flex;
   margin-top: 2vh;
-  margin-left: 4vw;
+  margin-left: 12vw;
 }
 
 .second,
@@ -159,15 +162,15 @@ h3 {
 .box2_1,
 .box2_2 {
   border: 1px solid black;
-  margin-top: 20px;
+  /*margin-top: 20px;*/
 
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: transparent;
   flex-direction: column;
-  width: 419px;
-  height: 113px;
+  width: 48%;
+  height: 70%;
   top: 409px;
   left: 802px;
   border-radius: 20px;
@@ -185,11 +188,16 @@ h3 {
   margin-left: 20px;
 }
 
+.boxwrap3_4 {
+  display: flex;
+  align-content: space-between;
+}
+
 .box3_1,
 .box3_2,
 .box3_3 {
-  width: 272.05px;
-  height: 65px;
+  width: 32%;
+  height: 100px;
   top: 551px;
   left: 357px;
   border-radius: 20px;
@@ -211,7 +219,7 @@ h3 {
 .box4_2,
 .box4_3 {
   margin-top: 15px;
-  width: 100%;
+  width: 32%;
   height: 100%;
   border-radius: 20px;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
@@ -229,7 +237,9 @@ h3 {
 
 .qhashtags {
   display: flex;
-  margin-top: 16vh;
+  /* margin-top: 10vh; */
+  position: absolute;
+  bottom: 0;
 }
 
 .otherprofile>img {
@@ -250,10 +260,12 @@ h3 {
   position: absolute;
   z-index: 1;
   background-color: white;
-  width: 60vw;
+  width: 69vw;
   height: 55vh;
 
   opacity: 0.974;
+  top: 58%;
+  left: 20%;
 }
 
 .modalwrap {

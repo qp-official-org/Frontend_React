@@ -12,10 +12,11 @@ import naverlogo from '../src/components/mprofile/images/naverlogo.png';
 //import kakaologo from '../src/components/mprofile/images/katalk.png';
 import coin from '../src/components/mprofile/images/coin.png';
 import gear from '../src/components/mprofile/images/Vector.png';
-//import badge from '../src/components/mprofile/images/badge.png';
+import badge from '../src/components/mprofile/images/badge.png';
 import Header from './Header';
 import DropMPro from './DropMPro';
 import ProfileQ from './ProfileQ';
+import Certify from './CertifyModal';
 
 // accessToken: eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUyMCwiaWF0IjoxNzA4MjY5ODI4LCJleHAiOjE3MDgyNzcwMjh9.SrKdPOljkWwMdIaLQzBkblMSOqMkqzcSvPmXTssq1g35R39mRPK4SSEg9KRSLO65kNCM-lNWOkBjtL1GWsnTAA
 const Myprofile = () => {
@@ -39,6 +40,29 @@ const Myprofile = () => {
   const [myQ, setMyQ] = useState(true)
   const [buyQ, setBuyQ] = useState(false)
   const [alarmQ, setAlarmQ] = useState(false)
+  const [isCModalOpen, setIsCModalOpen] = useState(false);
+  // const modalRef = useRef(null);
+  console.log(userInfo.createdAt)
+  const dateObj = new Date(userInfo.createdAt);
+
+  const year = dateObj.getFullYear();
+  const month = dateObj.getMonth() + 1; // getMonth는 0부터 시작하므로 1을 더해줍니다.
+  const day = dateObj.getDate();
+
+  const formattedDate = `${year}년 ${month}월 ${day}일 가입`;
+  const handleCreatedAt = () => {
+    setregiD(formattedDate)
+  }
+  useEffect(() => {
+    handleCreatedAt()
+  }, [userInfo])
+  const openCModal = () => {
+    setIsCModalOpen(true);
+  };
+
+  const closeCModal = () => {
+    setIsCModalOpen(false);
+  };
   const getUserInfo = async () => {
     try {
       const apiUrl = `http://52.78.248.199:8080/users/${gUserId}`;
@@ -144,7 +168,6 @@ const Myprofile = () => {
   };
 
   // 닉네임관련
-  const [Role, setRole] = useState(null);
   const [holder, holdervisible] = useState(false);
   const handleholder = () => {
     holdervisible(true);
@@ -320,7 +343,7 @@ const Myprofile = () => {
               <div className="photo">
                 <img
                   className="photo1"
-                  style={{ width: '100px', position: 'absolute' }}
+                  style={{ width: '100px', position: 'absolute', height: '100px' }}
                   src={userInfo.profileImage}
                   alt="프사"
                 />
@@ -344,18 +367,20 @@ const Myprofile = () => {
 
                   {isOpen && <DropMPro onProfileChange={handleProfileChange} />}
                 </div>
-                <img
-                  className="photo2"
-                  style={{
-                    width: '30px',
-                    position: 'absolute',
-                    zIndex: '1',
-                    margin: '3px',
-                    // display: (Role = 'EXPERT' ? 'block' : 'none'),
-                  }}
-                  src={{/*badge*/ }}
-                  alt="뱃지"
-                />
+                {userInfo.role === 'EXPERT' && (
+                  <img
+                    className="photo2"
+                    style={{
+                      width: '30px',
+                      position: 'absolute',
+                      zIndex: '1',
+                      margin: '3px',
+                    }}
+                    src={badge}
+                    alt="뱃지"
+                  />
+                )}
+
               </div>
               <div className="data">
                 <p
@@ -376,8 +401,9 @@ const Myprofile = () => {
                 <p
                   style={{
                     display: isModifyVisible ? 'block' : 'none',
-                    fontSize: 'large',
-                    fontWeight: 'bold',
+                    fontSize: '32px',
+                    fontWeight: '900',
+                    marginTop: '0px'
                   }}
                 >
                   {userInfo.nickname}
@@ -400,11 +426,11 @@ const Myprofile = () => {
                   }}
                 />
 
-                <p className="date">{registerD}가입</p>
+                <p className="date">{registerD}</p>
                 <div className="innerwrap">
-                  <img style={{ width: '80px' }} src={coin} alt="프사" />
+                  <img style={{ width: '45px' }} src={coin} alt="프사" />
                   <p className="balance">{balance}</p>
-                  <p>&nbsp;{userInfo.point}POINT&nbsp;&nbsp;|&nbsp;</p>
+                  <p style={{ fontWeight: '900' }}>&nbsp;{userInfo.point}POINT&nbsp;&nbsp;|&nbsp;</p>
 
                   <div className="prof_respond">
                     {userInfo.point}개의 답변을 볼 수 있어요!
@@ -445,15 +471,37 @@ const Myprofile = () => {
             >
               <p className="exp1" style={{ marginRight: '5px' }}>
                 전문가이신가요?
-              </p>
-              <p
-                className="exp2"
-                style={{ textDecoration: 'underline', color: '#eb7125' }}
-              >
-                <Link to="/certify" style={{ color: '#eb7125' }}>
+              </p><div style={{ display: 'flex' }}>
+                <button
+                  style={{
+                    textDecoration: 'underline',
+                    color: '#eb7125',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    fontSize: '17px',
+                  }}
+                  onClick={openCModal}
+                >
                   전문가 인증하기
-                </Link>
-              </p>
+                </button>
+                {isCModalOpen && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                  >
+                    {/* 모달 */}
+                    <div className="modal">
+                      <div className="modal-content">
+                        <Certify closeCModal={closeCModal} />
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
             {/* 2번 박스*/}
             <div className="wrap2">

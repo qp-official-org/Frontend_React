@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 function ProfileQ({ title, img, hashtags, child, qId }) {
     const navigate = useNavigate();
-
     const goQ = () => {
         navigate(`/detail/${qId}`);
     };
