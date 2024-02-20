@@ -51,10 +51,10 @@ function Certify() {
               {isValidNum ? (
                 <span class="success" style={{ color: "green", fontFamily: "Pretendard", fontSize: "30px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal" }}></span> //이 부분은 임의로 작성해둔 것 (메일로 전송받은 인증번호를 어떻게 확인할지에 대해 논의 필요<)
               ) : (
-                <span class="fail" style={{ position: "absolute", color: '#F00', fontFamily: "Pretendard", fontSize: "30px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal", top: "57%", left: "20%" }}>틀린 인증번호 입니다.</span>
+                <span class="fail" style={{ position: "absolute", color: '#F00', fontFamily: "Pretendard", fontSize: "30px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal", top: "57%", left: "23%" }}>틀린 인증번호 입니다.</span>
               )}
             </div>
-            <button style={styles.loginButton} onClick={handleNextButtonClick}>로그인</button>
+            <button style={styles.loginButton} onClick={handleNextButtonClick}>인증하기</button>
           </div>
         </div>
       </div>

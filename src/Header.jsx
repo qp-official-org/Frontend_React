@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React from 'react';
+import Qicon from 'src/tabler_search.svg';
 import { styles } from './components/qdetail/style';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +13,7 @@ import axios from 'axios';
 import coinImg from './3dicons.png'
 
 function Header() {
+    const ls = localStorage.getItem("isLoggedIn");
     const [searchClick, setSearchClick] = useState(false);
     const [searchContent, setSearchContent] = useState('');
     const [isSearchClicked, setIsSearchClicked] = useState(false);
@@ -43,6 +45,11 @@ function Header() {
         setAccessToken(null); // 로그아웃 시 엑세스 토큰 초기화
         setUserId(null)
     }
+
+    const GoMain = () => {
+        navigate("/mainpage");
+    };
+
 
     useEffect(() => {
         const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
@@ -110,7 +117,7 @@ function Header() {
 
     return (
         <div style={styles.header_block}>
-            <div style={{ color: '#EB7125', fontWeight: 'bold', width: '6vw' }}>
+            <div style={{ color: '#EB7125', fontWeight: 'bold', width: '6vw', cursor: "pointer" }} onClick={GoMain}>
                 큐피로고
             </div>
             {/*로고 이미지로 대체*/}
@@ -137,7 +144,9 @@ function Header() {
                     </div>
                 ) : (
                     <div onClick={handleSearchBlock} style={styles.header_center_before}>
-                        <div style={styles.header_search_before}></div>
+                        <div style={styles.header_search_before}>
+                            <img src={Qicon} style={{ alignItems: 'center', margin: "22%" }}></img>
+                        </div>
                         <div style={styles.header_input_before}>질문하기 전 검색하기</div>
                     </div>
                 )}
@@ -149,7 +158,7 @@ function Header() {
                         로그아웃
                     </div>
                     <div style={styles.header_profile_box}>
-                        <div style={styles.header_profile_img}></div>
+                        <img src={userInfo.profileImage} style={styles.header_profile_img}></img>
                         <div style={styles.header_profile_nickname}>{userInfo.nickname}</div>
                         <div style={{ display: 'flex', marginRight: '7%', marginTop: '5%' }}><img src={coinImg} alt="Coin Img" /><div style={styles.header_profile_point}>{userInfo.point}P</div></div>
                         <div style={styles.header_profile_charge_btn}>충전하러 가기</div>

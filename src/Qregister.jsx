@@ -9,7 +9,9 @@ import { RegisterApi } from "./api/register.controller";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { accesstokenState, userIdState } from "./atom/atoms";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 function Qregister() {
+    const ls = localStorage.getItem("isLoggedIn");
     const [childClicked, setChildClicked] = useState(true)
     const [adultClicked, setAdultClicked] = useState(false)
     const [warnCheck, setWarnCheck] = useState(true);
@@ -25,7 +27,7 @@ function Qregister() {
     const [hashTagModal, setHashTagModal] = useState(false);
     const [hashtagId, setHashtagId] = useState([]);
     const [childState, setChildState] = useState("ACTIVE");
-
+    const navigate = useNavigate();
     const accesstoken = useRecoilValue(accesstokenState)
     const userId = useRecoilValue(userIdState)
 
@@ -174,6 +176,7 @@ function Qregister() {
         } catch (error) {
             console.error('등록 오류:', error);
         }
+        navigate("/mainpage");
     };
 
 
@@ -295,8 +298,7 @@ function Qregister() {
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <button onClick={handleRegistration}
                         disabled={warnCheck || !titleValidate || !titleValidateMax || !titleValidateMin || !contentValidateMax || !contentValidateMin}
-                        style={styles.submit_btn}
-                    >
+                        style={styles.submit_btn} >
                         등록
                     </button>
                 </div>

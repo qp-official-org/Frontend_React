@@ -4,6 +4,8 @@ import { useState } from "react";
 import { styles } from "src/components/MainPageDetail/style";
 import answericon from 'src/default.svg';
 import panswericon from 'src/professor.svg';
+import answericon2 from 'src/Vector-4.svg';
+import panswericon2 from 'src/Vector-3 1.svg';
 import { Link } from "react-router-dom";
 
 function Qdummy({ title, answerCount, expertCount, createdAt, hashtag, user, childStatus, profileImg, questionId }) {
@@ -12,6 +14,7 @@ function Qdummy({ title, answerCount, expertCount, createdAt, hashtag, user, chi
     // const quesHash = qdata.result.questions.map(
     //       (question) => question.hashtags
     //     );
+    // {questions.map((question, index) => )};
     console.log(hashtag); //해시태그 잘 불러와지는지
     console.log(questionId); //questionId 잘 불러와지는지
 
@@ -104,13 +107,15 @@ function Qdummy({ title, answerCount, expertCount, createdAt, hashtag, user, chi
                                     <p>어떻게 되어 가고 있나요?</p> */}
                                         {title}
                                     </div>
-                                    {/* <div class="reply" style={styles.answer}>
-                                    <img src={answericon}></img>
-                                    <span style={{marginLeft:"8px"}}>2</span>
-                                    <img src={panswericon} style={{marginLeft:"8px"}}></img>
-                                    <span style={{marginLeft:"8px"}}>3</span>
-                                </div> */}
-                                    <div class="tag" style={{ fontSize: "15px", marginTop: "60%" }}>
+                                    <div class="reply" style={styles.answer}>
+                                        <img src={answericon2}></img>
+                                        <span style={{marginLeft:"8px", color:"black"}}>   </span>
+                                        {answerCount}
+                                        <img src={panswericon2} style={{marginLeft:"8px", filter: "grayscale(100%)"}}></img>
+                                        <span style={{marginLeft:"8px", color:"black"}}>   </span>
+                                        {expertCount}
+                                    </div>
+                                    <div class="tag" style={{ fontSize: "15px", marginTop: "24%" }}>
                                         {/* <span>#해시태그</span>
                                     <span style={{marginLeft:"17px"}}>#해시태그</span>
                                     <span style={{marginLeft:"17px"}}>#해시태그</span> */}

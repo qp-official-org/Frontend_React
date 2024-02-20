@@ -53,12 +53,12 @@ function Question({ isChild, time, title, content, hashtags, qId, writerId }) {
                     <div style={styles.profile_box}><div style={styles.profile_img}></div></div>
                     <div style={styles.question_main2}>
                         <div style={styles.question_main3}>
-                            {hashtags.length > 0 && (
+                            {hashtags.length > 0 ? (
                                 <div style={styles.question_hashtag}>
                                     {hashtags.map((tag, index) => <div style={{ marginRight: '2%' }} key={index}>#{tag.hashtag}</div>)}
                                 </div>
-                            )}
-                            <div style={{ flex: '1', marginLeft: '7%', fontSize: '16px', color: '#EB7125', fontWeight: '400' }}>{isChild ? "어린이" : null}</div>
+                            ) : <div style={styles.question_hashtag}></div>}
+                            <div style={{ flex: '1', marginLeft: '7%', fontSize: '16px', color: '#EB7125', fontWeight: '400' }}>{isChild ? "어린이" : ""}</div>
                             {(writerId == LuserId) ?
                                 <ul onClick={() => { setView(!view) }} style={styles.dropdownbtn}>⋮
                                     {view && (

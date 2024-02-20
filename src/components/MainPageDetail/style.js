@@ -5,6 +5,7 @@ export const styles = {
   // },
 
   container: {
+    justifyContent: 'center',
     background: 'white',
     width: '100vw',
     height: '100vh',

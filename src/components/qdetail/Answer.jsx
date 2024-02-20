@@ -73,6 +73,7 @@ function Answer({ qId, content, userNickname, answerId, like, userId }) {//props
     }
     const handleSubmit = () => {
         fixAnswer()
+        window.location.reload()
     }
     const fixAnswer = async () => {
         try {

@@ -90,12 +90,15 @@ function Auth() {
             }
             // 여기에 userId, accessToken, refreshToken을 저장하는 코드를 작성해야 함 (recoil 사용하는 것으로 알고있음)
             // dispatch({type: INIT_USER, ...result});
+            localStorage.setItem('accesstoken', ret.data.result.accessToken);
+            localStorage.setItem('userId', ret.data.result.userId);
+            navigate("/mainpage");
         } else {
             console.log("Login Failed");
         }
-        localStorage.setItem('accesstoken', ret.data.result.accessToken);
-        localStorage.setItem('userId', ret.data.result.userId);
-        navigate("/mainpage");
+        // localStorage.setItem('accesstoken', ret.data.result.accessToken);
+        // localStorage.setItem('userId', ret.data.result.userId);
+        // navigate("/mainpage");
     }
 
     useEffect(() => {

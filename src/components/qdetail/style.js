@@ -249,6 +249,7 @@ export const styles = {
         fontWeight: '500'
     },
     header_not_login: {
+        cursor: "pointer",
         justifyContent: 'center',
         textAlign: 'center',
         borderRadius: '40px',
@@ -268,7 +269,8 @@ export const styles = {
         left: '88%'
     },
     header_logout: {
-        marginTop: '5%',
+        cursor: "pointer",
+        marginTop: '13%',
         marginRight: '10%',
         textAlign: 'right',
         fontWeight: '400',
@@ -287,6 +289,7 @@ export const styles = {
     header_profile_img: {
         width: '9vh',
         height: '9vh',
+        margin: "5%",
         borderRadius: '50%',
         backgroundColor: 'rgba(255,255,255,0.5)',
         border: '1px solid white',

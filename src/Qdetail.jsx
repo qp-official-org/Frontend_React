@@ -11,7 +11,6 @@ import { accesstokenState, userIdState, loginState } from "./atom/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Link, useParams } from 'react-router-dom';
 
-//import { Link } from "react-router-dom";
 //questionId를 받고 호출받음
 function Qdetail() {
     const params = useParams();
@@ -36,13 +35,12 @@ function Qdetail() {
     const userId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
     const handleChildStatus = () => {
-        if (isChildStatus == 'ACTIVE') {
-            setIsChild(true)
-        } else {
-            setIsChild(false)
-        }
+        (isChildStatus == "ACTIVE") ? setIsChild(true) : setIsChild(false)
     }
 
+    useEffect(() => {
+        handleChildStatus()
+    }, [title])
     const getTimeAgo = (dateString) => {
         const date = new Date(dateString);
         const now = new Date();
