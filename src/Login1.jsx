@@ -1,5 +1,6 @@
 //로그인페이지1
 //@ts-nocheck
+import Qlogo from "src/Subtract.svg";
 import nlogo from "src/naver.svg";
 import klogo from "src/kakao.svg";
 import glogo from "src/google.svg";
@@ -44,8 +45,8 @@ function Login1() {
       {/* 흰 박스 */}
       <div style={styles.whitebox}>
         <div>
-          <div class="logo">
-            <h1 style={styles.logo}>큐피 로고</h1>
+          <div class="logo" style={styles.logo}>
+            <img src={Qlogo} style={{width:"100px"}}></img>
           </div>
 
           <div class="back">
@@ -54,19 +55,24 @@ function Login1() {
 
           <div style={styles.buttonBox}>
             <div class="naverLogin">
-              <button style={styles.button1}>네이버 로그인</button>
-              <img src={nlogo} style={{ position: "absolute", top: "36.7%", left: "35%" }}></img>
+              <button style={styles.button1}>
+              <img src={nlogo} style={{marginRight:"28%"}}></img>
+              <span style={styles.button1Text}>네이버로 간편 가입하기</span>
+              </button>
             </div>
             <div class="kakaoLogin">
               <button style={styles.button2}
                 onClick={() => window.location.href =
                   `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${'9c0435350e0714d02ef07e6bccb168ab'}&redirect_uri=${window.location.href + '/auth/kakao/login'}`}>
-                카카오 로그인</button>
-              <img src={klogo} style={{ position: "absolute", top: "53%", left: "35%" }}></img>
+                <img src={klogo} style={{marginRight:"28%"}}></img>
+                <span style={styles.button2Text}>카카오로 간편 가입하기</span>
+                </button>
             </div>
             <div class="googleLogin">
-              <button style={styles.button3}>구글 로그인</button>
-              <img src={glogo} style={{ position: "absolute", top: "68%", left: "35%" }}></img>
+              <button style={styles.button3}>
+              <img src={glogo} style={{marginRight:"28%"}}></img>
+              <span style={styles.button3Text}>구글로 가입하기</span>
+              </button>
             </div>
           </div>
 

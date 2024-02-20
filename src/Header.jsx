@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React from 'react';
+import Qicon from 'src/tabler_search.svg';
 import { styles } from './components/qdetail/style';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -148,7 +149,9 @@ function Header() {
                     </div>
                 ) : (
                     <div onClick={handleSearchBlock} style={styles.header_center_before}>
-                        <div style={styles.header_search_before}></div>
+                        <div style={styles.header_search_before}>
+                            <img src={Qicon} style={{alignItems: 'center', margin:"22%"}}></img>
+                        </div>
                         <div style={styles.header_input_before}>질문하기 전 검색하기</div>
                     </div>
                 )}
