@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React from 'react';
+import Qlogo from "src/Subtract.svg";
 import Qicon from 'src/tabler_search.svg';
 import { styles } from './components/qdetail/style';
 import { useState, useEffect } from 'react';
@@ -122,10 +123,7 @@ function Header() {
 
     return (
         <div style={styles.header_block}>
-            <div style={{ color: '#EB7125', fontWeight: 'bold', width: '6vw', cursor:"pointer" }} onClick={GoMain}>
-                큐피로고
-            </div>
-            {/*로고 이미지로 대체*/}
+            <img src={Qlogo} style={{width:"50px"}}></img>
             <div
                 style={
                     isSearchClicked ? styles.search_btn_after : styles.search_btn_before
@@ -145,7 +143,9 @@ function Header() {
                             value={searchContent}
                             onChange={handleInputChange}
                         ></input>
-                        <div style={styles.header_search_after}></div>
+                        <div style={styles.header_search_after}>
+                            <img src={Qicon} style={{alignItems: 'center', margin:"22%"}}></img>
+                        </div>
                     </div>
                 ) : (
                     <div onClick={handleSearchBlock} style={styles.header_center_before}>
