@@ -225,11 +225,11 @@ const Myprofile = () => {
   //test user 생성 API연결 코드
   useEffect(() => {
     // fetch 요청
-    fetch(`http://52.78.248.199:8080/users/538`, {
+    fetch(`http://52.78.248.199:8080/users/539`, {
       method: 'GET',
       headers: {
         accessToken:
-          'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUzOCwiaWF0IjoxNzA4NDM5NzQxLCJleHAiOjE3MDg0NDY5NDF9.bMUvQM804NFgE7SmpUI8_QSuKKe56Z6OXZ_GqIyHGl-b94D0VmB16hHJfFUmX5rIC9-YuYiT6Ez-Kvqxl8ng-Q',
+          'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUzOSwiaWF0IjoxNzA4NDU3NTM3LCJleHAiOjE3MDg0NjQ3Mzd9.HqYXPzLM3fqPz4zmbMXIOh7S9zyQCM1i-ohpmTpbVzplzZlv4mH-tLbzKg4PfrFmeQiSVVBueHA4-wGoMLZQpA',
       },
     })
       .then((res) => res.json())
