@@ -6,8 +6,12 @@ import { useState, useEffect } from "react";
 import { Api } from "./api/common.controller";
 import { QuestionApi } from "./api/question.controller";
 import { RegisterApi } from "./api/register.controller";
-//header에서 userId받아오기
+import { useRecoilState, useRecoilValue } from "recoil";
+import { accesstokenState, userIdState } from "./atom/atoms";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 function Qregister() {
+    const ls = localStorage.getItem("isLoggedIn");
     const [childClicked, setChildClicked] = useState(true)
     const [adultClicked, setAdultClicked] = useState(false)
     const [warnCheck, setWarnCheck] = useState(true);
@@ -21,8 +25,11 @@ function Qregister() {
     const [contentValidateMin, setContentValidateMin] = useState(false);
     const [contentValidateMax, setContentValidateMax] = useState(false);
     const [hashTagModal, setHashTagModal] = useState(false);
-    const [userId, setUserId] = useState(1);
     const [hashtagId, setHashtagId] = useState([]);
+    const [childState, setChildState] = useState("ACTIVE");
+    const navigate = useNavigate();
+    const accesstoken = useRecoilValue(accesstokenState)
+    const userId = useRecoilValue(userIdState)
 
     const handleTitleChange = (e) => {
         const value = e.target.value;
@@ -38,6 +45,12 @@ function Qregister() {
     const handleChildClicked = () => {
         setChildClicked(!childClicked)
         setAdultClicked(!adultClicked)
+        if (childClicked) {
+            setChildState("ACTIVE")
+        } else {
+            setChildState("INACTIVE")
+        }
+        console.log(accesstoken, userId)
     };
     //유의사항 체크
     const handleBtnClicked = () => {
@@ -58,6 +71,7 @@ function Qregister() {
             } else {
                 setHashTagModal(false)
                 setHashtag([...hashtag, writeTag])
+                console.log(hashtag)
             }
         }
     }
@@ -128,35 +142,47 @@ function Qregister() {
     */
     //서버에 POST하는 함수
 
-    /*해시태그 에러 고치기 전
     const handleRegistration = async () => {
         try {
-            // hashtag 배열의 각 요소에 대해 병렬로 처리하기 위해 Promise.all을 사용
-            await Promise.all(hashtag.map((singleHashtag, index) => {
-                return RegisterApi.findHashtag(singleHashtag)
-                    .console.log('1')
-                    .catch(error => console.error(error.message));
+            const newHashtagIds = await Promise.all(hashtag.map((singleHashtag) => {
+                const data = {
+                    hashtag: singleHashtag
+                };
+
+                return RegisterApi.uploadHashtag(data)
+                    .then(response => response.result.hashtagId)
+                    .catch(error => {
+                        console.error('해시태그 업로드 오류:', error);
+                        throw error;
+                    });
             }));
-            // 질문을 업로드
-            const response = await QuestionApi.uploadQuestion({
-                data: {
-                    userId,
-                    title,
-                    content,
-                    hashtag: [1, 2, 3],
-                },
-            });
+
+            const apiUrl = "http://52.78.248.199:8080/questions/";
+
+            // 질문을 업로드할 때, 새로운 해시태그 ID 배열을 전송
+            const data = {
+                userId: userId,
+                title: title,
+                content: content,
+                childStatus: childState,
+                hashtag: newHashtagIds,
+            }
+            const headers = {
+                accessToken: accesstoken
+            }
+            const response = await axios.post(apiUrl, data, { headers });
 
             console.log('등록 성공:', response);
         } catch (error) {
             console.error('등록 오류:', error);
         }
-        console.log(hashtag)
+        navigate("/mainpage");
     };
-    */
 
 
-    /*질문 등록 에러 고치기 전
+
+
+    /*
         const handleRegistration = async () => {
             let data = {
                 userId,
@@ -181,8 +207,8 @@ function Qregister() {
             catch (error) {
                 console.error('Registration error:', error);
             }
-        };
-        */
+        };*/
+
     useEffect(() => {
         validateTitle();
     }, [title]);
@@ -269,10 +295,9 @@ function Qregister() {
                     </div>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <button onClick={() => { console.log("제출 완료")/*handleRegistration*/ }}
+                    <button onClick={handleRegistration}
                         disabled={warnCheck || !titleValidate || !titleValidateMax || !titleValidateMin || !contentValidateMax || !contentValidateMin}
-                        style={styles.submit_btn}
-                    >
+                        style={styles.submit_btn} >
                         등록
                     </button>
                 </div>

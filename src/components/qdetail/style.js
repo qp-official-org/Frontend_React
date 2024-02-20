@@ -114,11 +114,13 @@ export const styles = {
     },
     question_main3: {
         display: 'flex',
-        flex: '2',
+        flex: '1',
         position: 'relative',
     },
     question_hashtag: {
-        flex: '5'
+        display: 'flex',
+        flex: '5',
+        height: '10%'
     },
     dropdownbtn: {
         listStyle: 'none',
@@ -209,7 +211,7 @@ export const styles = {
         display: 'flex',
     },
     header_search_after: {
-        left: '71%',
+        left: '69%',
         marginTop: '-0.5%',
         width: '9vh',
         height: '9vh',
@@ -217,7 +219,8 @@ export const styles = {
         position: 'absolute',
         backgroundColor: 'rgba(255,255,255,0.5)',
         boxShadow: '0px 4px 4px 2px rgba(0, 0, 0, 0.25), 0px 2px 8px 0px rgba(0, 0, 0, 0.25) inset',
-        transition: 'all 0.5s ease'
+        transition: 'all 0.5s ease',
+        backdropFilter: 'blur(15px)'
     },
     header_center_before: {
         display: 'flex',
@@ -239,6 +242,7 @@ export const styles = {
         width: '40vw'
     },
     header_not_login: {
+        cursor: "pointer",
         justifyContent: 'center',
         textAlign: 'center',
         borderRadius: '40px',
@@ -250,7 +254,7 @@ export const styles = {
     },
     header_profile: {
         width: '8.948vw',
-        height: '24.9vh',
+        height: '26.9vh',
         background: 'linear-gradient(to bottom, rgba(235, 113, 37, 1),rgba(203, 78, 0, 1))',
         borderRadius: '40px',
         justifyContent: 'center',
@@ -258,7 +262,8 @@ export const styles = {
         left: '88%'
     },
     header_logout: {
-        marginTop: '5%',
+        cursor: "pointer",
+        marginTop: '13%',
         marginRight: '10%',
         textAlign: 'right',
         fontWeight: '600',
@@ -276,6 +281,7 @@ export const styles = {
     header_profile_img: {
         width: '9vh',
         height: '9vh',
+        margin:"5%",
         borderRadius: '50%',
         backgroundColor: 'rgba(255,255,255,0.5)',
         border: '1px solid white'
@@ -284,7 +290,7 @@ export const styles = {
         fontWeight: '900',
         fontSize: '21px',
         color: 'white',
-        margin: '4.5%'
+        margin: '6%'
     },
     header_profile_point: {
         fontWeight: '900',
@@ -294,12 +300,12 @@ export const styles = {
     },
     header_profile_charge_btn: {
         background: 'white',
-        width: '7.617vw',
+        width: '5.617vw',
         height: "1.597vh",
         borderRadius: '20px',
         fontWeight: '700',
         fontSize: '10px',
-        margin: '4.5%'
+        margin: '2%'
     },
     header_login_btn: {
         color: 'white',
