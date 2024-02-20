@@ -211,7 +211,7 @@ export const styles = {
         display: 'flex',
     },
     header_search_after: {
-        left: '71%',
+        left: '69%',
         marginTop: '-0.5%',
         width: '9vh',
         height: '9vh',
@@ -219,7 +219,8 @@ export const styles = {
         position: 'absolute',
         backgroundColor: 'rgba(255,255,255,0.5)',
         boxShadow: '0px 4px 4px 2px rgba(0, 0, 0, 0.25), 0px 2px 8px 0px rgba(0, 0, 0, 0.25) inset',
-        transition: 'all 0.5s ease'
+        transition: 'all 0.5s ease',
+        backdropFilter: 'blur(15px)'
     },
     header_center_before: {
         display: 'flex',
