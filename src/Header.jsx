@@ -9,6 +9,7 @@ import { userIdState } from "./atom/atoms";
 import { useSetRecoilState } from "recoil";
 import { useRecoilState } from "recoil";
 import axios from 'axios';
+import coinImg from './3dicons.png'
 
 function Header() {
     const [searchClick, setSearchClick] = useState(false);
@@ -16,6 +17,7 @@ function Header() {
     const [isSearchClicked, setIsSearchClicked] = useState(false);
     const [accesstoken, setAccessToken] = useRecoilState(accesstokenState);
     const [userId, setUserId] = useRecoilState(userIdState);
+    const [isLogin, setIsLogin] = useRecoilState(loginState)
     const [isLogined, setIsLogined] = useState(false);
     const [userInfo, setUserInfo] = useState([])
 
@@ -31,7 +33,6 @@ function Header() {
         setUserId(gUserId);
         getUserInfo()
     }
-
     const handleLogout = () => {
         setIsLogined(false);
         setAccessToken(null); // 로그아웃 시 엑세스 토큰 초기화
@@ -144,7 +145,7 @@ function Header() {
                     <div style={styles.header_profile_box}>
                         <div style={styles.header_profile_img}></div>
                         <div style={styles.header_profile_nickname}>{userInfo.nickname}</div>
-                        <div style={styles.header_profile_point}>{userInfo.point}</div>
+                        <div style={{ display: 'flex', marginRight: '7%', marginTop: '5%' }}><img src={coinImg} alt="Coin Img" /><div style={styles.header_profile_point}>{userInfo.point}P</div></div>
                         <div style={styles.header_profile_charge_btn}>충전하러 가기</div>
                     </div>
                 </div>

@@ -89,7 +89,7 @@ function Qregister() {
             setTitleValidateMin(true)
         };
 
-        if (title.length > maxLength) {
+        if ((title.length < minLength || title.length === 0)) {
             setTitleValidateMax(false)
         } else {
             setTitleValidateMax(true)
@@ -111,7 +111,7 @@ function Qregister() {
             setContentValidateMin(true)
         };
 
-        if (content.length > maxLength) {
+        if ((content.length > maxLength || content.length === 0)) {
             setContentValidateMax(false)
         } else {
             setContentValidateMax(true)
@@ -226,7 +226,9 @@ function Qregister() {
                         <div></div>
                         <div style={styles.title_detail_text}>
                             <div style={titleValidateMin ? { color: 'green' } : { color: 'red' }}>최소 5자</div>
+                            <div style={{ marginRight: '1%', marginLeft: '1%' }}>/</div>
                             <div style={titleValidateMax ? { color: 'green' } : { color: 'red' }}>최대 60자</div>
+                            <div style={{ marginRight: '1%', marginLeft: '1%' }}>/</div>
                             <div style={titleValidate ? { color: 'green' } : { color: 'red' }}>?(물음표)로 끝내기</div>
                         </div>
                     </div>
@@ -238,6 +240,7 @@ function Qregister() {
                         <div></div>
                         <div style={styles.title_detail_text}>
                             <div style={contentValidateMin ? { color: 'green' } : { color: 'red' }}>최소 10자</div>
+                            <div style={{ marginRight: '1%', marginLeft: '1%' }}>/</div>
                             <div style={contentValidateMax ? { color: 'green' } : { color: 'red' }}>최대 300자</div>
                         </div>
                     </div>
@@ -261,8 +264,6 @@ function Qregister() {
                     <div style={{ marginTop: '2%' }}>
                         <div style={styles.child_or_adult_text}>
                             <button onClick={handleChildClicked} style={childClicked ? styles.clicked_button : styles.not_clicked_button}>어린이</button>
-
-                            <button onClick={handleChildClicked} style={adultClicked ? styles.clicked_button : styles.not_clicked_button}>성인</button>
                         </div>
                         <div style={styles.child_guide1}></div>
                         <div style={styles.child_guide2}>

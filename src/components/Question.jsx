@@ -50,7 +50,7 @@ function Question({ time, title, content, hashtags, qId }) {
                                     {hashtags.map((tag, index) => <div style={{ marginRight: '2%' }} key={index}>#{tag.hashtag}</div>)}
                                 </div>
                             )}
-                            <div style={{ flex: '1' }}>{isChild ? "어린이" : null}</div>
+                            <div style={{ flex: '1', marginLeft: '7%', fontSize: '16px', color: '#EB7125', fontWeight: '400' }}>{isChild ? "어린이" : null}</div>
                             <ul onClick={() => { setView(!view) }} style={styles.dropdownbtn}>⋮
                                 {view && (
                                     <div style={{ background: 'white', border: '1px solid #000' }}>
