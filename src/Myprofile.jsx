@@ -3,8 +3,9 @@ import { useRecoilValue } from 'recoil';
 import { Link } from 'react-router-dom';
 import { accesstokenState } from './atom/atoms';
 import { userIdState } from './atom/atoms';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import Certify from './CertifyModal';
 
 // import { Link } from 'react-router-dom';
 import '../src/pstyle.css';
@@ -294,7 +295,22 @@ const Myprofile = () => {
         console.error('There was a problem with the fetch operation:', error);
       });
   }, []);
+  //인증 모달 관련
+  const [isCModalOpen, setIsCModalOpen] = useState(false);
+  // const modalRef = useRef(null);
+  const openCModal = () => {
+    setIsCModalOpen(true);
+  };
 
+  const closeCModal = () => {
+    setIsCModalOpen(false);
+  };
+  // const handleOutsideClick = (e) => {
+  //   if (modalRef.current && modalRef.current.contains(e.target)) {
+  //     return;
+  //   }
+  //   closeCModal();
+  // };
   return (
     <>
       <Header />
@@ -311,7 +327,11 @@ const Myprofile = () => {
               <div className="photo">
                 <img
                   className="photo1"
-                  style={{ width: '100px', position: 'absolute' }}
+                  style={{
+                    width: '100px',
+                    height: '100px',
+                    position: 'absolute',
+                  }}
                   src={profileImage}
                   alt="프사"
                 />
@@ -335,18 +355,19 @@ const Myprofile = () => {
 
                   {isOpen && <DropMPro onProfileChange={handleProfileChange} />}
                 </div>
-                <img
-                  className="photo2"
-                  style={{
-                    width: '30px',
-                    position: 'absolute',
-                    zIndex: '1',
-                    margin: '3px',
-                    // display: (Role = 'EXPERT' ? 'block' : 'none'),
-                  }}
-                  src={badge}
-                  alt="뱃지"
-                />
+                {Role === 'EXPERT' && (
+                  <img
+                    className="photo2"
+                    style={{
+                      width: '30px',
+                      position: 'absolute',
+                      zIndex: '1',
+                      margin: '3px',
+                    }}
+                    src={badge}
+                    alt="뱃지"
+                  />
+                )}
               </div>
               <div className="data">
                 <p
@@ -438,14 +459,38 @@ const Myprofile = () => {
               <p className="exp1" style={{ marginRight: '5px' }}>
                 전문가이신가요?
               </p>
-              <p
-                className="exp2"
-                style={{ textDecoration: 'underline', color: '#eb7125' }}
-              >
-                <Link to="/certify" style={{ color: '#eb7125' }}>
+
+              <div style={{ display: 'flex' }}>
+                <button
+                  style={{
+                    textDecoration: 'underline',
+                    color: '#eb7125',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    fontSize: '17px',
+                  }}
+                  onClick={openCModal}
+                >
                   전문가 인증하기
-                </Link>
-              </p>
+                </button>
+                {isCModalOpen && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                  >
+                    {/* 모달 */}
+                    <div className="modal">
+                      <div className="modal-content">
+                        <Certify closeCModal={closeCModal} />
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
             {/* 2번 박스*/}
             <div className="wrap2">
@@ -508,100 +553,103 @@ const Myprofile = () => {
               </div>
             </div>
             {/* 3번 박스 질문,답변 컴포넌트 만들어서 불러올 수 있게 */}
-            <div className="wrap3">
-              <div className="third">
-                {/* 박스 use state onclick -> 아래가 바뀌게  */}
-                <div
-                  className="box3_1"
-                  style={{
-                    backgroundColor: isbox3clicked ? '#eb7125' : 'white',
-                  }}
-                  onClick={box3clicked}
-                >
-                  내가 한 질문
-                </div>
-                <div
-                  className="box3_2"
-                  style={{
-                    backgroundColor: isbox4clicked ? '#eb7125' : 'white',
-                  }}
-                  onClick={box4clicked}
-                >
-                  내가 구매한 답변
-                </div>
-                <div
-                  className="box3_3"
-                  style={{
-                    backgroundColor: isbox5clicked ? '#eb7125' : 'white',
-                  }}
-                  onClick={box5clicked}
-                >
-                  알림 신청한 질문
+            <div className="wrap3_4">
+              <div className="wrap3">
+                <div className="third">
+                  {/* 박스 use state onclick -> 아래가 바뀌게  */}
+                  <div
+                    className="box3_1"
+                    style={{
+                      backgroundColor: isbox3clicked ? '#eb7125' : 'white',
+                    }}
+                    onClick={box3clicked}
+                  >
+                    내가 한 질문
+                  </div>
+                  <div
+                    className="box3_2"
+                    style={{
+                      backgroundColor: isbox4clicked ? '#eb7125' : 'white',
+                    }}
+                    onClick={box4clicked}
+                  >
+                    내가 구매한 답변
+                  </div>
+                  <div
+                    className="box3_3"
+                    style={{
+                      backgroundColor: isbox5clicked ? '#eb7125' : 'white',
+                    }}
+                    onClick={box5clicked}
+                  >
+                    알림 신청한 질문
+                  </div>
                 </div>
               </div>
-            </div>
-            {/* 4번 박스 */}
-            <div className="wrap3">
-              <div className="fourth">
-                <div className="box4_1">
-                  <div className="otherprofile">
-                    <img
-                      style={{ width: '70px' }}
-                      src={profileImage}
-                      alt="프사"
-                    />
-                  </div>
-                  {Array.isArray(questiontitle) && questiontitle.length > 0 && (
-                    <p className="temp">{questiontitle[0]}</p>
-                  )}
-
-                  {Array.isArray(quesHashs) && quesHashs.length > 0 && (
-                    <div className="qhashtags">
-                      {quesHashs[0].map((hashTag, index) => (
-                        <p key={index}>#{hashTag.hashtag}</p>
-                      ))}
+              {/* 4번 박스 */}
+              <div className="wrap3">
+                <div className="fourth">
+                  <div className="box4_1">
+                    <div className="otherprofile">
+                      <img
+                        style={{ width: '70px' }}
+                        src={profileImage}
+                        alt="프사"
+                      />
                     </div>
-                  )}
-                </div>
-                <div className="box4_2">
-                  <div className="otherprofile">
-                    <img
-                      style={{ width: '70px' }}
-                      src={profileImage}
-                      alt="프사"
-                    />
-
                     {Array.isArray(questiontitle) &&
                       questiontitle.length > 0 && (
-                        <p className="temp">{questiontitle[1]}</p>
+                        <p className="temp">{questiontitle[0]}</p>
                       )}
+
                     {Array.isArray(quesHashs) && quesHashs.length > 0 && (
                       <div className="qhashtags">
-                        {quesHashs[1].map((hashTag, index) => (
+                        {quesHashs[0].map((hashTag, index) => (
                           <p key={index}>#{hashTag.hashtag}</p>
                         ))}
                       </div>
                     )}
                   </div>
-                </div>
-                <div className="box4_3">
-                  <div className="otherprofile">
-                    <img
-                      style={{ width: '70px' }}
-                      src={profileImage}
-                      alt="프사"
-                    />
-                    {Array.isArray(questiontitle) &&
-                      questiontitle.length > 0 && (
-                        <p className="temp">{questiontitle[2]}</p>
+                  <div className="box4_2">
+                    <div className="otherprofile">
+                      <img
+                        style={{ width: '70px' }}
+                        src={profileImage}
+                        alt="프사"
+                      />
+
+                      {Array.isArray(questiontitle) &&
+                        questiontitle.length > 0 && (
+                          <p className="temp">{questiontitle[1]}</p>
+                        )}
+                      {Array.isArray(quesHashs) && quesHashs.length > 0 && (
+                        <div className="qhashtags">
+                          {quesHashs[1].map((hashTag, index) => (
+                            <p key={index}>#{hashTag.hashtag}</p>
+                          ))}
+                        </div>
                       )}
-                    {Array.isArray(quesHashs) && quesHashs.length > 0 && (
-                      <div className="qhashtags">
-                        {quesHashs[2].map((hashTag, index) => (
-                          <p key={index}>#{hashTag.hashtag}</p>
-                        ))}
-                      </div>
-                    )}
+                    </div>
+                  </div>
+                  <div className="box4_3">
+                    <div className="otherprofile">
+                      <img
+                        style={{ width: '70px' }}
+                        src={profileImage}
+                        alt="프사"
+                      />
+                      {Array.isArray(questiontitle) &&
+                        questiontitle.length > 0 && (
+                          <p className="temp">{questiontitle[2]}</p>
+                        )}
+                      {Array.isArray(quesHashs) && quesHashs.length > 0 && (
+                        <div className="qhashtags">
+                          {quesHashs[2].map((hashTag, index) => (
+                            <p key={index}>#{hashTag.hashtag}</p>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
