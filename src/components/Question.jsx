@@ -7,7 +7,7 @@ import { accesstokenState, userIdState } from "src/atom/atoms";
 import { useRecoilValue } from "recoil";
 import axios from "axios";
 
-function Question({ time, title, content, hashtags, qId }) {
+function Question({ time, title, content, hashtags, qId, writerId }) {
     const [view, setView] = useState(false);
     const [isChild, setIsChiled] = useState(true);
     const [fixClick, setFixClick] = useState(false)
@@ -18,6 +18,14 @@ function Question({ time, title, content, hashtags, qId }) {
     const handleSubmit = () => {
         fixQuestion()
         window.location.reload()
+    }
+    const handleFixQuestion = () => {
+        if (writerId == LuserId) {
+            setFixClick(true)
+        } else {
+            alert("질문 작성자가 아니면 수정할 수 없습니다.")
+        }
+
     }
     const fixQuestion = async () => {
         try {
@@ -51,14 +59,25 @@ function Question({ time, title, content, hashtags, qId }) {
                                 </div>
                             )}
                             <div style={{ flex: '1', marginLeft: '7%', fontSize: '16px', color: '#EB7125', fontWeight: '400' }}>{isChild ? "어린이" : null}</div>
-                            <ul onClick={() => { setView(!view) }} style={styles.dropdownbtn}>⋮
-                                {view && (
-                                    <div style={{ background: 'white', border: '1px solid #000' }}>
-                                        <li onClick={() => { setFixClick(true) }} style={{ order: '-1', height: '25px', width: "100px" }}>수정하기</li>
-                                        <li style={{ order: '-1', height: '25px', width: "100px" }}>신고하기</li>
-                                    </div>
-                                )}
-                            </ul>
+                            {(writerId == LuserId) ?
+                                <ul onClick={() => { setView(!view) }} style={styles.dropdownbtn}>⋮
+                                    {view && (
+                                        <div style={{ background: 'white', border: '1px solid #000' }}>
+                                            <li onClick={() => { handleFixQuestion() }} style={{ order: '-1', height: '25px', width: "100px", }}>수정하기</li>
+                                            <li style={{ order: '-1', height: '25px', width: "100px" }}>신고하기</li>
+                                            <li style={{ order: '-1', height: '25px', width: "100px" }}>삭제하기</li>
+                                        </div>
+                                    )}
+                                </ul>
+                                :
+                                <ul onClick={() => { setView(!view) }} style={styles.dropdownbtn}>⋮
+                                    {view && (
+                                        <div style={{ background: 'white', border: '1px solid #000' }}>
+                                            <li style={{ order: '-1', height: '25px', width: "100px" }}>신고하기</li>
+                                        </div>
+                                    )}
+                                </ul>}
+
                         </div>
                         {fixClick ? (
                             <div>

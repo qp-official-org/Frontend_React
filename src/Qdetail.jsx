@@ -29,6 +29,8 @@ function Qdetail() {
     const [answerId, setAnswerId] = useState("");
     const [howLong, setHowlong] = useState("1시간 전");
     const [response, setResponse] = useState([])
+    const [expertCount, setExpertCount] = useState('')
+    const [writerId, setWriterId] = useState("")
     const userId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
     const getTimeAgo = (dateString) => {
@@ -72,6 +74,8 @@ function Qdetail() {
             setHashtags(response.result.hashtags);
             const howLong = getTimeAgo(response.result.createdAt);
             setHowlong(howLong);
+            setExpertCount(response.result.expertCount)
+            setWriterId(response.result.user.userId)
             console.log(howLong);
         } catch (error) {
             console.error(error);
@@ -120,9 +124,9 @@ function Qdetail() {
                     </div>
                     <div style={styles.main_orange_container}>
                         <div style={{ flex: '1' }}>
-                            <Question time={howLong} qId={qId} hashtags={hashtags} title={title} content={content} />
+                            <Question time={howLong} qId={qId} writerId={writerId} hashtags={hashtags} title={title} content={content} />
                         </div>
-                        <div style={{ textAlign: 'center', color: 'white', fontWeight: '600', fontSize: '16px' }}>{answerList.length}명의 전문가가 답변했어요</div>
+                        <div style={{ textAlign: 'center', color: 'white', fontWeight: '600', fontSize: '16px' }}>{expertCount}명의 전문가가 답변했어요</div>
                         <hr style={styles.hrline} />
                         <div style={btnClicked ? { flex: '1', display: 'flex', justifyContent: 'center', alignItems: 'center' } : { display: 'flex', height: '100%' }}>
                             {btnClicked ? <Newanswer qId={qId} /> :
@@ -130,7 +134,7 @@ function Qdetail() {
                         </div>
                         {answerList.map((answer, index) => (
                             <div style={styles.answer}>
-                                <Answer key={index} qId={qId} like={answer.likeCount} answerId={answer.answerId} content={answer.content} userId={answer.nickname} />
+                                <Answer key={index} qId={qId} like={answer.likeCount} userId={answer.user.userId} answerId={answer.answerId} content={answer.content} userNickname={answer.user.nickname} />
                             </div>
                         ))}
                         { }

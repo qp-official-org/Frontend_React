@@ -130,7 +130,7 @@ export const styles = {
         position: 'absolute',
         left: '92%',
         fontSize: '16px',
-        fontWeight: '900'
+        fontWeight: '900', cursor: 'pointer'
     },
     question_title: {
         flex: '2',
@@ -271,10 +271,11 @@ export const styles = {
         marginTop: '5%',
         marginRight: '10%',
         textAlign: 'right',
-        fontWeight: '600',
-        fontSize: '10px',
+        fontWeight: '400',
+        fontSize: '12px',
         color: 'white',
-        textDecoration: 'underline'
+        textDecoration: 'underline',
+        cursor: 'pointer'
     },
     header_profile_box: {
         display: 'flex',

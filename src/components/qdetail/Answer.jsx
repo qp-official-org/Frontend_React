@@ -11,7 +11,7 @@ import { useRecoilValue } from "recoil";
 import Childnewanswer from "./Childnewanswer";
 import { accesstokenState, userIdState } from "../../atom/atoms";
 
-function Answer({ qId, content, userId, answerId, like }) {//props로 답변 내용을 전달받음(값 그대로 와서 가공할 필요X)
+function Answer({ qId, content, userNickname, answerId, like, userId }) {//props로 답변 내용을 전달받음(값 그대로 와서 가공할 필요X)
     const [view, setView] = useState(false);
     const [answerOfAnswer, setAnswerOfAnswer] = useState(false);
     const [isBtnClicked, setIsBtnClicked] = useState(false);
@@ -20,8 +20,10 @@ function Answer({ qId, content, userId, answerId, like }) {//props로 답변 내
     const [answerCount, setAnswerCount] = useState('')
     const [fixClick, setFixClick] = useState(false)
     const [answerText, setAnswerText] = useState(content);
+    const [clickLike, setClickLike] = useState(false)
     const LuserId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
+    const [totalLike, setTotalLike] = useState(like)
     console.log(accesstoken)
     const handleCheckBtn = () => {
         setIsBtnClicked(true);
@@ -39,15 +41,18 @@ function Answer({ qId, content, userId, answerId, like }) {//props로 답변 내
                 accessToken: accesstoken
             }
             const response = await axios.post(apiUrl, null, { headers });
-
             console.log('POST 요청 성공:', response.data);
+            if (response.data.result.answerLikeStatus == "ADDED") {
+                setTotalLike(totalLike + 1)
+            } else {
+                setTotalLike(totalLike - 1)
+            }
         } catch (error) {
             console.error('POST 요청 실패:', error);
         }
     };
     const handleClickLike = async () => {
         await postLike();
-        window.location.reload()
     };
 
     const reanswerRequest = async () => {
@@ -97,16 +102,26 @@ function Answer({ qId, content, userId, answerId, like }) {//props로 답변 내
                 <div style={styles.question_main2}>
                     <div style={styles.question_main3}>
                         {isBtnClicked ?
-                            <ul onClick={() => { setView(!view) }} style={styles.dropdownbtn}>⋮
-                                {view && (
-                                    <div style={{ background: 'white', border: '1px solid #000' }}>
-                                        <li onClick={() => { setFixClick(true) }} style={{ order: '-1', height: '25px', width: "100px" }}>수정하기</li>
-                                        <li style={{ order: '-1', height: '25px', width: "100px" }}>신고하기</li>
-                                    </div>
-                                )}
-                            </ul> : null}
+                            <div>{(userId == LuserId) ?
+                                <ul onClick={() => { setView(!view) }} style={styles.dropdownbtn}>⋮
+                                    {view && (
+                                        <div style={{ background: 'white', border: '1px solid #000' }}>
+                                            <li onClick={() => { setFixClick(true) }} style={{ order: '-1', height: '25px', width: "100px", }}>수정하기</li>
+                                            <li style={{ order: '-1', height: '25px', width: "100px" }}>신고하기</li>
+                                            <li style={{ order: '-1', height: '25px', width: "100px" }}>삭제하기</li>
+                                        </div>
+                                    )}
+                                </ul>
+                                :
+                                <ul onClick={() => { setView(!view) }} style={styles.dropdownbtn}>⋮
+                                    {view && (
+                                        <div style={{ background: 'white', border: '1px solid #000' }}>
+                                            <li style={{ order: '-1', height: '25px', width: "100px" }}>신고하기</li>
+                                        </div>
+                                    )}
+                                </ul>}</div> : null}
                     </div>
-                    <h3 style={styles.question_title}>{userId}</h3>
+                    <h3 style={styles.question_title}>{userNickname}</h3>
                 </div>
             </div>
             {fixClick ?
@@ -127,7 +142,7 @@ function Answer({ qId, content, userId, answerId, like }) {//props로 답변 내
                 <div>
                     <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '3%' }}>
                         <div style={{ marginRight: '1%' }}>💬{answerCount}</div>
-                        <div onClick={handleClickLike}>👍{like}</div>
+                        <div onClick={handleClickLike}>👍{totalLike}</div>
                     </div>
                     {reanswerList && reanswerList.length > 0 ? (
                         <div>
