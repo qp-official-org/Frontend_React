@@ -119,18 +119,38 @@ h3 {
   display: flex;
   justify-content: space-between;
 }
+.exp1 {
+  font-family: Pretendard;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+.exp2 {
+  font-family: Pretendard;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: center;
+}
 .box2_1,
 .box2_2 {
-  width: 29vw;
-  height: 15vh;
   border: 1px solid black;
   margin-top: 20px;
-  border-radius: 15px;
+
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: transparent;
   flex-direction: column;
+  width: 419px;
+  height: 113px;
+  top: 409px;
+  left: 802px;
+  border-radius: 20px;
+  border: 2px solid rgba(217, 217, 217, 1);
 }
 .boxwrap {
   display: flex;
@@ -146,26 +166,34 @@ h3 {
 .box3_1,
 .box3_2,
 .box3_3 {
+  width: 272.05px;
+  height: 65px;
+  top: 551px;
+  left: 357px;
+  border-radius: 20px;
   margin-top: 20px;
-  width: 19vw;
-  height: 10vh;
-  border: 1px solid black;
-  border-radius: 15px;
+  border: 2px solid rgba(217, 217, 217, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: large;
-  font-weight: 600;
+
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: center;
 }
 
 .box4_1,
 .box4_2,
 .box4_3 {
   margin-top: 15px;
-  width: 19vw;
-  height: 36vh;
-  border-radius: 15px;
-  box-shadow: 1px 1px 1px 1px gray;
+  width: 276.42px;
+  height: 355px;
+  border-radius: 20px;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25) inset;
 }
 .questionwrap {
   margin-top: 5vh;
@@ -197,10 +225,9 @@ h3 {
   z-index: 1;
   background-color: white;
   width: 60vw;
-  height: 48.5vh;
-  border-radius: 15px;
-  opacity: 0.975;
-  box-shadow: 1px 1px 1px 1px gray;
+  height: 55vh;
+
+  opacity: 0.974;
 }
 .modalwrap {
   display: flex;

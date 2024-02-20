@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { useRecoilValue } from 'recoil';
+import { Link } from 'react-router-dom';
 import { accesstokenState } from './atom/atoms';
 import { userIdState } from './atom/atoms';
 import React, { useState, useEffect } from 'react';
@@ -9,9 +10,10 @@ import axios from 'axios';
 import '../src/pstyle.css';
 import logo from '../src/components/mprofile/images/apple.png';
 import naverlogo from '../src/components/mprofile/images/naverlogo.png';
-import kakaologo from '../src/components/mprofile/images/kakao.png';
+import kakaologo from '../src/components/mprofile/images/katalk.png';
 import coin from '../src/components/mprofile/images/coin.png';
 import gear from '../src/components/mprofile/images/Vector.png';
+import badge from '../src/components/mprofile/images/badge.png';
 import Header from './Header';
 import DropMPro from './DropMPro';
 // accessToken: eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUyMCwiaWF0IjoxNzA4MjY5ODI4LCJleHAiOjE3MDgyNzcwMjh9.SrKdPOljkWwMdIaLQzBkblMSOqMkqzcSvPmXTssq1g35R39mRPK4SSEg9KRSLO65kNCM-lNWOkBjtL1GWsnTAA
@@ -76,6 +78,24 @@ const Myprofile = () => {
   // 얼마 충전할것인지 물어보는 창
   const [isboxclicked, setboxclicked] = useState(false);
   const [isbox2clicked, setbox2clicked] = useState(false);
+  const [isbox3clicked, setbox3clicked] = useState(false);
+  const [isbox4clicked, setbox4clicked] = useState(false);
+  const [isbox5clicked, setbox5clicked] = useState(false);
+  const box3clicked = () => {
+    setbox3clicked(true);
+    setbox4clicked(false);
+    setbox5clicked(false);
+  };
+  const box4clicked = () => {
+    setbox3clicked(false);
+    setbox4clicked(true);
+    setbox5clicked(false);
+  };
+  const box5clicked = () => {
+    setbox3clicked(false);
+    setbox4clicked(false);
+    setbox5clicked(true);
+  };
   const boxclicked = () => {
     setboxclicked(true);
     setbox2clicked(false);
@@ -117,6 +137,7 @@ const Myprofile = () => {
   };
 
   // 닉네임관련
+  const [Role, setRole] = useState(null);
   const [holder, holdervisible] = useState(false);
   const handleholder = () => {
     holdervisible(true);
@@ -146,12 +167,12 @@ const Myprofile = () => {
     };
 
     // 서버에 PATCH 요청 보내기
-    fetch(`http://52.78.248.199:8080/users/520`, {
+    fetch(`http://52.78.248.199:8080/users/538`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         accessToken:
-          'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUyMCwiaWF0IjoxNzA4MzI2Mzc5LCJleHAiOjE3MDgzMzM1Nzl9.q4AIfXx9vSvOY7-KVgxuRlPCBmOR2PEYDVueZtuYpJEEaXekVVjWxhd1scUOGAJ30IAzT9NU0uvbJXFJhy2i9A',
+          'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUzOCwiaWF0IjoxNzA4NDM5NzQxLCJleHAiOjE3MDg0NDY5NDF9.bMUvQM804NFgE7SmpUI8_QSuKKe56Z6OXZ_GqIyHGl-b94D0VmB16hHJfFUmX5rIC9-YuYiT6Ez-Kvqxl8ng-Q',
       },
       body: JSON.stringify(updatedData), // 수정된 데이터를 JSON 형식으로 변환하여 전송
     })
@@ -203,28 +224,30 @@ const Myprofile = () => {
   //test user 생성 API연결 코드
   useEffect(() => {
     // fetch 요청
-    fetch(`http://52.78.248.199:8080/users/520`, {
+    fetch(`http://52.78.248.199:8080/users/538`, {
       method: 'GET',
       headers: {
         accessToken:
-          'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUyMCwiaWF0IjoxNzA4MzI2Mzc5LCJleHAiOjE3MDgzMzM1Nzl9.q4AIfXx9vSvOY7-KVgxuRlPCBmOR2PEYDVueZtuYpJEEaXekVVjWxhd1scUOGAJ30IAzT9NU0uvbJXFJhy2i9A',
+          'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjUzOCwiaWF0IjoxNzA4NDM5NzQxLCJleHAiOjE3MDg0NDY5NDF9.bMUvQM804NFgE7SmpUI8_QSuKKe56Z6OXZ_GqIyHGl-b94D0VmB16hHJfFUmX5rIC9-YuYiT6Ez-Kvqxl8ng-Q',
       },
     })
       .then((res) => res.json())
       .then((data) => {
+        const userrole = data.result.role;
+        setRole(userrole);
         if (data && data.result && data.result.nickname) {
           const username = data.result.nickname;
           setname(username);
           const registerDay = data.result.createdAt;
           const dateObject = new Date(registerDay);
-          const formattedDate = `${dateObject.getFullYear()}-${(
+          const formattedDate = `${dateObject.getFullYear()}년 ${(
             dateObject.getMonth() + 1
           )
             .toString()
-            .padStart(2, '0')}-${dateObject
+            .padStart(2, '0')}월 ${dateObject
             .getDate()
             .toString()
-            .padStart(2, '0')}`;
+            .padStart(2, '0')}일`;
           console.log(data);
           console.log(formattedDate);
           setregiD(formattedDate);
@@ -239,7 +262,7 @@ const Myprofile = () => {
   }, []);
 
   // 질문 받아내는 곳
-  const page = 1;
+  const page = 0;
   const size = 10;
   useEffect(() => {
     fetch(`http://52.78.248.199:8080/questions?page=${page}&size=${size}`, {
@@ -309,8 +332,21 @@ const Myprofile = () => {
                     src={gear}
                     alt="톱니"
                   />
+
                   {isOpen && <DropMPro onProfileChange={handleProfileChange} />}
                 </div>
+                <img
+                  className="photo2"
+                  style={{
+                    width: '30px',
+                    position: 'absolute',
+                    zIndex: '1',
+                    margin: '3px',
+                    // display: (Role = 'EXPERT' ? 'block' : 'none'),
+                  }}
+                  src={badge}
+                  alt="뱃지"
+                />
               </div>
               <div className="data">
                 <p
@@ -319,7 +355,7 @@ const Myprofile = () => {
                     color: isModifyVisible
                       ? 'transparent'
                       : isValidNickname
-                      ? 'black'
+                      ? 'white'
                       : 'red',
                   }}
                   onClick={handleModifyClick}
@@ -336,7 +372,7 @@ const Myprofile = () => {
                   }}
                 >
                   {userInfo.nickname}
-                  {/* {name} */}
+                  {name}
                 </p>
                 <input
                   placeholder={holdervisible ? name : ''}
@@ -395,6 +431,22 @@ const Myprofile = () => {
                 </button>
               </div>
             </div>
+            <div
+              className="expert"
+              style={{ display: 'flex', justifyContent: 'center' }}
+            >
+              <p className="exp1" style={{ marginRight: '5px' }}>
+                전문가이신가요?
+              </p>
+              <p
+                className="exp2"
+                style={{ textDecoration: 'underline', color: '#eb7125' }}
+              >
+                <Link to="/certify" style={{ color: '#eb7125' }}>
+                  전문가 인증하기
+                </Link>
+              </p>
+            </div>
             {/* 2번 박스*/}
             <div className="wrap2">
               <div className="second">
@@ -402,6 +454,7 @@ const Myprofile = () => {
                   className="box2_1"
                   style={{
                     backgroundColor: isboxclicked ? '#eb7125' : 'white',
+                    color: isboxclicked ? 'white' : 'black',
                   }}
                   onClick={() => {
                     clicked('1000');
@@ -409,8 +462,14 @@ const Myprofile = () => {
                   }}
                 >
                   <div className="boxwrap">
-                    <img style={{ width: '55px' }} src={coin} alt="동전" />
-                    <h3>1천원 충전하기</h3>
+                    <img
+                      style={{ width: '55px', marginTop: '20px' }}
+                      src={coin}
+                      alt="동전"
+                    />
+                    <h3 style={{ marginRight: '17px', marginTop: '20px' }}>
+                      1천원 충전하기
+                    </h3>
                   </div>
                   <p style={{ fontSize: '13px', textAlign: 'center' }}>
                     1000P가 충전돼요
@@ -423,6 +482,7 @@ const Myprofile = () => {
                   className="box2_2"
                   style={{
                     backgroundColor: isbox2clicked ? '#eb7125' : 'white',
+                    color: isbox2clicked ? 'white' : 'black',
                   }}
                   onClick={() => {
                     clicked('10000');
@@ -430,8 +490,14 @@ const Myprofile = () => {
                   }}
                 >
                   <div className="boxwrap">
-                    <img style={{ width: '55px' }} src={coin} alt="동전" />
-                    <h3>1만원 충전하기</h3>
+                    <img
+                      style={{ width: '55px', marginTop: '20px' }}
+                      src={coin}
+                      alt="동전"
+                    />
+                    <h3 style={{ marginRight: '17px', marginTop: '20px' }}>
+                      1만원 충전하기
+                    </h3>
                   </div>
                   <p style={{ fontSize: '13px', textAlign: 'center' }}>
                     10000P가 충전돼요
@@ -445,9 +511,33 @@ const Myprofile = () => {
             <div className="wrap3">
               <div className="third">
                 {/* 박스 use state onclick -> 아래가 바뀌게  */}
-                <div className="box3_1">내가 한 질문</div>
-                <div className="box3_2">내가 구매한 답변</div>
-                <div className="box3_3">알림 신청한 질문</div>
+                <div
+                  className="box3_1"
+                  style={{
+                    backgroundColor: isbox3clicked ? '#eb7125' : 'white',
+                  }}
+                  onClick={box3clicked}
+                >
+                  내가 한 질문
+                </div>
+                <div
+                  className="box3_2"
+                  style={{
+                    backgroundColor: isbox4clicked ? '#eb7125' : 'white',
+                  }}
+                  onClick={box4clicked}
+                >
+                  내가 구매한 답변
+                </div>
+                <div
+                  className="box3_3"
+                  style={{
+                    backgroundColor: isbox5clicked ? '#eb7125' : 'white',
+                  }}
+                  onClick={box5clicked}
+                >
+                  알림 신청한 질문
+                </div>
               </div>
             </div>
             {/* 4번 박스 */}
@@ -558,7 +648,7 @@ const Myprofile = () => {
                   }}
                 >
                   <img
-                    style={{ width: '3vw' }}
+                    style={{ width: '30px', marginLeft: '4px' }}
                     src={kakaologo}
                     alt="카카오로고"
                   />
@@ -573,9 +663,6 @@ const Myprofile = () => {
                   </p>
                 </button>
               </div>
-              <button className="closemodal" onClick={closed}>
-                X
-              </button>
             </div>
             <div
               className="payarea"
@@ -588,7 +675,7 @@ const Myprofile = () => {
                 </p>
                 <div className="paybutton">
                   <button className="payyes">네</button>
-                  <button className="payno" onClick={payclose}>
+                  <button className="payno" onClick={closed}>
                     아니요
                   </button>
                 </div>
