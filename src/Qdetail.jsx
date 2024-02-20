@@ -7,7 +7,7 @@ import Newanswer from "./components/qdetail/Newanswer";
 import Question from "./components/Question";
 import Header from "./Header";
 import { QuestionApi } from "src/api/question.controller";
-import { accesstokenState, userIdState } from "./atom/atoms";
+import { accesstokenState, userIdState, loginState } from "./atom/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Link, useParams } from 'react-router-dom';
 
@@ -21,7 +21,8 @@ function Qdetail() {
     const [view, setView] = useState(false);
     const [alarm, setAlarm] = useState(false);
     const [isAnswer, setIsAnswer] = useState(false);
-    const [isChild, setIsChiled] = useState(true);
+    const [isChild, setIsChild] = useState(true);
+    const [isChildStatus, setIsChildStatus] = useState('ACTIVE')
     const [answerOfAnswer, setAnswerOfAnswer] = useState(false);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -31,8 +32,17 @@ function Qdetail() {
     const [response, setResponse] = useState([])
     const [expertCount, setExpertCount] = useState('')
     const [writerId, setWriterId] = useState("")
+    const ls = useRecoilValue(loginState)
     const userId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
+    const handleChildStatus = () => {
+        if (isChildStatus == 'ACTIVE') {
+            setIsChild(true)
+        } else {
+            setIsChild(false)
+        }
+    }
+
     const getTimeAgo = (dateString) => {
         const date = new Date(dateString);
         const now = new Date();
@@ -76,7 +86,9 @@ function Qdetail() {
             setHowlong(howLong);
             setExpertCount(response.result.expertCount)
             setWriterId(response.result.user.userId)
+            setIsChildStatus(response.result.childstatus)
             console.log(howLong);
+            handleChildStatus()
         } catch (error) {
             console.error(error);
         }
@@ -104,10 +116,14 @@ function Qdetail() {
         setView(!view)
     };
     const answerClick = () => {
-        console.log("clicked")
-        setBtnClicked(true)
-        console.log(accesstoken, userId)
+        if (ls) {
+            setBtnClicked(true);
+            console.log(accesstoken, userId);
+        } else {
+            alert("로그인이 필요합니다.");
+        }
     };
+
 
     return (
         <div>
@@ -124,7 +140,7 @@ function Qdetail() {
                     </div>
                     <div style={styles.main_orange_container}>
                         <div style={{ flex: '1' }}>
-                            <Question time={howLong} qId={qId} writerId={writerId} hashtags={hashtags} title={title} content={content} />
+                            <Question time={howLong} isChild={isChild} qId={qId} writerId={writerId} hashtags={hashtags} title={title} content={content} />
                         </div>
                         <div style={{ textAlign: 'center', color: 'white', fontWeight: '600', fontSize: '16px' }}>{expertCount}명의 전문가가 답변했어요</div>
                         <hr style={styles.hrline} />

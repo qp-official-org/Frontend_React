@@ -1,16 +1,22 @@
+//@ts-nocheck
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import { useSearchContent } from './Context';
 import { Link } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { loginState } from './atom/atoms';
+import { useNavigate } from "react-router-dom";
 
-const SearchPage = ({}) => {
+const SearchPage = ({ }) => {
   const [questiontitle, setquestitle] = useState(null);
   const [profileImage, setphoto] = useState(null);
   const [quesHashs, setquesHash] = useState(null);
+  const navigate = useNavigate();
   const [qcount, setqcount] = useState('');
   const { AsearchContent, setASearchContent } = useSearchContent();
   const [questionId, setquesId] = useState(null);
   const [selectedBoxIndex, setSelectedBoxIndex] = useState(null); // 클릭한 박스의 인덱스를 저장할 상태 변수
+  const ls = useRecoilValue(loginState)
   const page = 1;
   const size = 10;
 
@@ -18,7 +24,9 @@ const SearchPage = ({}) => {
   const handleBoxClick = (index) => {
     setSelectedBoxIndex(index);
   };
-
+  const GoRegister = () => {
+    { ls ? navigate("/register") : alert("로그인이 필요합니다.") }
+  };
   console.log(AsearchContent);
   useEffect(() => {
     if (!AsearchContent || !AsearchContent.trim()) return;
@@ -47,7 +55,7 @@ const SearchPage = ({}) => {
         console.log('qid', quesId);
         const profileImage =
           Array.isArray(qdata.result.questions) &&
-          qdata.result.questions.length > 0
+            qdata.result.questions.length > 0
             ? qdata.result.questions[0].user.profileImage
             : null;
         setphoto(profileImage);
@@ -126,12 +134,7 @@ const SearchPage = ({}) => {
             border: 'none',
           }}
         >
-          <Link
-            to="/register"
-            style={{ textDecoration: 'none', color: 'inherit' }}
-          >
-            질문하러 가기
-          </Link>
+          <div onClick={GoRegister} style={{ textDecoration: 'none', color: 'inherit' }}>질문하러 가기</div>
         </button>
       </div>
     </>

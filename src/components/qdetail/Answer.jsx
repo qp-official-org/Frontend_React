@@ -9,7 +9,7 @@ import Reanswer from "../Reanswer";
 import { QuestionApi } from "src/api/question.controller";
 import { useRecoilValue } from "recoil";
 import Childnewanswer from "./Childnewanswer";
-import { accesstokenState, userIdState } from "../../atom/atoms";
+import { accesstokenState, userIdState, loginState } from "../../atom/atoms";
 
 function Answer({ qId, content, userNickname, answerId, like, userId }) {//props로 답변 내용을 전달받음(값 그대로 와서 가공할 필요X)
     const [view, setView] = useState(false);
@@ -23,12 +23,18 @@ function Answer({ qId, content, userNickname, answerId, like, userId }) {//props
     const [clickLike, setClickLike] = useState(false)
     const LuserId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
+    const ls = useRecoilValue(loginState)
     const [totalLike, setTotalLike] = useState(like)
-    console.log(accesstoken)
+    console.log("로그인 되어있는지", ls)
+    console.log("토큰", accesstoken)
     const handleCheckBtn = () => {
-        setIsBtnClicked(true);
-        setAnswerOfAnswer(true);
-        setIsBlurred(false);
+        if (ls) {
+            setIsBtnClicked(true);
+            setAnswerOfAnswer(true);
+            setIsBlurred(false);
+        } else {
+            alert("로그인이 필요합니다.");
+        }
     };
     useEffect(() => {
         reanswerRequest()

@@ -7,9 +7,8 @@ import { accesstokenState, userIdState } from "src/atom/atoms";
 import { useRecoilValue } from "recoil";
 import axios from "axios";
 
-function Question({ time, title, content, hashtags, qId, writerId }) {
+function Question({ isChild, time, title, content, hashtags, qId, writerId }) {
     const [view, setView] = useState(false);
-    const [isChild, setIsChiled] = useState(true);
     const [fixClick, setFixClick] = useState(false)
     const [questionTitle, setQuestionTitle] = useState(title);
     const [questionContent, setQuestionContent] = useState(content);
@@ -19,6 +18,7 @@ function Question({ time, title, content, hashtags, qId, writerId }) {
         fixQuestion()
         window.location.reload()
     }
+    console.log("어린이", isChild)
     const handleFixQuestion = () => {
         if (writerId == LuserId) {
             setFixClick(true)

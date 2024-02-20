@@ -60,7 +60,7 @@ function Login1() {
             <div class="kakaoLogin">
               <button style={styles.button2}
                 onClick={() => window.location.href =
-                  `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${'9c0435350e0714d02ef07e6bccb168ab'}&redirect_uri=${window.location.href + 'auth/kakao/login'}`}>
+                  `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${'9c0435350e0714d02ef07e6bccb168ab'}&redirect_uri=${window.location.href + '/auth/kakao/login'}`}>
                 카카오 로그인</button>
               <img src={klogo} style={{ position: "absolute", top: "53%", left: "35%" }}></img>
             </div>

@@ -20,26 +20,28 @@ function Header() {
     const [isLogin, setIsLogin] = useRecoilState(loginState)
     const [isLogined, setIsLogined] = useState(false);
     const [userInfo, setUserInfo] = useState([])
-
     const gAccessToken = localStorage.getItem('accesstoken')
     const gUserId = localStorage.getItem('userId')
     const totalLogin = () => {
         gAccessToken && gUserId ? handleLogin() : handleLogout()
     }
-
+    console.log(isLogin)
     const handleLogin = () => {
-        setIsLogined(true);
-        setAccessToken(gAccessToken);
-        setUserId(gUserId);
-        getUserInfo()
+        if (gAccessToken && gUserId) {
+            setIsLogin(true);
+            setAccessToken(gAccessToken);
+            setUserId(gUserId);
+            getUserInfo()
+            localStorage.setItem("isLoggedIn", 'true')
+        }
     }
     const handleLogout = () => {
-        setIsLogined(false);
-        setAccessToken(null); // 로그아웃 시 엑세스 토큰 초기화
-        setUserId(null)
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('accesstoken')
         localStorage.removeItem('userId')
+        setIsLogin(false);
+        setAccessToken(null); // 로그아웃 시 엑세스 토큰 초기화
+        setUserId(null)
     }
 
     useEffect(() => {
@@ -50,6 +52,10 @@ function Header() {
     useEffect(() => {
         totalLogin()
     }, []);
+
+    const GoLogin = () => {
+        navigate('/')
+    }
 
     const getUserInfo = async () => {
         try {
@@ -137,7 +143,7 @@ function Header() {
                 )}
             </div>
             <div style={{ width: '6vw' }}></div>
-            {isLogined ? (
+            {isLogin ? (
                 <div style={styles.header_profile}>
                     <div onClick={handleLogout} style={styles.header_logout}>
                         로그아웃
@@ -151,7 +157,7 @@ function Header() {
                 </div>
             ) : (
                 <div onClick={handleLogin} style={styles.header_not_login}>
-                    <div style={styles.header_login_btn}>로그인하기</div>
+                    <div style={styles.header_login_btn} onClick={GoLogin}>로그인하기</div>
                 </div>
             )}
         </div>
