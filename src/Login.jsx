@@ -1,3 +1,4 @@
+//컴포넌트 합칠 파일
 //@ts-nocheck
 import React from "react";
 import { styles } from "src/components/logindetail/style";
@@ -7,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 function Login1() {
     return (
         // 주황색 화면
-        <div style={styles.container}> 
+        <div style={styles.container}>
             {/* 흰 박스 */}
             <div style={styles.whitebox}>
                 {/* 로그인1페이지 */}
@@ -16,18 +17,18 @@ function Login1() {
                         <h1 style={styles.logo}>큐피 로고</h1>
                     </div>
                     <div>
-                        <h1 style = {styles.previous}>X</h1>
+                        <h1 style={styles.previous}>X</h1>
                     </div>
                     <div style={styles.buttonBox}>
-                        {/* 해당 div 완성되면 컴포넌트화 시키기  */} 
+                        {/* 해당 div 완성되면 컴포넌트화 시키기  */}
                         {/* 클릭하면 컴포넌트 사이에서 이동가능하게 라우터.? */}
                         <button style={styles.button1}>네이버로그인</button>
                         <button style={styles.button2}>카카오로그인</button>
-                        <button style={styles.button3}>구글 로그인</button> 
+                        <button style={styles.button3}>구글 로그인</button>
                     </div>
                     <div style={styles.text}>
                         <span style={styles.text1}>전문가이신가요?</span>
-                        <Link to = "/Certify" style={styles.text2}>전문가 계정으로 로그인하기</Link>
+                        <Link to="/Certify" style={styles.text2}>전문가 계정으로 로그인하기</Link>
                     </div>
                 </div>
 

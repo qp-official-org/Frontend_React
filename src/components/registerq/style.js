@@ -14,9 +14,12 @@ export const styles = {
         justifyContent: 'space-between'
     },
     title_detail_text: {
-        textAlign: 'right',
+        textAlign: 'Left',
         fontSize: '10px',
-        fontWeight: '400'
+        fontWeight: '400',
+        display: 'flex',
+        width: '150%',
+        marginBottom: '3%'
     },
     main_content_box: {
         width: "48.3vw",

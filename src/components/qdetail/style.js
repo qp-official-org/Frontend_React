@@ -105,20 +105,24 @@ export const styles = {
         borderRadius: "50%",
         width: "8vh",
         height: "8vh",
-        margin: '2px'
+        margin: '2px',
+        border: "2px solid #f9f9f9"
     },
     question_main2: {
         flexDirection: 'column',
         display: 'flex',
         flex: '10',
+        marginTop: '1.5%'
     },
     question_main3: {
         display: 'flex',
-        flex: '2',
+        flex: '1',
         position: 'relative',
     },
     question_hashtag: {
-        flex: '5'
+        display: 'flex',
+        flex: '5',
+        height: '10%'
     },
     dropdownbtn: {
         listStyle: 'none',
@@ -126,6 +130,8 @@ export const styles = {
         marginLeft: '-5%',
         position: 'absolute',
         left: '92%',
+        fontSize: '16px',
+        fontWeight: '900', cursor: 'pointer'
     },
     question_title: {
         flex: '2',
@@ -185,9 +191,11 @@ export const styles = {
         color: 'white',
         width: '100%',
         right: '0',
-        marginLeft: '9.5vw',
+        marginLeft: '10vw',
         textAlign: 'center',
-        marginTop: '2vh'
+        marginTop: '2vh',
+        fontSize: '20px',
+        fontWeight: '500'
     },
     header_search_before: {
         marginLeft: '-0.5%',
@@ -209,7 +217,7 @@ export const styles = {
         display: 'flex',
     },
     header_search_after: {
-        left: '71%',
+        left: '69%',
         marginTop: '-0.5%',
         width: '9vh',
         height: '9vh',
@@ -217,7 +225,8 @@ export const styles = {
         position: 'absolute',
         backgroundColor: 'rgba(255,255,255,0.5)',
         boxShadow: '0px 4px 4px 2px rgba(0, 0, 0, 0.25), 0px 2px 8px 0px rgba(0, 0, 0, 0.25) inset',
-        transition: 'all 0.5s ease'
+        transition: 'all 0.5s ease',
+        backdropFilter: 'blur(15px)'
     },
     header_center_before: {
         display: 'flex',
@@ -229,16 +238,20 @@ export const styles = {
         color: 'white',
         fontSize: '43px',
         fontWeight: 'bold',
-        transition: 'all 0.5s ease'
+        transition: 'all 0.5s ease',
+        marginTop: '0.8%'
     },
     header_input: {
         border: 'none',
         background: 'none',
         color: 'white',
         marginLeft: '2%',
-        width: '40vw'
+        width: '40vw',
+        fontSize: '20px',
+        fontWeight: '500'
     },
     header_not_login: {
+        cursor: "pointer",
         justifyContent: 'center',
         textAlign: 'center',
         borderRadius: '40px',
@@ -250,7 +263,7 @@ export const styles = {
     },
     header_profile: {
         width: '8.948vw',
-        height: '24.9vh',
+        height: '32vh',
         background: 'linear-gradient(to bottom, rgba(235, 113, 37, 1),rgba(203, 78, 0, 1))',
         borderRadius: '40px',
         justifyContent: 'center',
@@ -258,13 +271,15 @@ export const styles = {
         left: '88%'
     },
     header_logout: {
-        marginTop: '5%',
+        cursor: "pointer",
+        marginTop: '13%',
         marginRight: '10%',
         textAlign: 'right',
-        fontWeight: '600',
-        fontSize: '10px',
+        fontWeight: '400',
+        fontSize: '12px',
         color: 'white',
-        textDecoration: 'underline'
+        textDecoration: 'underline',
+        cursor: 'pointer'
     },
     header_profile_box: {
         display: 'flex',
@@ -276,30 +291,39 @@ export const styles = {
     header_profile_img: {
         width: '9vh',
         height: '9vh',
+        margin: "5%",
         borderRadius: '50%',
         backgroundColor: 'rgba(255,255,255,0.5)',
-        border: '1px solid white'
+        border: '1px solid white',
+        marginTop: '20%'
     },
     header_profile_nickname: {
         fontWeight: '900',
-        fontSize: '21px',
+        fontSize: '23px',
         color: 'white',
-        margin: '4.5%'
+        margin: '4.5%',
+        marginTop: '10%',
+
     },
     header_profile_point: {
         fontWeight: '900',
         fontSize: '21px',
         color: 'white',
-        margin: '4.5%'
+        margin: '4.5%',
+        marginLeft: '10%',
     },
     header_profile_charge_btn: {
         background: 'white',
-        width: '7.617vw',
-        height: "1.597vh",
+        width: '7vw',
+        height: "2.5vh",
         borderRadius: '20px',
         fontWeight: '700',
         fontSize: '10px',
-        margin: '4.5%'
+        margin: '4.5%',
+        color: '#EB7125',
+        textaAlign: 'center',
+        lineHeight: '2.5vh',
+        marginTop: '10%'
     },
     header_login_btn: {
         color: 'white',

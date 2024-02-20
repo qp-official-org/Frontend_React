@@ -6,8 +6,12 @@ import { useState, useEffect } from "react";
 import { Api } from "./api/common.controller";
 import { QuestionApi } from "./api/question.controller";
 import { RegisterApi } from "./api/register.controller";
-//header에서 userId받아오기
+import { useRecoilState, useRecoilValue } from "recoil";
+import { accesstokenState, userIdState } from "./atom/atoms";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 function Qregister() {
+    const ls = localStorage.getItem("isLoggedIn");
     const [childClicked, setChildClicked] = useState(true)
     const [adultClicked, setAdultClicked] = useState(false)
     const [warnCheck, setWarnCheck] = useState(true);
@@ -21,8 +25,11 @@ function Qregister() {
     const [contentValidateMin, setContentValidateMin] = useState(false);
     const [contentValidateMax, setContentValidateMax] = useState(false);
     const [hashTagModal, setHashTagModal] = useState(false);
-    const [userId, setUserId] = useState(1);
     const [hashtagId, setHashtagId] = useState([]);
+    const [childState, setChildState] = useState("ACTIVE");
+    const navigate = useNavigate();
+    const accesstoken = useRecoilValue(accesstokenState)
+    const userId = useRecoilValue(userIdState)
 
     const handleTitleChange = (e) => {
         const value = e.target.value;
@@ -38,6 +45,12 @@ function Qregister() {
     const handleChildClicked = () => {
         setChildClicked(!childClicked)
         setAdultClicked(!adultClicked)
+        if (childClicked) {
+            setChildState("ACTIVE")
+        } else {
+            setChildState("INACTIVE")
+        }
+        console.log(accesstoken, userId)
     };
     //유의사항 체크
     const handleBtnClicked = () => {
@@ -58,6 +71,7 @@ function Qregister() {
             } else {
                 setHashTagModal(false)
                 setHashtag([...hashtag, writeTag])
+                console.log(hashtag)
             }
         }
     }
@@ -77,7 +91,7 @@ function Qregister() {
             setTitleValidateMin(true)
         };
 
-        if (title.length > maxLength) {
+        if ((title.length < minLength || title.length === 0)) {
             setTitleValidateMax(false)
         } else {
             setTitleValidateMax(true)
@@ -99,7 +113,7 @@ function Qregister() {
             setContentValidateMin(true)
         };
 
-        if (content.length > maxLength) {
+        if ((content.length > maxLength || content.length === 0)) {
             setContentValidateMax(false)
         } else {
             setContentValidateMax(true)
@@ -128,35 +142,47 @@ function Qregister() {
     */
     //서버에 POST하는 함수
 
-    /*해시태그 에러 고치기 전
     const handleRegistration = async () => {
         try {
-            // hashtag 배열의 각 요소에 대해 병렬로 처리하기 위해 Promise.all을 사용
-            await Promise.all(hashtag.map((singleHashtag, index) => {
-                return RegisterApi.findHashtag(singleHashtag)
-                    .console.log('1')
-                    .catch(error => console.error(error.message));
+            const newHashtagIds = await Promise.all(hashtag.map((singleHashtag) => {
+                const data = {
+                    hashtag: singleHashtag
+                };
+
+                return RegisterApi.uploadHashtag(data)
+                    .then(response => response.result.hashtagId)
+                    .catch(error => {
+                        console.error('해시태그 업로드 오류:', error);
+                        throw error;
+                    });
             }));
-            // 질문을 업로드
-            const response = await QuestionApi.uploadQuestion({
-                data: {
-                    userId,
-                    title,
-                    content,
-                    hashtag: [1, 2, 3],
-                },
-            });
+
+            const apiUrl = "http://52.78.248.199:8080/questions/";
+
+            // 질문을 업로드할 때, 새로운 해시태그 ID 배열을 전송
+            const data = {
+                userId: userId,
+                title: title,
+                content: content,
+                childStatus: childState,
+                hashtag: newHashtagIds,
+            }
+            const headers = {
+                accessToken: accesstoken
+            }
+            const response = await axios.post(apiUrl, data, { headers });
 
             console.log('등록 성공:', response);
         } catch (error) {
             console.error('등록 오류:', error);
         }
-        console.log(hashtag)
+        navigate("/mainpage");
     };
-    */
 
 
-    /*질문 등록 에러 고치기 전
+
+
+    /*
         const handleRegistration = async () => {
             let data = {
                 userId,
@@ -181,8 +207,8 @@ function Qregister() {
             catch (error) {
                 console.error('Registration error:', error);
             }
-        };
-        */
+        };*/
+
     useEffect(() => {
         validateTitle();
     }, [title]);
@@ -203,7 +229,9 @@ function Qregister() {
                         <div></div>
                         <div style={styles.title_detail_text}>
                             <div style={titleValidateMin ? { color: 'green' } : { color: 'red' }}>최소 5자</div>
+                            <div style={{ marginRight: '1%', marginLeft: '1%' }}>/</div>
                             <div style={titleValidateMax ? { color: 'green' } : { color: 'red' }}>최대 60자</div>
+                            <div style={{ marginRight: '1%', marginLeft: '1%' }}>/</div>
                             <div style={titleValidate ? { color: 'green' } : { color: 'red' }}>?(물음표)로 끝내기</div>
                         </div>
                     </div>
@@ -215,6 +243,7 @@ function Qregister() {
                         <div></div>
                         <div style={styles.title_detail_text}>
                             <div style={contentValidateMin ? { color: 'green' } : { color: 'red' }}>최소 10자</div>
+                            <div style={{ marginRight: '1%', marginLeft: '1%' }}>/</div>
                             <div style={contentValidateMax ? { color: 'green' } : { color: 'red' }}>최대 300자</div>
                         </div>
                     </div>
@@ -238,8 +267,6 @@ function Qregister() {
                     <div style={{ marginTop: '2%' }}>
                         <div style={styles.child_or_adult_text}>
                             <button onClick={handleChildClicked} style={childClicked ? styles.clicked_button : styles.not_clicked_button}>어린이</button>
-
-                            <button onClick={handleChildClicked} style={adultClicked ? styles.clicked_button : styles.not_clicked_button}>성인</button>
                         </div>
                         <div style={styles.child_guide1}></div>
                         <div style={styles.child_guide2}>
@@ -269,10 +296,9 @@ function Qregister() {
                     </div>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <button onClick={() => { console.log("제출 완료")/*handleRegistration*/ }}
+                    <button onClick={handleRegistration}
                         disabled={warnCheck || !titleValidate || !titleValidateMax || !titleValidateMin || !contentValidateMax || !contentValidateMin}
-                        style={styles.submit_btn}
-                    >
+                        style={styles.submit_btn} >
                         등록
                     </button>
                 </div>

@@ -14,9 +14,9 @@ class registerApi extends Api {
         return this.get('/hashtag/', { data, content_type: 'application/json' })
     }
     //해시태그업로드
-    uploadHashtag = async (hashtag) => {
+    uploadHashtag = async (data) => {
 
-        return this.post('/hashtag/', { hashtag, content_type: 'application/json' })
+        return this.post('/hashtag/', { data, content_type: 'application/json' })
     }
 }
 

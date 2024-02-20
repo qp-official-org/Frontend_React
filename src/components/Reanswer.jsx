@@ -6,9 +6,8 @@ import Newanswer from "./qdetail/Newanswer";
 import { styles } from "./qdetail/style";
 import Dropdown from "./Dropdown";
 
-function Reanswer({ content, author, reply }) {
+function Reanswer({ content, userId, answerId }) {
     const [isBlurred, setIsBlurred] = useState(false);
-
 
     return (
         <div style={styles.newanswer_box}>
@@ -18,7 +17,7 @@ function Reanswer({ content, author, reply }) {
                     <div style={styles.question_main3}>
                         <Dropdown />
                     </div>
-                    <h3 style={styles.question_title}>{author}</h3>
+                    <h3 style={styles.question_title}>{userId}</h3>
                 </div>
             </div>
             <div style={{ margin: '15px', minHeight: '10vh', filter: isBlurred ? 'blur(5px)' : 'none' }}>

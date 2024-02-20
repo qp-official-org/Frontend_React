@@ -6,15 +6,15 @@ import Dropdown from "../Dropdown";
 import { QuestionApi } from "src/api/question.controller";
 import { accesstokenState, userIdState } from "../../atom/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
-import axios from "axios";
+import axios from 'axios';
 
-function Newanswer(qId, answerId) {
+
+function Childnewanswer({ qId, answerId }) {
     const userId = useRecoilValue(userIdState)
     const accesstoken = useRecoilValue(accesstokenState)
     const [answerText, setAnswerText] = useState("");
     const [submitBtnClicked, setSubmitBtnClicked] = useState(false);
-    const questionId = qId.qId
-    console.log(questionId)
+
     const onChangeText = (event) => {
         setAnswerText(event.target.value);
     }//서버에 추가할 답변 내용
@@ -22,20 +22,20 @@ function Newanswer(qId, answerId) {
         setSubmitBtnClicked(true)
         postAnswer()
         window.location.reload()
-
     }
-
-    //id에는 question id
+    console.log(answerId)
+    //id에는 question id,
+    //answerGroup에는 상위 답변의 answerId
     const postAnswer = async () => {
         try {
-            const apiUrl = `http://52.78.248.199:8080/answers/questions/${questionId}`;
+            const apiUrl = `http://52.78.248.199:8080/answers/questions/${qId}`;
 
             const postData = {
                 userId: userId,
                 title: "1",
                 content: answerText,
-                category: "PARENT",
-                answerGroup: ""
+                category: "CHILD",
+                answerGroup: answerId
             };
 
             const headers = {
@@ -50,10 +50,6 @@ function Newanswer(qId, answerId) {
             console.error('POST 요청 실패:', error);
         }
     };
-
-
-
-
 
     return (
         <div style={styles.newanswer_box}>
@@ -80,4 +76,4 @@ function Newanswer(qId, answerId) {
     )
 }
 
-export default Newanswer;
+export default Childnewanswer;
