@@ -10,11 +10,6 @@ import { Link } from "react-router-dom";
 
 function Qdummy({ title, answerCount, expertCount, createdAt, hashtag, user, childStatus, profileImg, questionId }) {
     const [isHovered, setIsHovered] = useState(false);
-    // const [quesHashs, setquesHash] = useState(null);
-    // const quesHash = qdata.result.questions.map(
-    //       (question) => question.hashtags
-    //     );
-    // {questions.map((question, index) => )};
     console.log(hashtag); //해시태그 잘 불러와지는지
     console.log(questionId); //questionId 잘 불러와지는지
 
