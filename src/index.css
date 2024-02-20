@@ -1,9 +1,18 @@
 @font-face {
-    font-family: "Pretendard";
-    font-weight: normal;
-    src: url("./PretendardVariable.ttf") format("truetype");
-  }
-  
-  body {
-    font-family: "Pretendard";
-  }
+  font-family: 'PretendardVariable';
+  font-weight: normal;
+  src: url('src/PretendardVariable.ttf') format('truetype');
+}
+
+body {
+  font-family: 'Pretendard';
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: normal;
+  src: url('./PretendardVariable.ttf') format('truetype');
+}
+
+body {
+  font-family: 'Pretendard';
+}

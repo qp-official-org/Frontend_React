@@ -129,7 +129,7 @@ export class Api extends ApiBase {
   }
 
   async sendRequest(options) {
-    const { method, url, data, content_type } = options;
+    const { method, url, data, content_type, accessToken } = options;
 
     const config = {
       headers: {
@@ -137,46 +137,51 @@ export class Api extends ApiBase {
       },
     };
 
+    // AccessToken이 존재하면 Authorization 헤더에 추가
+    if (accessToken) {
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
+    }
+
     return this.axiosInstance[method](url, data, config);
   }
 
-  async rGet(url, { data, content_type = 'application/json' } = {}) {
-    const response = await this.sendRequest({ method: 'get', url, data, content_type });
+  async rGet(url, { data, content_type = 'application/json', accessToken } = {}) {
+    const response = await this.sendRequest({ method: 'get', url, data, content_type, accessToken });
     return response;
   }
 
-  async rPost(url, { data, content_type = 'application/json' } = {}) {
-    const response = await this.sendRequest({ method: 'post', url, data, content_type });
+  async rPost(url, { data, content_type = 'application/json', accessToken } = {}) {
+    const response = await this.sendRequest({ method: 'post', url, data, content_type, accessToken });
     return response;
   }
 
-  async rPut(url, { data, content_type = 'application/json' } = {}) {
-    const response = await this.sendRequest({ method: 'put', url, data, content_type });
+  async rPut(url, { data, content_type = 'application/json', accessToken } = {}) {
+    const response = await this.sendRequest({ method: 'put', url, data, content_type, accessToken });
     return response;
   }
 
-  async rDelete(url, { data, content_type = 'application/json' } = {}) {
-    const response = await this.sendRequest({ method: 'delete', url, data, content_type });
+  async rDelete(url, { data, content_type = 'application/json', accessToken } = {}) {
+    const response = await this.sendRequest({ method: 'delete', url, data, content_type, accessToken });
     return response;
   }
 
-  async get(url, { data, content_type = 'application/json' } = {}) {
-    const response = await this.sendRequest({ method: 'get', url, data, content_type });
+  async get(url, { data, content_type = 'application/json', accessToken } = {}) {
+    const response = await this.sendRequest({ method: 'get', url, data, content_type, accessToken });
     return response.data;
   }
 
-  async post(url, { data, content_type = 'application/json' } = {}) {
-    const response = await this.sendRequest({ method: 'post', url, data, content_type });
+  async post(url, { data, content_type = 'application/json', accessToken } = {}) {
+    const response = await this.sendRequest({ method: 'post', url, data, content_type, accessToken });
     return response.data;
   }
 
-  async put(url, { data, content_type = 'application/json' } = {}) {
-    const response = await this.sendRequest({ method: 'put', url, data, content_type });
+  async put(url, { data, content_type = 'application/json', accessToken } = {}) {
+    const response = await this.sendRequest({ method: 'put', url, data, content_type, accessToken });
     return response.data;
   }
 
-  async delete(url, { data, content_type = 'application/json' } = {}) {
-    const response = await this.sendRequest({ method: 'delete', url, data, content_type });
+  async delete(url, { data, content_type = 'application/json', accessToken } = {}) {
+    const response = await this.sendRequest({ method: 'delete', url, data, content_type, accessToken });
     return response.data;
   }
 }
